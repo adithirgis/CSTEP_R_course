@@ -1,11 +1,12 @@
 ---
-title: "CSTEP R Course Website"
-author: "Meenakshi Kushwaha"
+title: "Introductory R course"
+subtitle: Online course for Team CSTEP
 output: 
   html_document:
     theme: flatly
     toc: TRUE
     toc_float: TRUE
+    number_sections: TRUE
 ---
 
 ```{r setup, include=FALSE}
@@ -15,40 +16,72 @@ knitr::opts_chunk$set(
   message = FALSE)
 ```
 
-# About
+## Getting started
+2022/07/07
 
-Welcome to the introductory R course!  This is the course website where all course content will be made accessible, including the slides, code and other resources. We meet on Thursdays, 2 - 4 pm IST. This website collates all the presentations, course content and other resources. We will populate the site as we go. Please contact us if you have trouble accessing the content.
+- Introduction to R and Rstudio environment 
+- Setting up Projects 
+- Libraries and packages 
+- File naming conventions
 
-## Welcome to the course!
-
-
-## Instructors
-
-[Adithi Upadhya](adithirugis.rbind.io)\
-[Meenakshi Kushwaha](meenakshi.rbind.io)
-
-# 1 Getting started 
-7 Jul 2022
 [Slides](https://docs.google.com/presentation/d/1wuaTSNCsBhmRUxFx6ADoxvp8UG28uDqVBL3d50BwUBQ/edit?usp=sharing)
 
-# 2 Exploratory Data Analysis
+### Packages
 
 
-# 3 Data Wrangling
+## Exploratory Data Analysis
+- Reading and writing data
+- Visualizing distributions
+- Patterns in data
+- Missing values
+
+## Data Wrangling
+- Introduction to ggplot package
+- Theory of grammar of graphics
+- Customizable and publication ready plots 
+- Common problems with plotting
+
+## Data Visualization
+- Introduction to ggplot package
+- Theory of grammar of graphics
+- Customizable and publication ready plots 
+- Common problems with plotting
 
 
-# 4 Data Visualization
+## Relational Data
+- Working with multiple datasets
+- Different kinds of data joins
+- Join problems and pitfalls
+- Set operations with datasets
+
+## Date and Time
+- Creating date/times
+- Introduction lubridate package
+- Manipulating timestamps
+- Arithmetic with date-time data
+
+## Iterations & Functions
+- Introduction to functions
+- For loops 
+- Introduction to purrr package 
+- Best practices for efficient code
 
 
-# 5 Relational Data
+## Satistics & Modelling
+- Univariate and Bivariate analysis 
+- simple linear regression
+- Multivariate analysis 
+- Brief intro to Machine Learning 
+
+## Saptial Analysis
+- Introduction to coordinate systems
+- Introduction to sf and raster packages
+- Making maps in R
+- Spatial data analysis in R
 
 
-# 6 Date and Time
-
-# 7 Iterations & Functions
-
-# 8 Satistics & Modelling
-
-# 9 Saptial Analysis
-
-# 10 Reporting with RMarkdown
+## 10 Reporting with RMarkdown
+-Creating reproducible reports
+- Themes and formatting
+- Automated reports using parameters
+I- ntroduction to Xaringan package 

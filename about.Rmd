@@ -1,6 +1,5 @@
 ---
 title: "About"
-author: "Meenakshi Kushwaha"
 output: html_document
 ---
 
@@ -8,4 +7,11 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-More about this website
+
+Welcome to the introductory R course!  This is the course website where all course content will be made accessible, including the slides, code and other resources. We meet on Thursdays, 2 - 4 pm IST. We will populate the site as we go. Please contact us if you have trouble accessing the content.
+
+
+## Instructors
+
+[Adithi Upadhya](adithirugis.rbind.io)\
+[Meenakshi Kushwaha](meenakshi.rbind.io)
