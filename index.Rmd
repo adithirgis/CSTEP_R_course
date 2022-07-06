@@ -1,12 +1,12 @@
 ---
 title: "Introductory R course"
-subtitle: Online course for Team CSTEP
+subtitle: July 2022
 output: 
   html_document:
     theme: flatly
     toc: TRUE
     toc_float: TRUE
-    number_sections: TRUE
+
 ---
 
 ```{r setup, include=FALSE}
@@ -16,64 +16,62 @@ knitr::opts_chunk$set(
   message = FALSE)
 ```
 
-## Getting started
-2022/07/07
+## 1 Getting started
+[Slides](https://docs.google.com/presentation/d/1wuaTSNCsBhmRUxFx6ADoxvp8UG28uDqVBL3d50BwUBQ/edit?usp=sharing)
 
 - Introduction to R and Rstudio environment 
 - Setting up Projects 
 - Libraries and packages 
 - File naming conventions
 
-[Slides](https://docs.google.com/presentation/d/1wuaTSNCsBhmRUxFx6ADoxvp8UG28uDqVBL3d50BwUBQ/edit?usp=sharing)
-
 ### Packages
+[here](https://here.r-lib.org/)
 
-
-## Exploratory Data Analysis
+## 2 Exploratory Data Analysis
 - Reading and writing data
 - Visualizing distributions
 - Patterns in data
 - Missing values
 
-## Data Wrangling
+## 3 Data Wrangling
 - Introduction to ggplot package
 - Theory of grammar of graphics
 - Customizable and publication ready plots 
 - Common problems with plotting
 
-## Data Visualization
+## 4 Data Visualization
 - Introduction to ggplot package
 - Theory of grammar of graphics
 - Customizable and publication ready plots 
 - Common problems with plotting
 
 
-## Relational Data
+## 5 Relational Data
 - Working with multiple datasets
 - Different kinds of data joins
 - Join problems and pitfalls
 - Set operations with datasets
 
-## Date and Time
+## 6 Date and Time
 - Creating date/times
 - Introduction lubridate package
 - Manipulating timestamps
 - Arithmetic with date-time data
 
-## Iterations & Functions
+## 7 Iterations & Functions
 - Introduction to functions
 - For loops 
 - Introduction to purrr package 
 - Best practices for efficient code
 
 
-## Satistics & Modelling
+## 8 Satistics & Modelling
 - Univariate and Bivariate analysis 
 - simple linear regression
 - Multivariate analysis 
 - Brief intro to Machine Learning 
 
-## Saptial Analysis
+## 9 Saptial Analysis
 - Introduction to coordinate systems
 - Introduction to sf and raster packages
 - Making maps in R
@@ -81,7 +79,7 @@ knitr::opts_chunk$set(
 
 
 ## 10 Reporting with RMarkdown
--Creating reproducible reports
+- Creating reproducible reports
 - Themes and formatting
 - Automated reports using parameters
-I- ntroduction to Xaringan package 
+- Introduction to Xaringan package 

@@ -4,6 +4,8 @@ navbar:
   left:
     - text: "Modules"
       href: index.html
+    - text: "Shortcuts"
+      href: shortcuts.html
     - text: "About"
       href: about.html
   
