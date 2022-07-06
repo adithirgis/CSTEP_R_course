@@ -17,5 +17,5 @@ Welcome to the introductory R course!  This is the course website where all cour
 Office hours - 2 to 3 pm Fridays on Slack
 
 [Meenakshi Kushwaha](meenakshi.rbind.io)  
-Office hours - 3 to 4 pm Tuesdays on Slack
+Office hours - 3 to  pm Tuesdays on Slack
 
