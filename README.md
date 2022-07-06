@@ -5,4 +5,4 @@ Course website for Introductory R course
 - Meenakshi Kushwaha
 
 ## Website
-csteprcourse.netlify.app
+cstep-r-course.netlify.app
