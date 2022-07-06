@@ -1,0 +1,11 @@
+---
+title: " Keyboard shortcuts"
+author: "Meenakshi Kushwaha"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+This page will have a list of keyboard shorcuts that we learn during the course.

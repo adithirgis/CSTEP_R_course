@@ -13,5 +13,9 @@ Welcome to the introductory R course!  This is the course website where all cour
 
 ## Instructors
 
-[Adithi Upadhya](adithirugis.rbind.io)\
-[Meenakshi Kushwaha](meenakshi.rbind.io)
+[Adithi Upadhya](adithirugis.rbind.io)  
+Office hours - 2 to 3 pm Fridays on Slack
+
+[Meenakshi Kushwaha](meenakshi.rbind.io)  
+Office hours - 3 to  pm Tuesdays on Slack
+
