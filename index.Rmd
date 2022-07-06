@@ -1,0 +1,54 @@
+---
+title: "CSTEP R Course Website"
+author: "Meenakshi Kushwaha"
+output: 
+  html_document:
+    theme: flatly
+    toc: TRUE
+    toc_float: TRUE
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  comment = NA, 
+  warning = FALSE,
+  message = FALSE)
+```
+
+# About
+
+Welcome to the introductory R course!  This is the course website where all course content will be made accessible, including the slides, code and other resources. We meet on Thursdays, 2 - 4 pm IST. This website collates all the presentations, course content and other resources. We will populate the site as we go. Please contact us if you have trouble accessing the content.
+
+## Welcome to the course!
+
+
+## Instructors
+
+[Adithi Upadhya](adithirugis.rbind.io)\
+[Meenakshi Kushwaha](meenakshi.rbind.io)
+
+# 1 Getting started 
+7 Jul 2022
+[Slides](https://docs.google.com/presentation/d/1wuaTSNCsBhmRUxFx6ADoxvp8UG28uDqVBL3d50BwUBQ/edit?usp=sharing)
+
+# 2 Exploratory Data Analysis
+
+
+# 3 Data Wrangling
+
+
+# 4 Data Visualization
+
+
+# 5 Relational Data
+
+
+# 6 Date and Time
+
+# 7 Iterations & Functions
+
+# 8 Satistics & Modelling
+
+# 9 Saptial Analysis
+
+# 10 Reporting with RMarkdown
