@@ -6,7 +6,6 @@ output:
     theme: flatly
     toc: TRUE
     toc_float: TRUE
-
 ---
 
 ```{r setup, include=FALSE}
@@ -17,69 +16,104 @@ knitr::opts_chunk$set(
 ```
 
 ## 1 Getting started
+
 [Slides](https://docs.google.com/presentation/d/1wuaTSNCsBhmRUxFx6ADoxvp8UG28uDqVBL3d50BwUBQ/edit?usp=sharing)
 
-- Introduction to R and Rstudio environment 
-- Setting up Projects 
-- Libraries and packages 
-- File naming conventions
+-   Introduction to R and Rstudio environment
+-   Setting up Projects
+-   Libraries and packages
+-   File naming conventions
 
-### Packages
+#### Packages
+
 [here](https://here.r-lib.org/)
 
 ## 2 Exploratory Data Analysis
-- Reading and writing data
-- Visualizing distributions
-- Patterns in data
-- Missing values
+
+-   Reading and writing data
+-   Visualizing distributions
+-   Patterns in data
+-   Missing values
+
+#### Packages
+TBD
 
 ## 3 Data Wrangling
-- Introduction to ggplot package
-- Theory of grammar of graphics
-- Customizable and publication ready plots 
-- Common problems with plotting
+
+-   Introduction to ggplot package
+-   Theory of grammar of graphics
+-   Customizable and publication ready plots
+-   Common problems with plotting
+
+#### Packages
+TBD
 
 ## 4 Data Visualization
-- Introduction to ggplot package
-- Theory of grammar of graphics
-- Customizable and publication ready plots 
-- Common problems with plotting
 
+-   Introduction to ggplot package
+-   Theory of grammar of graphics
+-   Customizable and publication ready plots
+-   Common problems with plotting
+
+#### Packages
+TBD
 
 ## 5 Relational Data
-- Working with multiple datasets
-- Different kinds of data joins
-- Join problems and pitfalls
-- Set operations with datasets
+
+-   Working with multiple datasets
+-   Different kinds of data joins
+-   Join problems and pitfalls
+-   Set operations with datasets
+
+#### Packages
+TBD
 
 ## 6 Date and Time
-- Creating date/times
-- Introduction lubridate package
-- Manipulating timestamps
-- Arithmetic with date-time data
+
+-   Creating date/times
+-   Introduction lubridate package
+-   Manipulating timestamps
+-   Arithmetic with date-time data
+
+#### Packages
+TBD
 
 ## 7 Iterations & Functions
-- Introduction to functions
-- For loops 
-- Introduction to purrr package 
-- Best practices for efficient code
 
+-   Introduction to functions
+-   For loops
+-   Introduction to purrr package
+-   Best practices for efficient code
+
+#### Packages
+TBD
 
 ## 8 Satistics & Modelling
-- Univariate and Bivariate analysis 
-- simple linear regression
-- Multivariate analysis 
-- Brief intro to Machine Learning 
+
+#### Packages
+TBD
+
+-   Univariate and Bivariate analysis
+-   simple linear regression
+-   Multivariate analysis
+-   Brief intro to Machine Learning
 
 ## 9 Saptial Analysis
-- Introduction to coordinate systems
-- Introduction to sf and raster packages
-- Making maps in R
-- Spatial data analysis in R
 
+-   Introduction to coordinate systems
+-   Introduction to sf and raster packages
+-   Making maps in R
+-   Spatial data analysis in R
+
+#### Packages
+TBD
 
 ## 10 Reporting with RMarkdown
-- Creating reproducible reports
-- Themes and formatting
-- Automated reports using parameters
-- Introduction to Xaringan package 
+
+-   Creating reproducible reports
+-   Themes and formatting
+-   Automated reports using parameters
+-   Introduction to Xaringan package
+
+#### Packages
+TBD
