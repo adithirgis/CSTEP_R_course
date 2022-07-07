@@ -13,11 +13,11 @@ Welcome to the introductory R course!  This is the course website where all cour
 
 ## Instructors
 
-[Adithi Upadhya](adithirugis.rbind.io) 
-Office hours - 2 to 3pm IST, Fridays on Slack
-adithi@ilklabs.com
+[Adithi Upadhya](adithirugis.rbind.io)        
+adithi@ilklabs.com     
+Office hours - 2 to 3 pm IST, Fridays on Slack  
 
-[Meenakshi Kushwaha](meenakshi.rbind.io) 
-Office hours - 3 to 4pm IST, Tuesdays on Slack
-meenakshi@ilklabs.com
+[Meenakshi Kushwaha](meenakshi.rbind.io)     
+meenakshi@ilklabs.com     
+Office hours - 3 to 4 pm IST, Tuesdays on Slack  
 
