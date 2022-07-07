@@ -4,5 +4,4 @@ Course website for Introductory R course
 - Adithi Upadhya
 - Meenakshi Kushwaha
 
-## Website
-cstep-r-course.netlify.app
+## [Website](https://cstep-r-course.netlify.app/)
