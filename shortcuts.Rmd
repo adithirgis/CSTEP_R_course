@@ -10,4 +10,5 @@ knitr::opts_chunk$set(echo = TRUE)
 
 This page will have a list of keyboard shorcuts that we learn during the course.
 
-Cntrl + L : Clear your console. 
+
+#### Cntrl + L : Clear the console 
