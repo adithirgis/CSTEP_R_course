@@ -1,0 +1,13 @@
+---
+title: "Regression"
+author: "Meenakshi Kushwaha"
+date: '2022-07-12'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Reference
+https://github.com/joseph-data-science/gap-minder

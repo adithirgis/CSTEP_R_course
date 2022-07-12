@@ -4,6 +4,10 @@ navbar:
   left:
     - text: "Modules"
       href: index.html
+    - text: "Exercises"
+      menu:
+      - text: Module 8
+        href: regression.html
     - text: "Shortcuts"
       href: shortcuts.html
     - text: "About"
