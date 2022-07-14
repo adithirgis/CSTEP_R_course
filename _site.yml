@@ -2,7 +2,7 @@ name: "my-website"
 navbar:
   title: 
   left:
-    - text: "Modules"
+    - text: "Home"
       href: index.html
     - text: "Exercises"
       menu:
