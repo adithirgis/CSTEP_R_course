@@ -1,0 +1,17 @@
+---
+title: "EDA"
+date: '2022-07-14'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Data and Code 
+
+[Download here](https://drive.google.com/drive/folders/1I8n32Wf7cEJUgCUH8OVfRbh7NF0cU8KX?usp=sharing)
+
+Today's data file is "spotted.csv". It is a dummy data set of lizard species spread across urban Bangalore.
+
+Today's code is in the R script "EDA.R"
