@@ -30,20 +30,22 @@ knitr::opts_chunk$set(
 
 ## 2 Exploratory Data Analysis
 
+[Slides](https://docs.google.com/presentation/d/1Wjx81_gBEk112qsRnbNJ9m9sXUxyF_HE9_71TNXc5Uo/edit?usp=sharing)
+
 -   Reading and writing data
 -   Visualizing distributions
 -   Patterns in data
 -   Missing values
 
 #### Packages
-TBD
+[tidyverse](https://www.tidyverse.org/packages/)
 
 ## 3 Data Wrangling
 
--   Introduction to ggplot package
--   Theory of grammar of graphics
--   Customizable and publication ready plots
--   Common problems with plotting
+- Introduction to tidyverse
+- Data transformation
+- Cleaning data for analysis
+- Summarizing datasets
 
 #### Packages
 TBD

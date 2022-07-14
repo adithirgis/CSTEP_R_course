@@ -13,7 +13,7 @@
 
 <title>Introductory R course</title>
 
-<script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
@@ -63,6 +63,7 @@ if (window.hljs) {
 
 
 
+
 <style type = "text/css">
 .main-container {
   max-width: 940px;
@@ -83,6 +84,9 @@ button.code-folding-btn:focus {
 }
 summary {
   display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
 }
 pre code {
   padding: 0;
@@ -308,7 +312,7 @@ div.tocify {
 <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -321,7 +325,7 @@ div.tocify {
   <a href="index.html">Modules</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Exercises
      
     <span class="caret"></span>
@@ -373,6 +377,8 @@ href="https://docs.google.com/presentation/d/1wuaTSNCsBhmRUxFx6ADoxvp8UG28uDqVBL
 </div>
 <div id="exploratory-data-analysis" class="section level2">
 <h2>2 Exploratory Data Analysis</h2>
+<p><a
+href="https://docs.google.com/presentation/d/1Wjx81_gBEk112qsRnbNJ9m9sXUxyF_HE9_71TNXc5Uo/edit?usp=sharing">Slides</a></p>
 <ul>
 <li>Reading and writing data</li>
 <li>Visualizing distributions</li>
@@ -381,16 +387,16 @@ href="https://docs.google.com/presentation/d/1wuaTSNCsBhmRUxFx6ADoxvp8UG28uDqVBL
 </ul>
 <div id="packages-1" class="section level4">
 <h4>Packages</h4>
-<p>TBD</p>
+<p><a href="https://www.tidyverse.org/packages/">tidyverse</a></p>
 </div>
 </div>
 <div id="data-wrangling" class="section level2">
 <h2>3 Data Wrangling</h2>
 <ul>
-<li>Introduction to ggplot package</li>
-<li>Theory of grammar of graphics</li>
-<li>Customizable and publication ready plots</li>
-<li>Common problems with plotting</li>
+<li>Introduction to tidyverse</li>
+<li>Data transformation</li>
+<li>Cleaning data for analysis</li>
+<li>Summarizing datasets</li>
 </ul>
 <div id="packages-2" class="section level4">
 <h4>Packages</h4>
