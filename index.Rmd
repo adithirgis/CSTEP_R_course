@@ -41,6 +41,7 @@ knitr::opts_chunk$set(
 [tidyverse](https://www.tidyverse.org/packages/)
 
 ## 3 Data Wrangling
+[Slides](https://data-wrangling.netlify.app/#/title-slide)
 
 - Introduction to tidyverse
 - Data transformation
