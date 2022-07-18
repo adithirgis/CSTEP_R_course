@@ -1,0 +1,135 @@
+---
+title: "Data Wrangling"
+author: "Meenakshi Kushwaha"
+date: '2022-07-21'
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    code_download: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, 
+                      warning = FALSE, 
+                      cache = TRUE, 
+                      message = FALSE)
+```
+
+## Load packages
+```{r message=FALSE, warning=FALSE}
+library(tidyverse) # data wrangling
+library(gapminder) # dataset
+```
+
+Take a look at the dataset. **Tibbles** are a type of dataframes that work better with tidyverse. To see the full dataset use View()
+```{r dataset}
+gapminder # print the dataset
+```
+## Filter rows or observations using `filter()`
+```{r filter}
+gapminder %>% 
+  filter(country == "India") # filter observations according to specific country
+
+gapminder %>% 
+  filter(country == "India", year < 1975) # filter using two conditions
+
+gapminder %>% 
+  filter(country=="India" | country == "Nepal") # filter using "or" condition
+
+gapminder %>% 
+  filter(year %in% c(1952,1962, 1972 )) # filter using multiple values
+
+```
+
+## Arrange rows or observations using `arrange()`
+
+```{r arrange}
+gapminder %>% 
+  filter(year %in% c(1952,1962, 1972 )) %>% 
+  arrange(year) # arrange in ascending order by default
+
+gapminder %>% 
+  filter(year %in% c(1952,1962, 1972 )) %>% 
+  arrange(desc(year)) # arrange in descending order
+
+```
+
+
+## Select variables of interest using `select()`
+
+```{r select}
+gapminder %>% 
+  select(country, year, pop) # select variables of interest
+
+gapminder %>% 
+  select(-pop) # drop variables using -
+```
+
+## Create new variable using `mutate()`
+```{r mutate}
+gapminder %>% 
+  select(country, pop) %>% 
+  mutate(pop_mil = round(pop/1000000, 1)) # add a new variable
+
+gapminder %>% 
+  select(country, year, pop) %>% 
+  mutate(pop_rank = min_rank(pop)) %>%  # add new variable using rank
+  arrange(pop_rank) # arrange in ascening order 
+
+gapminder %>% 
+  select(country, pop) %>% 
+  transmute(pop_mil = round(pop/1000000, 1)) # only keep the new variable 
+```
+
+## Summarise your dataset 
+```{r summarise}
+gapminder %>% 
+  summarise(mean_lifeExp = mean(lifeExp)) # summarise the entire data in one line
+
+gapminder %>% 
+  group_by(continent) %>% # group by continent
+  summarise(mean_lifeExp = mean(lifeExp)) # summarise by groups
+```
+
+## Count number of observations in each group
+```{r counts}
+# both codes below will give the same output
+
+gapminder %>% 
+  count(continent)
+
+gapminder %>% 
+  group_by(continent) %>% 
+  summarise(observations = n())
+
+
+```
+
+## Exercises
+### Filter the data for India and Nepal for the years 1997, 2002, and 2007
+```{r exercise}
+gapminder %>% 
+  filter(country == "India"| country == "Nepal",
+         year %in% c(1997, 2002, 2007))
+```
+### What is the mean life expectancy of countries in Asia
+
+```{r}
+gapminder %>% 
+  filter(continent == "Asia") %>% 
+  group_by(country) %>% 
+  summarise(mean(lifeExp))
+```
+
+### In 2007 Which countries have the highest and lowest gdppercap in Asia
+
+```{r}
+gapminder %>% 
+  filter(continent == "Asia", year == 2007) %>% 
+  group_by(country) %>% 
+  summarise(avg_gdp = mean(gdpPercap)) %>% 
+  arrange(avg_gdp) %>% 
+  tail()
+```
+
