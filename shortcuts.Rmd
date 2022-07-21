@@ -11,4 +11,8 @@ knitr::opts_chunk$set(echo = TRUE)
 This page will have a list of keyboard shorcuts that we learn during the course.
 
 
-#### Cntrl + L : Clear the console 
+#### Clear the console : Ctrl + L 
+#### Run current line of code : Ctrl/Cmd + Enter/Return
+#### Run whole R script : Ctrl + Shift + S 
+#### Pipe %>% operator : Ctrl/Cmd + Shift + M
+#### See previous code in console: Up arrow key 

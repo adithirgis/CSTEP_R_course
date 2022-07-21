@@ -82,6 +82,17 @@ gapminder %>%
   transmute(pop_mil = round(pop/1000000, 1)) # only keep the new variable 
 ```
 
+### Creating new variable based on some condition(s)
+```{r case_when}
+gapminder %>% 
+  select (country, continent, year, pop) %>% 
+  mutate(cont_code = case_when(continent == "Africa" ~ 1,
+                               continent == "Americas" ~ 2,
+                               continent == "Asia" ~ 3,
+                               continent == "Europe" ~ 4,
+                               TRUE ~ 5)) ## option when none of the above conditions are true
+```
+
 ## Summarise your dataset 
 ```{r summarise}
 gapminder %>% 

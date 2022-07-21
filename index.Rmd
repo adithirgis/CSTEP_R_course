@@ -49,7 +49,7 @@ knitr::opts_chunk$set(
 - Summarizing datasets
 
 #### Packages
-TBD
+[tidyverse](https://www.tidyverse.org/packages/)
 
 ## 4 Data Visualization
 
