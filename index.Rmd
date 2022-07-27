@@ -53,6 +53,7 @@ knitr::opts_chunk$set(
 [gapminder](https://www.rdocumentation.org/packages/gapminder/versions/0.3.0)
 
 ## 4 Data Visualization
+[Slides](https://cstep-data-viz.netlify.app/#1)
 
 -   Introduction to ggplot package
 -   Theory of grammar of graphics
@@ -60,7 +61,7 @@ knitr::opts_chunk$set(
 -   Common problems with plotting
 
 #### Packages
-TBD
+[tidyverse](https://www.tidyverse.org/packages/)
 
 ## 5 Relational Data
 
