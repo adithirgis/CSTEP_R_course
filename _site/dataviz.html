@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Meenakshi Kushwaha" />
+
+<meta name="date" content="2022-07-28" />
+
+<title>Module 4 - Data Visualization</title>
+
+<script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<script src="site_libs/navigation-1.1/sourceembed.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+<style type="text/css">
+#rmd-source-code {
+  display: none;
+}
+</style>
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Exercises
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="EDA.html">Module 2</a>
+    </li>
+    <li>
+      <a href="wrangling.html">Module 3</a>
+    </li>
+    <li>
+      <a href="dataviz.html">Module 4</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="shortcuts.html">Shortcuts</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-download-source" href="#">Download Rmd</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">Module 4 - Data Visualization</h1>
+<h4 class="author">Meenakshi Kushwaha</h4>
+<h4 class="date">2022-07-28</h4>
+
+</div>
+
+
+<pre class="r"><code>library(tidyverse)</code></pre>
+<div id="basics" class="section level3">
+<h3>Basics</h3>
+<p>Modify the code below to make the points larger triangles and
+slightly transparent. See <code>?geom_point</code> for more information
+on the point layer.</p>
+<pre class="r"><code>ggplot(mpg) + 
+  geom_point(aes(x = displ, y = hwy))</code></pre>
+<p><img src="dataviz_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p>Solution:</p>
+<pre class="r"><code>ggplot(mpg) + 
+  geom_point(aes(x = displ, y = hwy), shape=&quot;triangle&quot;, size=4, alpha=0.5)</code></pre>
+<p><img src="dataviz_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<hr />
+<p>Using the <code>mpg</code> dataset draw a line chart, a boxplot, and
+a histogram</p>
+<p>Solution:</p>
+<pre class="r"><code>ggplot(data=mpg)+
+  geom_line(aes(x=displ, y=hwy))</code></pre>
+<p><img src="dataviz_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<pre class="r"><code>ggplot(data=mpg)+
+  geom_boxplot(aes(x=class, y=displ))</code></pre>
+<p><img src="dataviz_files/figure-html/unnamed-chunk-4-2.png" width="672" /></p>
+<pre class="r"><code>ggplot(data=mpg)+
+  geom_histogram(aes(x=hwy))</code></pre>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="dataviz_files/figure-html/unnamed-chunk-4-3.png" width="672" /></p>
+</div>
+<div id="stat" class="section level3">
+<h3>Stat</h3>
+<p>What does geom_col() do? How is it different from geom_bar()?</p>
+<p>Look at the documentation for geom_bar using
+<code>?geom_bar</code></p>
+<hr />
+<p>We learnt that <code>geom_*()</code> and <code>stat_*()</code> are
+interchangeable. Can you look at <code>?geom_bar()</code> and figure out
+which stat it uses as default. Modify the code below to use that stat
+directly instead</p>
+<pre class="r"><code>ggplot(mpg) + 
+  geom_bar(aes(x = class))</code></pre>
+<p><img src="dataviz_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p>Solution: The description says “geom_bar() uses stat_count() by
+default”. Using it directly below:</p>
+<pre class="r"><code>ggplot(mpg) + 
+  stat_count(aes(x = class))</code></pre>
+<p><img src="dataviz_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<hr />
+<p>Use <code>stat_summary()</code> to add a red dot at the mean
+<code>hwy</code> for each group</p>
+<pre class="r"><code>ggplot(mpg) + 
+  geom_jitter(aes(x = class, y = hwy), width = 0.2)</code></pre>
+<p><img src="dataviz_files/figure-html/unnamed-chunk-7-1.png" width="672" />
+Hint: You will need to change the default geom of
+<code>stat_summary()</code></p>
+<p>Solution:</p>
+<pre class="r"><code>ggplot(mpg, aes(x=class, y=hwy)) + 
+  geom_jitter(width = 0.2)+
+  stat_summary(geom = &quot;point&quot;, fun=&quot;mean&quot;, color=&quot;red&quot;)</code></pre>
+<p><img src="dataviz_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<hr />
+<p>In our proportion bar chart, we need to set group = 1. Why? In other
+words what is the problem with these two graphs?</p>
+<pre class="r"><code>p1&lt;- ggplot(data = diamonds) + 
+  geom_bar(mapping = aes(x = cut, y = after_stat(prop)))
+
+p2&lt;-ggplot(data = diamonds) + 
+  geom_bar(mapping = aes(x = cut, fill = color, y = after_stat(prop)))
+
+p1</code></pre>
+<p><img src="dataviz_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<pre class="r"><code>p2</code></pre>
+<p><img src="dataviz_files/figure-html/unnamed-chunk-9-2.png" width="672" /></p>
+<p>Solution: if group = 1 is not included, the proportions will be
+calculated within each group. Modified code is below.</p>
+<pre class="r"><code>p1_new&lt;- ggplot(data = diamonds) + 
+  geom_bar(mapping = aes(x = cut, y = after_stat(prop), group=1))
+
+p2_new&lt;-ggplot(data = diamonds) + 
+  geom_bar(mapping = aes(x = cut, fill = color, y = ..count.. / sum(..count..)))
+
+p1_new</code></pre>
+<p><img src="dataviz_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<pre class="r"><code>p2_new</code></pre>
+<p><img src="dataviz_files/figure-html/unnamed-chunk-10-2.png" width="672" />
+*** What is the problem with this plot? How could we improve it?</p>
+<pre class="r"><code>ggplot(data = mpg, mapping = aes(x = cty, y = hwy)) + 
+  geom_point( )</code></pre>
+<p><img src="dataviz_files/figure-html/unnamed-chunk-11-1.png" width="672" />
+Solution: There is overplotting because there are multiple observations
+for each combination of <code>cty</code> and <code>hwy</code>
+values.</p>
+<pre class="r"><code>ggplot(data = mpg, mapping = aes(x = cty, y = hwy)) + 
+  geom_point(position=&quot;jitter&quot; )</code></pre>
+<p><img src="dataviz_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+</div>
+<div id="scales" class="section level3">
+<h3>Scales</h3>
+<p>Use <code>RColorBrewer::display.brewer.all()</code> to see all the
+different palettes from Color Brewer and pick your favourite. Modify the
+code below to use it</p>
+<pre class="r"><code>ggplot(mpg) + 
+  geom_point(aes(x = displ, y = hwy, colour = class)) + 
+  scale_colour_brewer(type = &#39;qual&#39;)</code></pre>
+<p><img src="dataviz_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<p>Solution:</p>
+<pre class="r"><code>data(&quot;mpg&quot;)
+ggplot(mpg) + 
+  geom_point(aes(x = displ, y = hwy, colour = class)) + 
+  scale_colour_brewer(type = &#39;qual&#39;, palette = &quot;Set1&quot;)</code></pre>
+<p><img src="dataviz_files/figure-html/unnamed-chunk-14-1.png" width="672" />
+* * *</p>
+<p>Modify the code below to create a bubble chart (scatterplot with size
+mapped to a continuous variable) showing <code>cyl</code> with size.
+Make sure that only the present amount of cylinders (4, 5, 6, and 8) are
+present in the legend.</p>
+<pre class="r"><code>ggplot(mpg) + 
+  geom_point(aes(x = displ, y = hwy, colour = class)) + 
+  scale_colour_brewer(type = &#39;qual&#39;)</code></pre>
+<p><img src="dataviz_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<p>Hint: The <code>breaks</code> argument in the scale is used to
+control which values are present in the legend.</p>
+<p>Solution:</p>
+<pre class="r"><code>ggplot(mpg) + 
+  geom_point(aes(x = displ, y = hwy, colour = class, size=cyl)) + 
+  scale_colour_brewer(type = &#39;qual&#39;) +
+  scale_size(breaks = c(4, 5, 6, 8))</code></pre>
+<p><img src="dataviz_files/figure-html/unnamed-chunk-16-1.png" width="672" />
+Explore the different types of size scales available in ggplot2. Is the
+default the most appropriate here?</p>
+<p>Solution: Default is mapping to the radius. But it is not intuitive.
+Let’s try size mapping by area.</p>
+<pre class="r"><code>ggplot(mpg) + 
+  geom_point(aes(x = displ, y = hwy, colour = class, size=cyl)) + 
+  scale_colour_brewer(type = &#39;qual&#39;) +
+  scale_size_area(breaks = c(4, 5, 6, 8))</code></pre>
+<p><img src="dataviz_files/figure-html/unnamed-chunk-17-1.png" width="672" />
+* * *</p>
+<p>Modify the code below so that colour is no longer mapped to the
+discrete <code>class</code> variable, but to the continuous
+<code>cty</code> variable. What happens to the guide (legend)?</p>
+<pre class="r"><code>ggplot(mpg) + 
+  geom_point(aes(x = displ, y = hwy, colour = class, size = cty))</code></pre>
+<p><img src="dataviz_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<p>Solution:</p>
+<pre class="r"><code>ggplot(mpg) + 
+  geom_point(aes(x = displ, y = hwy, colour = cty, size = cty))</code></pre>
+<p><img src="dataviz_files/figure-html/unnamed-chunk-19-1.png" width="672" />
+* * *</p>
+<p>The type of guide can be controlled with the <code>guide</code>
+argument in the scale, or with the <code>guides()</code> function.
+Continuous colours have a gradient colour bar by default, but setting it
+to <code>legend</code> will turn it back to the standard look. What
+happens when multiple aesthetics are mapped to the same variable and
+uses the guide type?</p>
+<p>Solution:</p>
+<pre class="r"><code>ggplot(mpg) + 
+  geom_point(aes(x = displ, y = hwy, colour = cty, size = cty))+
+  guides(color=&quot;legend&quot;)</code></pre>
+<p><img src="dataviz_files/figure-html/unnamed-chunk-20-1.png" width="672" />
+ggplot combines both legends.</p>
+</div>
+<div id="facets" class="section level3">
+<h3>Facets</h3>
+<p>One of the great things about facets is that they share the axes
+between the different panels. Sometimes this is undesirable though, and
+the behavior can be changed with the <code>scales</code> argument.
+Experiment with the different possible settings in the plot below:</p>
+<pre class="r"><code>ggplot(mpg) + 
+  geom_point(aes(x = displ, y = hwy)) + 
+  facet_wrap(~ drv)</code></pre>
+<p><img src="dataviz_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
+<p>Solution:</p>
+<pre class="r"><code>ggplot(mpg) + 
+  geom_point(aes(x = displ, y = hwy)) + 
+  facet_wrap(~ drv, scales=&quot;free_y&quot;)</code></pre>
+<p><img src="dataviz_files/figure-html/unnamed-chunk-22-1.png" width="672" />
+* * *</p>
+<p>Usually the space occupied by each panel is equal. This can create
+problems when different scales are used. Can you modify the code below
+so that the y scale differs between the panels in the plot. What
+happens?</p>
+<pre class="r"><code>ggplot(mpg) + 
+  geom_bar(aes(y = manufacturer)) + 
+  facet_grid(class ~ .)</code></pre>
+<p><img src="dataviz_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
+<p>Use the <code>space</code> argument in <code>facet_grid()</code> to
+change the plot above so each bar has the same width again.</p>
+<p>Solution:</p>
+<pre class="r"><code>data(&quot;mpg&quot;)
+ggplot(mpg) + 
+  geom_bar(aes(y = manufacturer)) + 
+  facet_grid(class ~ ., space = &quot;free_y&quot;, scales = &quot;free_y&quot;)</code></pre>
+<p><img src="dataviz_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
+</div>
+
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiTW9kdWxlIDQgLSBEYXRhIFZpc3VhbGl6YXRpb24iCmF1dGhvcjogTWVlbmFrc2hpIEt1c2h3YWhhCmRhdGU6ICcyMDIyLTA3LTI4JwpvdXRwdXQ6IAogIGh0bWxfZG9jdW1lbnQ6CiAgICB0b2M6IHRydWUKICAgIHRvY19mbG9hdDogdHJ1ZQogICAgY29kZV9kb3dubG9hZDogdHJ1ZQotLS0KCmBgYHtyIHNldHVwLCBpbmNsdWRlPUZBTFNFfQprbml0cjo6b3B0c19jaHVuayRzZXQoZWNobyA9IFRSVUUsIGNhY2hlID0gVFJVRSkKYGBgCgpgYGB7ciBlY2hvPVRSVUUsIG1lc3NhZ2U9RkFMU0UsIHdhcm5pbmc9RkFMU0V9CmxpYnJhcnkodGlkeXZlcnNlKQpgYGAKCiMjIyBCYXNpY3MKCk1vZGlmeSB0aGUgY29kZSBiZWxvdyB0byBtYWtlIHRoZSBwb2ludHMgbGFyZ2VyIHRyaWFuZ2xlcyBhbmQgc2xpZ2h0bHkgdHJhbnNwYXJlbnQuClNlZSBgP2dlb21fcG9pbnRgIGZvciBtb3JlIGluZm9ybWF0aW9uIG9uIHRoZSBwb2ludCBsYXllci4KCmBgYHtyfQpnZ3Bsb3QobXBnKSArIAogIGdlb21fcG9pbnQoYWVzKHggPSBkaXNwbCwgeSA9IGh3eSkpCmBgYAoKU29sdXRpb246CmBgYHtyfQpnZ3Bsb3QobXBnKSArIAogIGdlb21fcG9pbnQoYWVzKHggPSBkaXNwbCwgeSA9IGh3eSksIHNoYXBlPSJ0cmlhbmdsZSIsIHNpemU9NCwgYWxwaGE9MC41KQpgYGAKCiogKiAqCgpVc2luZyB0aGUgYG1wZ2AgZGF0YXNldCBkcmF3IGEgbGluZSBjaGFydCwgYSBib3hwbG90LCBhbmQgYSBoaXN0b2dyYW0KClNvbHV0aW9uOgpgYGB7cn0KZ2dwbG90KGRhdGE9bXBnKSsKICBnZW9tX2xpbmUoYWVzKHg9ZGlzcGwsIHk9aHd5KSkKZ2dwbG90KGRhdGE9bXBnKSsKICBnZW9tX2JveHBsb3QoYWVzKHg9Y2xhc3MsIHk9ZGlzcGwpKQpnZ3Bsb3QoZGF0YT1tcGcpKwogIGdlb21faGlzdG9ncmFtKGFlcyh4PWh3eSkpCmBgYAoKIyMjIFN0YXQKCldoYXQgZG9lcyBnZW9tX2NvbCgpIGRvPyBIb3cgaXMgaXQgZGlmZmVyZW50IGZyb20gZ2VvbV9iYXIoKT8KCkxvb2sgYXQgdGhlIGRvY3VtZW50YXRpb24gZm9yIGdlb21fYmFyIHVzaW5nIGA/Z2VvbV9iYXJgCgoqICogKgoKV2UgbGVhcm50IHRoYXQgYGdlb21fKigpYCBhbmQgYHN0YXRfKigpYCBhcmUgaW50ZXJjaGFuZ2VhYmxlLiBDYW4geW91IGxvb2sgYXQgYD9nZW9tX2JhcigpYCBhbmQgZmlndXJlIG91dCB3aGljaApzdGF0IGl0IHVzZXMgYXMgZGVmYXVsdC4gTW9kaWZ5IHRoZSBjb2RlIGJlbG93IHRvIHVzZSB0aGF0IHN0YXQgZGlyZWN0bHkgaW5zdGVhZAoKYGBge3J9CmdncGxvdChtcGcpICsgCiAgZ2VvbV9iYXIoYWVzKHggPSBjbGFzcykpCmBgYAoKU29sdXRpb246ClRoZSBkZXNjcmlwdGlvbiBzYXlzICJnZW9tX2JhcigpIHVzZXMgc3RhdF9jb3VudCgpIGJ5IGRlZmF1bHQiLiBVc2luZyBpdCBkaXJlY3RseSBiZWxvdzoKYGBge3J9CmdncGxvdChtcGcpICsgCiAgc3RhdF9jb3VudChhZXMoeCA9IGNsYXNzKSkKYGBgCgoqICogKgpVc2UgYHN0YXRfc3VtbWFyeSgpYCB0byBhZGQgYSByZWQgZG90IGF0IHRoZSBtZWFuIGBod3lgIGZvciBlYWNoIGdyb3VwCgpgYGB7cn0KZ2dwbG90KG1wZykgKyAKICBnZW9tX2ppdHRlcihhZXMoeCA9IGNsYXNzLCB5ID0gaHd5KSwgd2lkdGggPSAwLjIpCmBgYApIaW50OiBZb3Ugd2lsbCBuZWVkIHRvIGNoYW5nZSB0aGUgZGVmYXVsdCBnZW9tIG9mIGBzdGF0X3N1bW1hcnkoKWAKClNvbHV0aW9uOgpgYGB7cn0KZ2dwbG90KG1wZywgYWVzKHg9Y2xhc3MsIHk9aHd5KSkgKyAKICBnZW9tX2ppdHRlcih3aWR0aCA9IDAuMikrCiAgc3RhdF9zdW1tYXJ5KGdlb20gPSAicG9pbnQiLCBmdW49Im1lYW4iLCBjb2xvcj0icmVkIikKYGBgCgoKKiAqICoKCkluIG91ciBwcm9wb3J0aW9uIGJhciBjaGFydCwgd2UgbmVlZCB0byBzZXQgZ3JvdXAgPSAxLiBXaHk/IEluIG90aGVyIHdvcmRzIHdoYXQgaXMgdGhlIHByb2JsZW0gd2l0aCB0aGVzZSB0d28gZ3JhcGhzPwpgYGB7cn0KcDE8LSBnZ3Bsb3QoZGF0YSA9IGRpYW1vbmRzKSArIAogIGdlb21fYmFyKG1hcHBpbmcgPSBhZXMoeCA9IGN1dCwgeSA9IGFmdGVyX3N0YXQocHJvcCkpKQoKcDI8LWdncGxvdChkYXRhID0gZGlhbW9uZHMpICsgCiAgZ2VvbV9iYXIobWFwcGluZyA9IGFlcyh4ID0gY3V0LCBmaWxsID0gY29sb3IsIHkgPSBhZnRlcl9zdGF0KHByb3ApKSkKCnAxCnAyCmBgYAoKU29sdXRpb246CmlmIGdyb3VwID0gMSBpcyBub3QgaW5jbHVkZWQsIHRoZSBwcm9wb3J0aW9ucyB3aWxsIGJlIGNhbGN1bGF0ZWQgd2l0aGluIGVhY2ggZ3JvdXAuIE1vZGlmaWVkIGNvZGUgaXMgYmVsb3cuIApgYGB7cn0KcDFfbmV3PC0gZ2dwbG90KGRhdGEgPSBkaWFtb25kcykgKyAKICBnZW9tX2JhcihtYXBwaW5nID0gYWVzKHggPSBjdXQsIHkgPSBhZnRlcl9zdGF0KHByb3ApLCBncm91cD0xKSkKCnAyX25ldzwtZ2dwbG90KGRhdGEgPSBkaWFtb25kcykgKyAKICBnZW9tX2JhcihtYXBwaW5nID0gYWVzKHggPSBjdXQsIGZpbGwgPSBjb2xvciwgeSA9IC4uY291bnQuLiAvIHN1bSguLmNvdW50Li4pKSkKCnAxX25ldwpwMl9uZXcKYGBgCioqKgpXaGF0IGlzIHRoZSBwcm9ibGVtIHdpdGggdGhpcyBwbG90PyBIb3cgY291bGQgd2UgaW1wcm92ZSBpdD8KCmBgYHtyfQpnZ3Bsb3QoZGF0YSA9IG1wZywgbWFwcGluZyA9IGFlcyh4ID0gY3R5LCB5ID0gaHd5KSkgKyAKICBnZW9tX3BvaW50KCApCmBgYApTb2x1dGlvbjoKVGhlcmUgaXMgb3ZlcnBsb3R0aW5nIGJlY2F1c2UgdGhlcmUgYXJlIG11bHRpcGxlIG9ic2VydmF0aW9ucyBmb3IgZWFjaCBjb21iaW5hdGlvbiBvZiBgY3R5YCBhbmQgYGh3eWAgdmFsdWVzLiAKYGBge3J9CmdncGxvdChkYXRhID0gbXBnLCBtYXBwaW5nID0gYWVzKHggPSBjdHksIHkgPSBod3kpKSArIAogIGdlb21fcG9pbnQocG9zaXRpb249ImppdHRlciIgKQpgYGAKCiMjIyBTY2FsZXMKClVzZSBgUkNvbG9yQnJld2VyOjpkaXNwbGF5LmJyZXdlci5hbGwoKWAgdG8gc2VlIGFsbCB0aGUgZGlmZmVyZW50IHBhbGV0dGVzIGZyb20KQ29sb3IgQnJld2VyIGFuZCBwaWNrIHlvdXIgZmF2b3VyaXRlLiBNb2RpZnkgdGhlIGNvZGUgYmVsb3cgdG8gdXNlIGl0CgpgYGB7cn0KZ2dwbG90KG1wZykgKyAKICBnZW9tX3BvaW50KGFlcyh4ID0gZGlzcGwsIHkgPSBod3ksIGNvbG91ciA9IGNsYXNzKSkgKyAKICBzY2FsZV9jb2xvdXJfYnJld2VyKHR5cGUgPSAncXVhbCcpCmBgYAoKU29sdXRpb246CmBgYHtyfQpkYXRhKCJtcGciKQpnZ3Bsb3QobXBnKSArIAogIGdlb21fcG9pbnQoYWVzKHggPSBkaXNwbCwgeSA9IGh3eSwgY29sb3VyID0gY2xhc3MpKSArIAogIHNjYWxlX2NvbG91cl9icmV3ZXIodHlwZSA9ICdxdWFsJywgcGFsZXR0ZSA9ICJTZXQxIikKYGBgCiogKiAqCgpNb2RpZnkgdGhlIGNvZGUgYmVsb3cgdG8gY3JlYXRlIGEgYnViYmxlIGNoYXJ0IChzY2F0dGVycGxvdCB3aXRoIHNpemUgbWFwcGVkIHRvCmEgY29udGludW91cyB2YXJpYWJsZSkgc2hvd2luZyBgY3lsYCB3aXRoIHNpemUuIE1ha2Ugc3VyZSB0aGF0IG9ubHkgdGhlIHByZXNlbnQgCmFtb3VudCBvZiBjeWxpbmRlcnMgKDQsIDUsIDYsIGFuZCA4KSBhcmUgcHJlc2VudCBpbiB0aGUgbGVnZW5kLgoKYGBge3J9CmdncGxvdChtcGcpICsgCiAgZ2VvbV9wb2ludChhZXMoeCA9IGRpc3BsLCB5ID0gaHd5LCBjb2xvdXIgPSBjbGFzcykpICsgCiAgc2NhbGVfY29sb3VyX2JyZXdlcih0eXBlID0gJ3F1YWwnKQpgYGAKCkhpbnQ6IFRoZSBgYnJlYWtzYCBhcmd1bWVudCBpbiB0aGUgc2NhbGUgaXMgdXNlZCB0byBjb250cm9sIHdoaWNoIHZhbHVlcyBhcmUKcHJlc2VudCBpbiB0aGUgbGVnZW5kLgoKU29sdXRpb246CmBgYHtyfQpnZ3Bsb3QobXBnKSArIAogIGdlb21fcG9pbnQoYWVzKHggPSBkaXNwbCwgeSA9IGh3eSwgY29sb3VyID0gY2xhc3MsIHNpemU9Y3lsKSkgKyAKICBzY2FsZV9jb2xvdXJfYnJld2VyKHR5cGUgPSAncXVhbCcpICsKICBzY2FsZV9zaXplKGJyZWFrcyA9IGMoNCwgNSwgNiwgOCkpCmBgYApFeHBsb3JlIHRoZSBkaWZmZXJlbnQgdHlwZXMgb2Ygc2l6ZSBzY2FsZXMgYXZhaWxhYmxlIGluIGdncGxvdDIuIElzIHRoZSBkZWZhdWx0CnRoZSBtb3N0IGFwcHJvcHJpYXRlIGhlcmU/CgpTb2x1dGlvbjoKRGVmYXVsdCBpcyBtYXBwaW5nIHRvIHRoZSByYWRpdXMuIEJ1dCBpdCBpcyBub3QgaW50dWl0aXZlLiBMZXQncyB0cnkgc2l6ZSBtYXBwaW5nIGJ5IGFyZWEuIApgYGB7cn0KZ2dwbG90KG1wZykgKyAKICBnZW9tX3BvaW50KGFlcyh4ID0gZGlzcGwsIHkgPSBod3ksIGNvbG91ciA9IGNsYXNzLCBzaXplPWN5bCkpICsgCiAgc2NhbGVfY29sb3VyX2JyZXdlcih0eXBlID0gJ3F1YWwnKSArCiAgc2NhbGVfc2l6ZV9hcmVhKGJyZWFrcyA9IGMoNCwgNSwgNiwgOCkpCmBgYAoqICogKgoKTW9kaWZ5IHRoZSBjb2RlIGJlbG93IHNvIHRoYXQgY29sb3VyIGlzIG5vIGxvbmdlciBtYXBwZWQgdG8gdGhlIGRpc2NyZXRlIGBjbGFzc2AKdmFyaWFibGUsIGJ1dCB0byB0aGUgY29udGludW91cyBgY3R5YCB2YXJpYWJsZS4gV2hhdCBoYXBwZW5zIHRvIHRoZSBndWlkZSAobGVnZW5kKT8KCmBgYHtyfQpnZ3Bsb3QobXBnKSArIAogIGdlb21fcG9pbnQoYWVzKHggPSBkaXNwbCwgeSA9IGh3eSwgY29sb3VyID0gY2xhc3MsIHNpemUgPSBjdHkpKQpgYGAKClNvbHV0aW9uOgpgYGB7cn0KZ2dwbG90KG1wZykgKyAKICBnZW9tX3BvaW50KGFlcyh4ID0gZGlzcGwsIHkgPSBod3ksIGNvbG91ciA9IGN0eSwgc2l6ZSA9IGN0eSkpCmBgYAoqICogKgoKVGhlIHR5cGUgb2YgZ3VpZGUgY2FuIGJlIGNvbnRyb2xsZWQgd2l0aCB0aGUgYGd1aWRlYCBhcmd1bWVudCBpbiB0aGUgc2NhbGUsIG9yIAp3aXRoIHRoZSBgZ3VpZGVzKClgIGZ1bmN0aW9uLiBDb250aW51b3VzIGNvbG91cnMgaGF2ZSBhIGdyYWRpZW50IGNvbG91ciBiYXIgYnkgCmRlZmF1bHQsIGJ1dCBzZXR0aW5nIGl0IHRvIGBsZWdlbmRgIHdpbGwgdHVybiBpdCBiYWNrIHRvIHRoZSBzdGFuZGFyZCBsb29rLiBXaGF0IApoYXBwZW5zIHdoZW4gbXVsdGlwbGUgYWVzdGhldGljcyBhcmUgbWFwcGVkIHRvIHRoZSBzYW1lIHZhcmlhYmxlIGFuZCB1c2VzIHRoZSAKZ3VpZGUgdHlwZT8KClNvbHV0aW9uOgoKYGBge3J9CmdncGxvdChtcGcpICsgCiAgZ2VvbV9wb2ludChhZXMoeCA9IGRpc3BsLCB5ID0gaHd5LCBjb2xvdXIgPSBjdHksIHNpemUgPSBjdHkpKSsKICBndWlkZXMoY29sb3I9ImxlZ2VuZCIpCmBgYApnZ3Bsb3QgY29tYmluZXMgYm90aCBsZWdlbmRzLiAKCiMjIyBGYWNldHMKCk9uZSBvZiB0aGUgZ3JlYXQgdGhpbmdzIGFib3V0IGZhY2V0cyBpcyB0aGF0IHRoZXkgc2hhcmUgdGhlIGF4ZXMgYmV0d2VlbiB0aGUgCmRpZmZlcmVudCBwYW5lbHMuIFNvbWV0aW1lcyB0aGlzIGlzIHVuZGVzaXJhYmxlIHRob3VnaCwgYW5kIHRoZSBiZWhhdmlvciBjYW4KYmUgY2hhbmdlZCB3aXRoIHRoZSBgc2NhbGVzYCBhcmd1bWVudC4gRXhwZXJpbWVudCB3aXRoIHRoZSBkaWZmZXJlbnQgcG9zc2libGUKc2V0dGluZ3MgaW4gdGhlIHBsb3QgYmVsb3c6CgpgYGB7cn0KZ2dwbG90KG1wZykgKyAKICBnZW9tX3BvaW50KGFlcyh4ID0gZGlzcGwsIHkgPSBod3kpKSArIAogIGZhY2V0X3dyYXAofiBkcnYpCmBgYAoKU29sdXRpb246CmBgYHtyfQpnZ3Bsb3QobXBnKSArIAogIGdlb21fcG9pbnQoYWVzKHggPSBkaXNwbCwgeSA9IGh3eSkpICsgCiAgZmFjZXRfd3JhcCh+IGRydiwgc2NhbGVzPSJmcmVlX3kiKQpgYGAKKiAqICoKClVzdWFsbHkgdGhlIHNwYWNlIG9jY3VwaWVkIGJ5IGVhY2ggcGFuZWwgaXMgZXF1YWwuIFRoaXMgY2FuIGNyZWF0ZSBwcm9ibGVtcyB3aGVuCmRpZmZlcmVudCBzY2FsZXMgYXJlIHVzZWQuIENhbiB5b3UgbW9kaWZ5IHRoZSBjb2RlIGJlbG93IHNvIHRoYXQgdGhlIHkgc2NhbGUgZGlmZmVycyAKYmV0d2VlbiB0aGUgcGFuZWxzIGluIHRoZSBwbG90LiBXaGF0IGhhcHBlbnM/CgpgYGB7cn0KZ2dwbG90KG1wZykgKyAKICBnZW9tX2JhcihhZXMoeSA9IG1hbnVmYWN0dXJlcikpICsgCiAgZmFjZXRfZ3JpZChjbGFzcyB+IC4pCmBgYAoKVXNlIHRoZSBgc3BhY2VgIGFyZ3VtZW50IGluIGBmYWNldF9ncmlkKClgIHRvIGNoYW5nZSB0aGUgcGxvdCBhYm92ZSBzbyBlYWNoIGJhciAKaGFzIHRoZSBzYW1lIHdpZHRoIGFnYWluLgoKU29sdXRpb246CmBgYHtyfQpkYXRhKCJtcGciKQpnZ3Bsb3QobXBnKSArIAogIGdlb21fYmFyKGFlcyh5ID0gbWFudWZhY3R1cmVyKSkgKyAKICBmYWNldF9ncmlkKGNsYXNzIH4gLiwgc3BhY2UgPSAiZnJlZV95Iiwgc2NhbGVzID0gImZyZWVfeSIpCmBgYAoK</div>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeSourceEmbed("dataviz.Rmd");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

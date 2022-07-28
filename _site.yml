@@ -10,6 +10,8 @@ navbar:
         href: EDA.html
       - text: Module 3
         href: wrangling.html
+      - text: Module 4
+        href: dataviz.html
     - text: "Shortcuts"
       href: shortcuts.html
     - text: "About"
