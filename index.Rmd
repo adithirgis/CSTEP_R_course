@@ -64,6 +64,7 @@ knitr::opts_chunk$set(
 [tidyverse](https://www.tidyverse.org/packages/)
 
 ## 5 Relational Data
+[Slides](https://relational-data.netlify.app/#/title-slide)
 
 -   Working with multiple datasets
 -   Different kinds of data joins
@@ -71,7 +72,7 @@ knitr::opts_chunk$set(
 -   Set operations with datasets
 
 #### Packages
-TBD
+[tidyverse](https://www.tidyverse.org/packages/)
 
 ## 6 Date and Time
 
