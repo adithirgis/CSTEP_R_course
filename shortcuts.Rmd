@@ -16,3 +16,5 @@ This page will have a list of keyboard shorcuts that we learn during the course.
 #### Run whole R script : Ctrl + Shift + S 
 #### Pipe %>% operator : Ctrl/Cmd + Shift + M
 #### See previous code in console: Up arrow key 
+#### Show all shortcuts in RStudio: Shift + Alt + K 
+
