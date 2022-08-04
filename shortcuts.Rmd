@@ -8,7 +8,7 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-This page will have a list of keyboard shorcuts that we learn during the course.
+This page will have a list of keyboard shortcuts that we learn during the course.
 
 
 #### Clear the console : Ctrl + L 
