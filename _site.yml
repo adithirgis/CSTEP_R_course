@@ -12,6 +12,8 @@ navbar:
         href: wrangling.html
       - text: Module 4
         href: dataviz.html
+      - text: Module 5
+        href: relational_data.html
     - text: "Shortcuts"
       href: shortcuts.html
     - text: "About"
