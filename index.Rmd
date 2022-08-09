@@ -87,14 +87,14 @@ TBD
 ## 7 Iterations & Functions
 
 -   Introduction to functions
--   For loops
+-   for loops
 -   Introduction to purrr package
 -   Best practices for efficient code
 
 #### Packages
 TBD
 
-## 8 Satistics & Modelling
+## 8 Staistics & Modelling
 
 #### Packages
 TBD
@@ -102,9 +102,9 @@ TBD
 -   Univariate and Bivariate analysis
 -   simple linear regression
 -   Multivariate analysis
--   Brief intro to Machine Learning
+-   Brief introduction to Machine Learning
 
-## 9 Saptial Analysis
+## 9 Spatial Analysis
 
 -   Introduction to coordinate systems
 -   Introduction to sf and raster packages
