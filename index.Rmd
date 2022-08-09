@@ -19,7 +19,7 @@ knitr::opts_chunk$set(
 
 [Slides](https://docs.google.com/presentation/d/1wuaTSNCsBhmRUxFx6ADoxvp8UG28uDqVBL3d50BwUBQ/edit?usp=sharing)
 
--   Introduction to R and Rstudio environment
+-   Introduction to R and RStudio environment
 -   Setting up Projects
 -   Libraries and packages
 -   File naming conventions
@@ -94,7 +94,7 @@ TBD
 #### Packages
 TBD
 
-## 8 Staistics & Modelling
+## 8 Statistics & Modelling
 
 #### Packages
 TBD
