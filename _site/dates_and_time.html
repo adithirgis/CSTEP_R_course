@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Adithi R Upadhya" />
+
+<meta name="date" content="2022-08-10" />
+
+<title>Date and Time</title>
+
+<script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<script src="site_libs/navigation-1.1/sourceembed.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+<style type="text/css">
+#rmd-source-code {
+  display: none;
+}
+</style>
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Exercises
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="EDA.html">Module 2</a>
+    </li>
+    <li>
+      <a href="wrangling.html">Module 3</a>
+    </li>
+    <li>
+      <a href="dataviz.html">Module 4</a>
+    </li>
+    <li>
+      <a href="relational_data.html">Module 5</a>
+    </li>
+    <li>
+      <a href="dates_time.html">Module 6</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="shortcuts.html">Shortcuts</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-download-source" href="#">Download Rmd</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">Date and Time</h1>
+<h4 class="author">Adithi R Upadhya</h4>
+<h4 class="date">2022-08-10</h4>
+
+</div>
+
+
+<div id="load-packages" class="section level2">
+<h2>Load Packages</h2>
+<pre class="r"><code>library(tidyverse) 
+library(lubridate)
+library(nycflights13)
+library(openair)</code></pre>
+</div>
+<div id="get-todays-date-and-time" class="section level2">
+<h2>Get today’s date and time</h2>
+<pre class="r"><code>today()</code></pre>
+<pre><code>## [1] &quot;2022-08-10&quot;</code></pre>
+<pre class="r"><code>now()</code></pre>
+<pre><code>## [1] &quot;2022-08-10 15:55:30 IST&quot;</code></pre>
+</div>
+<div id="create-a-date-time-object-from-a-string"
+class="section level2">
+<h2>Create a date time object from a string</h2>
+<pre class="r"><code>ymd(&quot;2022-01-31&quot;)</code></pre>
+<pre><code>## [1] &quot;2022-01-31&quot;</code></pre>
+<pre class="r"><code>mdy(&quot;January 31st, 2022&quot;)</code></pre>
+<pre><code>## [1] &quot;2022-01-31&quot;</code></pre>
+<pre class="r"><code>dmy(&quot;31-Jan-2022&quot;)</code></pre>
+<pre><code>## [1] &quot;2022-01-31&quot;</code></pre>
+<pre class="r"><code>ymd_hms(&quot;2022-01-31 20:11:59&quot;)</code></pre>
+<pre><code>## [1] &quot;2022-01-31 20:11:59 UTC&quot;</code></pre>
+</div>
+<div id="create-a-date-time-object-from-individual-components"
+class="section level2">
+<h2>Create a date time object from individual components</h2>
+<pre class="r"><code>new_flights &lt;- flights %&gt;% 
+  select(year, month, day, hour, minute)
+
+new_flights_date &lt;- flights %&gt;% 
+  select(year, month, day, hour, minute) %&gt;% 
+  mutate(departure = make_datetime(year, month, day, hour, minute))</code></pre>
+</div>
+<div id="from-other-types" class="section level2">
+<h2>From other types</h2>
+<pre class="r"><code>as_datetime(now())</code></pre>
+<pre><code>## [1] &quot;2022-08-10 10:25:32 UTC&quot;</code></pre>
+<pre class="r"><code>as_date(now())</code></pre>
+<pre><code>## [1] &quot;2022-08-10&quot;</code></pre>
+</div>
+<div id="quiz-1" class="section level2">
+<h2>Quiz 1</h2>
+<pre class="r"><code>d1 &lt;- mdy(&quot;January 1, 2010&quot;)
+
+d2 &lt;- ymd(&quot;2015-Mar-07&quot;)
+
+d3 &lt;- dmy(&quot;06-Jun-2017&quot;)
+
+d4 &lt;- mdy(c(&quot;August 19 (2015)&quot;, &quot;July 1 (2015)&quot;))
+
+d5 &lt;- mdy(&quot;12/30/14&quot;) </code></pre>
+</div>
+<div id="quiz-2" class="section level2">
+<h2>Quiz 2</h2>
+<pre class="r"><code>ymd(c(&quot;2010-10-10&quot;, &quot;bananas&quot;))</code></pre>
+<pre><code>## Warning: 1 failed to parse.</code></pre>
+<pre><code>## [1] &quot;2010-10-10&quot; NA</code></pre>
+</div>
+<div id="manipulating-date-and-time" class="section level2">
+<h2>Manipulating date and time</h2>
+<pre class="r"><code>datetime &lt;- ymd_hms(&quot;2022-07-08 12:34:56&quot;)
+year(datetime)</code></pre>
+<pre><code>## [1] 2022</code></pre>
+<pre class="r"><code>month(datetime)</code></pre>
+<pre><code>## [1] 7</code></pre>
+<pre class="r"><code>mday(datetime)</code></pre>
+<pre><code>## [1] 8</code></pre>
+<pre class="r"><code>yday(datetime)</code></pre>
+<pre><code>## [1] 189</code></pre>
+<pre class="r"><code>wday(datetime)</code></pre>
+<pre><code>## [1] 6</code></pre>
+</div>
+<div id="date-time-components" class="section level2">
+<h2>Date time components</h2>
+<pre class="r"><code>month(datetime, label = TRUE)</code></pre>
+<pre><code>## [1] Jul
+## 12 Levels: Jan &lt; Feb &lt; Mar &lt; Apr &lt; May &lt; Jun &lt; Jul &lt; Aug &lt; Sep &lt; ... &lt; Dec</code></pre>
+<pre class="r"><code>wday(datetime, label = TRUE, abbr = FALSE)</code></pre>
+<pre><code>## [1] Friday
+## 7 Levels: Sunday &lt; Monday &lt; Tuesday &lt; Wednesday &lt; Thursday &lt; ... &lt; Saturday</code></pre>
+<pre class="r"><code>hour(datetime)</code></pre>
+<pre><code>## [1] 12</code></pre>
+<pre class="r"><code>minute(datetime)</code></pre>
+<pre><code>## [1] 34</code></pre>
+<pre class="r"><code>second(datetime)</code></pre>
+<pre><code>## [1] 56</code></pre>
+</div>
+<div id="rounding" class="section level2">
+<h2>Rounding</h2>
+<pre class="r"><code>datetime &lt;- ymd_hms(&quot;2022-07-08 12:34:56&quot;)
+ceiling_date(datetime, &quot;min&quot;)</code></pre>
+<pre><code>## [1] &quot;2022-07-08 12:35:00 UTC&quot;</code></pre>
+<pre class="r"><code>floor_date(datetime, &quot;hour&quot;)</code></pre>
+<pre><code>## [1] &quot;2022-07-08 12:00:00 UTC&quot;</code></pre>
+<pre class="r"><code>round_date(datetime, &quot;month&quot;)</code></pre>
+<pre><code>## [1] &quot;2022-07-01 UTC&quot;</code></pre>
+</div>
+<div id="setting-components" class="section level2">
+<h2>Setting components</h2>
+<pre class="r"><code>(datetime &lt;- ymd_hms(&quot;2020-07-08 12:34:56&quot;))</code></pre>
+<pre><code>## [1] &quot;2020-07-08 12:34:56 UTC&quot;</code></pre>
+<pre class="r"><code>year(datetime) &lt;- 2022
+datetime</code></pre>
+<pre><code>## [1] &quot;2022-07-08 12:34:56 UTC&quot;</code></pre>
+<pre class="r"><code>month(datetime) &lt;- 08
+datetime</code></pre>
+<pre><code>## [1] &quot;2022-08-08 12:34:56 UTC&quot;</code></pre>
+<pre class="r"><code>hour(datetime) &lt;- hour(datetime) + 2
+datetime</code></pre>
+<pre><code>## [1] &quot;2022-08-08 14:34:56 UTC&quot;</code></pre>
+</div>
+<div id="using-update" class="section level2">
+<h2>Using <code>update()</code></h2>
+<pre class="r"><code>(datetime &lt;- ymd_hms(&quot;2020-07-08 12:34:56&quot;))</code></pre>
+<pre><code>## [1] &quot;2020-07-08 12:34:56 UTC&quot;</code></pre>
+<pre class="r"><code>update(datetime, year = 2020, month = 2, mday = 2, hour = 2)</code></pre>
+<pre><code>## [1] &quot;2020-02-02 02:34:56 UTC&quot;</code></pre>
+</div>
+<div id="quiz-3" class="section level2">
+<h2>Quiz 3</h2>
+<pre class="r"><code># install.packages(&quot;openair&quot;)
+library(openair)
+our_new_dataset &lt;- openair::mydata %&gt;% 
+  head(50)</code></pre>
+<pre class="r"><code>our_new_mutated_dataset &lt;- our_new_dataset %&gt;% 
+  mutate(year_new_column = year(date), 
+         month_new_column = month(date))</code></pre>
+</div>
+<div id="durations" class="section level2">
+<h2>Durations</h2>
+<pre class="r"><code>my_age &lt;- today() - ymd(&quot;1995-03-27&quot;)
+my_age</code></pre>
+<pre><code>## Time difference of 9998 days</code></pre>
+<pre class="r"><code>as.duration(my_age)</code></pre>
+<pre><code>## [1] &quot;863827200s (~27.37 years)&quot;</code></pre>
+</div>
+<div id="different-durations" class="section level2">
+<h2>Different durations</h2>
+<pre class="r"><code>dseconds(15)</code></pre>
+<pre><code>## [1] &quot;15s&quot;</code></pre>
+<pre class="r"><code>dminutes(10)</code></pre>
+<pre><code>## [1] &quot;600s (~10 minutes)&quot;</code></pre>
+<pre class="r"><code>dhours(c(12, 24))</code></pre>
+<pre><code>## [1] &quot;43200s (~12 hours)&quot; &quot;86400s (~1 days)&quot;</code></pre>
+<pre class="r"><code>ddays(0:5)</code></pre>
+<pre><code>## [1] &quot;0s&quot;                &quot;86400s (~1 days)&quot;  &quot;172800s (~2 days)&quot;
+## [4] &quot;259200s (~3 days)&quot; &quot;345600s (~4 days)&quot; &quot;432000s (~5 days)&quot;</code></pre>
+<pre class="r"><code>dweeks(3)</code></pre>
+<pre><code>## [1] &quot;1814400s (~3 weeks)&quot;</code></pre>
+<pre class="r"><code>dyears(1)</code></pre>
+<pre><code>## [1] &quot;31557600s (~1 years)&quot;</code></pre>
+</div>
+<div id="airthmetic-with-durations" class="section level2">
+<h2>Airthmetic with Durations</h2>
+<pre class="r"><code>2 * dyears(1)</code></pre>
+<pre><code>## [1] &quot;63115200s (~2 years)&quot;</code></pre>
+<pre class="r"><code>dyears(1) + dweeks(12) + dhours(15)</code></pre>
+<pre><code>## [1] &quot;38869200s (~1.23 years)&quot;</code></pre>
+<pre class="r"><code>today() + ddays(1)</code></pre>
+<pre><code>## [1] &quot;2022-08-11&quot;</code></pre>
+<pre class="r"><code>today() - dyears(1)</code></pre>
+<pre><code>## [1] &quot;2021-08-09 18:00:00 UTC&quot;</code></pre>
+</div>
+<div id="periods" class="section level2">
+<h2>Periods</h2>
+<pre class="r"><code>one_pm &lt;- ymd_hms(&quot;2022-04-12 13:00:00&quot;, tz = &quot;America/New_York&quot;)
+one_pm + ddays(1)</code></pre>
+<pre><code>## [1] &quot;2022-04-13 13:00:00 EDT&quot;</code></pre>
+</div>
+<div id="manipulating-periods" class="section level2">
+<h2>Manipulating Periods</h2>
+<pre class="r"><code>seconds(15)</code></pre>
+<pre><code>## [1] &quot;15S&quot;</code></pre>
+<pre class="r"><code>hours(c(12, 24))</code></pre>
+<pre><code>## [1] &quot;12H 0M 0S&quot; &quot;24H 0M 0S&quot;</code></pre>
+<pre class="r"><code>days(7)</code></pre>
+<pre><code>## [1] &quot;7d 0H 0M 0S&quot;</code></pre>
+<pre class="r"><code>months(1:6)</code></pre>
+<pre><code>## [1] &quot;1m 0d 0H 0M 0S&quot; &quot;2m 0d 0H 0M 0S&quot; &quot;3m 0d 0H 0M 0S&quot; &quot;4m 0d 0H 0M 0S&quot;
+## [5] &quot;5m 0d 0H 0M 0S&quot; &quot;6m 0d 0H 0M 0S&quot;</code></pre>
+<pre class="r"><code>weeks(3)</code></pre>
+<pre><code>## [1] &quot;21d 0H 0M 0S&quot;</code></pre>
+</div>
+<div id="airthmetic-with-periods" class="section level2">
+<h2>Airthmetic with Periods</h2>
+<pre class="r"><code>10 * (months(6) + days(1))</code></pre>
+<pre><code>## [1] &quot;60m 10d 0H 0M 0S&quot;</code></pre>
+<pre class="r"><code>ymd(&quot;2020-01-01&quot;) + dyears(1)</code></pre>
+<pre><code>## [1] &quot;2020-12-31 06:00:00 UTC&quot;</code></pre>
+</div>
+<div id="intervals" class="section level2">
+<h2>Intervals</h2>
+<pre class="r"><code>next_year &lt;- today() + years(1)
+(today() %--% next_year) / ddays(1)</code></pre>
+<pre><code>## [1] 365</code></pre>
+</div>
+<div id="available-time-zones" class="section level2">
+<h2>Available time zones</h2>
+<pre class="r"><code>Sys.timezone()</code></pre>
+<pre><code>## [1] &quot;Asia/Calcutta&quot;</code></pre>
+<pre class="r"><code>head(OlsonNames())</code></pre>
+<pre><code>## [1] &quot;Africa/Abidjan&quot;     &quot;Africa/Accra&quot;       &quot;Africa/Addis_Ababa&quot;
+## [4] &quot;Africa/Algiers&quot;     &quot;Africa/Asmara&quot;      &quot;Africa/Asmera&quot;</code></pre>
+</div>
+<div id="set-time-zones" class="section level2">
+<h2>Set time zones</h2>
+<pre class="r"><code>xa &lt;- with_tz(&quot;2022-06-02 02:30:00&quot;, tzone = &quot;Asia/Kolkata&quot;)
+xa</code></pre>
+<pre><code>## [1] &quot;2022-06-02 02:30:00 IST&quot;</code></pre>
+<pre class="r"><code>xb &lt;- force_tz(xa, tzone = &quot;America/New_York&quot;)
+xb</code></pre>
+<pre><code>## [1] &quot;2022-06-02 02:30:00 EDT&quot;</code></pre>
+<pre class="r"><code>xc &lt;- mdy_hms(&quot;09/12/2021 09:00:10&quot;, tz = &quot;Asia/Kolkata&quot;)
+xc</code></pre>
+<pre><code>## [1] &quot;2021-09-12 09:00:10 IST&quot;</code></pre>
+</div>
+<div id="quiz-5.1" class="section level2">
+<h2>Quiz 5.1</h2>
+<pre class="r"><code>join_data_1 &lt;- read_csv(here::here(&quot;data&quot;, &quot;join_data1.csv&quot;))
+join_data_2 &lt;- read_csv(here::here(&quot;data&quot;, &quot;join_data2.csv&quot;))</code></pre>
+<pre class="r"><code>summary(join_data_1)
+summary(join_data_2)</code></pre>
+</div>
+<div id="quiz-5.3" class="section level2">
+<h2>Quiz 5.3</h2>
+<pre class="r"><code>join_data_1$date &lt;- ymd_hms(join_data_1$date, tz = &quot;Asia/Kolkata&quot;)
+join_data_2$Date &lt;- dmy_hms(join_data_2$Date, tz = &quot;Asia/Kolkata&quot;)</code></pre>
+</div>
+<div id="quiz-5.4" class="section level2">
+<h2>Quiz 5.4</h2>
+<pre class="r"><code>new_joined_df &lt;- full_join(join_data_1, join_data_2, by = c(&quot;date&quot; = &quot;Date&quot;, 
+                                                            &quot;area&quot; = &quot;Area&quot;))</code></pre>
+</div>
+<div id="quiz-5.5" class="section level2">
+<h2>Quiz 5.5</h2>
+<pre class="r"><code>new_joined_df &lt;- new_joined_df %&gt;% 
+  select(everything(), - so2)</code></pre>
+</div>
+<div id="quiz-5.6" class="section level2">
+<h2>Quiz 5.6</h2>
+<pre class="r"><code>new_joined_df &lt;- new_joined_df %&gt;% 
+  filter(area == &quot;BLR&quot;)</code></pre>
+</div>
+<div id="quiz-5.7" class="section level2">
+<h2>Quiz 5.7</h2>
+<pre class="r"><code>new_joined_df &lt;- new_joined_df %&gt;% 
+  mutate(ratio = pm25 / pm10)</code></pre>
+</div>
+<div id="quiz-5.8" class="section level2">
+<h2>Quiz 5.8</h2>
+<pre class="r"><code> new_joined_df %&gt;% 
+  ggplot(aes(pm25, pm10)) + 
+  geom_point()</code></pre>
+<p><img src="dates_and_time_files/figure-html/unnamed-chunk-32-1.png" width="672" /></p>
+</div>
+<div id="quiz-5.9" class="section level2">
+<h2>Quiz 5.9</h2>
+<pre class="r"><code> new_joined_df %&gt;% 
+  ggplot(aes(date, ratio)) + 
+  geom_line()</code></pre>
+<p><img src="dates_and_time_files/figure-html/unnamed-chunk-33-1.png" width="672" /></p>
+</div>
+
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIkRhdGUgYW5kIFRpbWUiDQphdXRob3I6ICJBZGl0aGkgUiBVcGFkaHlhIg0KZGF0ZTogIjIwMjItMDgtMTAiDQpvdXRwdXQ6IA0KICBodG1sX2RvY3VtZW50Og0KICAgIHRvYzogdHJ1ZQ0KICAgIHRvY19mbG9hdDogdHJ1ZQ0KICAgIGNvZGVfZG93bmxvYWQ6IHRydWUNCi0tLQ0KDQojIyBMb2FkIFBhY2thZ2VzDQoNCmBgYHtyIHdhcm5pbmcgPSBGQUxTRSwgbWVzc2FnZSA9IEZBTFNFfQ0KbGlicmFyeSh0aWR5dmVyc2UpIA0KbGlicmFyeShsdWJyaWRhdGUpDQpsaWJyYXJ5KG55Y2ZsaWdodHMxMykNCmxpYnJhcnkob3BlbmFpcikNCmBgYA0KDQojIyBHZXQgdG9kYXkncyBkYXRlIGFuZCB0aW1lIA0KDQpgYGB7cn0NCnRvZGF5KCkNCg0Kbm93KCkNCmBgYA0KDQojIyBDcmVhdGUgYSBkYXRlIHRpbWUgb2JqZWN0IGZyb20gYSBzdHJpbmcgDQoNCmBgYHtyfQ0KeW1kKCIyMDIyLTAxLTMxIikNCm1keSgiSmFudWFyeSAzMXN0LCAyMDIyIikNCmRteSgiMzEtSmFuLTIwMjIiKQ0KDQp5bWRfaG1zKCIyMDIyLTAxLTMxIDIwOjExOjU5IikNCmBgYA0KDQojIyBDcmVhdGUgYSBkYXRlIHRpbWUgb2JqZWN0IGZyb20gaW5kaXZpZHVhbCBjb21wb25lbnRzDQoNCg0KYGBge3J9DQpuZXdfZmxpZ2h0cyA8LSBmbGlnaHRzICU+JSANCiAgc2VsZWN0KHllYXIsIG1vbnRoLCBkYXksIGhvdXIsIG1pbnV0ZSkNCg0KbmV3X2ZsaWdodHNfZGF0ZSA8LSBmbGlnaHRzICU+JSANCiAgc2VsZWN0KHllYXIsIG1vbnRoLCBkYXksIGhvdXIsIG1pbnV0ZSkgJT4lIA0KICBtdXRhdGUoZGVwYXJ0dXJlID0gbWFrZV9kYXRldGltZSh5ZWFyLCBtb250aCwgZGF5LCBob3VyLCBtaW51dGUpKQ0KYGBgDQoNCg0KIyMgRnJvbSBvdGhlciB0eXBlcw0KDQpgYGB7cn0NCmFzX2RhdGV0aW1lKG5vdygpKQ0KYXNfZGF0ZShub3coKSkNCmBgYA0KDQojIyBRdWl6IDENCg0KYGBge3J9DQpkMSA8LSBtZHkoIkphbnVhcnkgMSwgMjAxMCIpDQoNCmQyIDwtIHltZCgiMjAxNS1NYXItMDciKQ0KDQpkMyA8LSBkbXkoIjA2LUp1bi0yMDE3IikNCg0KZDQgPC0gbWR5KGMoIkF1Z3VzdCAxOSAoMjAxNSkiLCAiSnVseSAxICgyMDE1KSIpKQ0KDQpkNSA8LSBtZHkoIjEyLzMwLzE0IikgDQpgYGANCg0KIyMgUXVpeiAyDQoNCmBgYHtyfQ0KeW1kKGMoIjIwMTAtMTAtMTAiLCAiYmFuYW5hcyIpKQ0KYGBgDQoNCiMjIE1hbmlwdWxhdGluZyBkYXRlIGFuZCB0aW1lIA0KDQpgYGB7cn0NCmRhdGV0aW1lIDwtIHltZF9obXMoIjIwMjItMDctMDggMTI6MzQ6NTYiKQ0KeWVhcihkYXRldGltZSkNCm1vbnRoKGRhdGV0aW1lKQ0KbWRheShkYXRldGltZSkNCnlkYXkoZGF0ZXRpbWUpDQp3ZGF5KGRhdGV0aW1lKQ0KYGBgDQoNCg0KIyMgRGF0ZSB0aW1lIGNvbXBvbmVudHMNCg0KYGBge3J9DQptb250aChkYXRldGltZSwgbGFiZWwgPSBUUlVFKQ0Kd2RheShkYXRldGltZSwgbGFiZWwgPSBUUlVFLCBhYmJyID0gRkFMU0UpDQpgYGANCg0KYGBge3J9DQpob3VyKGRhdGV0aW1lKQ0KbWludXRlKGRhdGV0aW1lKQ0Kc2Vjb25kKGRhdGV0aW1lKQ0KYGBgDQoNCiMjIFJvdW5kaW5nDQoNCmBgYHtyfQ0KZGF0ZXRpbWUgPC0geW1kX2htcygiMjAyMi0wNy0wOCAxMjozNDo1NiIpDQpjZWlsaW5nX2RhdGUoZGF0ZXRpbWUsICJtaW4iKQ0KZmxvb3JfZGF0ZShkYXRldGltZSwgImhvdXIiKQ0Kcm91bmRfZGF0ZShkYXRldGltZSwgIm1vbnRoIikNCmBgYA0KDQojIyBTZXR0aW5nIGNvbXBvbmVudHMNCg0KYGBge3J9DQooZGF0ZXRpbWUgPC0geW1kX2htcygiMjAyMC0wNy0wOCAxMjozNDo1NiIpKQ0KDQp5ZWFyKGRhdGV0aW1lKSA8LSAyMDIyDQpkYXRldGltZQ0KDQptb250aChkYXRldGltZSkgPC0gMDgNCmRhdGV0aW1lDQoNCmhvdXIoZGF0ZXRpbWUpIDwtIGhvdXIoZGF0ZXRpbWUpICsgMg0KZGF0ZXRpbWUNCg0KYGBgDQoNCiMjIFVzaW5nIGB1cGRhdGUoKWAgDQoNCmBgYHtyfQ0KKGRhdGV0aW1lIDwtIHltZF9obXMoIjIwMjAtMDctMDggMTI6MzQ6NTYiKSkNCg0KdXBkYXRlKGRhdGV0aW1lLCB5ZWFyID0gMjAyMCwgbW9udGggPSAyLCBtZGF5ID0gMiwgaG91ciA9IDIpDQoNCmBgYA0KDQojIyBRdWl6IDMgDQoNCmBgYHtyfQ0KIyBpbnN0YWxsLnBhY2thZ2VzKCJvcGVuYWlyIikNCmxpYnJhcnkob3BlbmFpcikNCm91cl9uZXdfZGF0YXNldCA8LSBvcGVuYWlyOjpteWRhdGEgJT4lIA0KICBoZWFkKDUwKQ0KYGBgDQoNCg0KYGBge3J9DQpvdXJfbmV3X211dGF0ZWRfZGF0YXNldCA8LSBvdXJfbmV3X2RhdGFzZXQgJT4lIA0KICBtdXRhdGUoeWVhcl9uZXdfY29sdW1uID0geWVhcihkYXRlKSwgDQogICAgICAgICBtb250aF9uZXdfY29sdW1uID0gbW9udGgoZGF0ZSkpDQpgYGANCg0KIyMgRHVyYXRpb25zIA0KDQpgYGB7cn0NCm15X2FnZSA8LSB0b2RheSgpIC0geW1kKCIxOTk1LTAzLTI3IikNCm15X2FnZQ0KYXMuZHVyYXRpb24obXlfYWdlKQ0KYGBgDQoNCiMjIERpZmZlcmVudCBkdXJhdGlvbnMgDQoNCmBgYHtyfQ0KZHNlY29uZHMoMTUpDQpkbWludXRlcygxMCkNCmRob3VycyhjKDEyLCAyNCkpDQpkZGF5cygwOjUpDQpkd2Vla3MoMykNCmR5ZWFycygxKQ0KYGBgDQoNCiMjIEFpcnRobWV0aWMgd2l0aCBEdXJhdGlvbnMNCg0KYGBge3J9DQoyICogZHllYXJzKDEpDQpkeWVhcnMoMSkgKyBkd2Vla3MoMTIpICsgZGhvdXJzKDE1KQ0KdG9kYXkoKSArIGRkYXlzKDEpDQp0b2RheSgpIC0gZHllYXJzKDEpDQpgYGANCg0KIyMgUGVyaW9kcyANCg0KYGBge3J9DQpvbmVfcG0gPC0geW1kX2htcygiMjAyMi0wNC0xMiAxMzowMDowMCIsIHR6ID0gIkFtZXJpY2EvTmV3X1lvcmsiKQ0Kb25lX3BtICsgZGRheXMoMSkNCmBgYA0KDQojIyBNYW5pcHVsYXRpbmcgUGVyaW9kcyANCg0KDQpgYGB7cn0NCnNlY29uZHMoMTUpDQpob3VycyhjKDEyLCAyNCkpDQpkYXlzKDcpDQptb250aHMoMTo2KQ0Kd2Vla3MoMykNCmBgYA0KDQojIyBBaXJ0aG1ldGljIHdpdGggUGVyaW9kcw0KDQpgYGB7cn0NCjEwICogKG1vbnRocyg2KSArIGRheXMoMSkpDQp5bWQoIjIwMjAtMDEtMDEiKSArIGR5ZWFycygxKQ0KYGBgDQoNCiMjIEludGVydmFscyANCg0KYGBge3J9DQpuZXh0X3llYXIgPC0gdG9kYXkoKSArIHllYXJzKDEpDQoodG9kYXkoKSAlLS0lIG5leHRfeWVhcikgLyBkZGF5cygxKQ0KYGBgDQoNCiMjIEF2YWlsYWJsZSB0aW1lIHpvbmVzDQoNCmBgYHtyfQ0KU3lzLnRpbWV6b25lKCkNCmhlYWQoT2xzb25OYW1lcygpKQ0KYGBgDQoNCiMjIFNldCB0aW1lIHpvbmVzDQoNCmBgYHtyfQ0KeGEgPC0gd2l0aF90eigiMjAyMi0wNi0wMiAwMjozMDowMCIsIHR6b25lID0gIkFzaWEvS29sa2F0YSIpDQp4YQ0KeGIgPC0gZm9yY2VfdHooeGEsIHR6b25lID0gIkFtZXJpY2EvTmV3X1lvcmsiKQ0KeGINCnhjIDwtIG1keV9obXMoIjA5LzEyLzIwMjEgMDk6MDA6MTAiLCB0eiA9ICJBc2lhL0tvbGthdGEiKQ0KeGMNCmBgYA0KDQojIyBRdWl6IDUuMQ0KDQpgYGB7ciBtZXNzYWdlID0gRkFMU0UsIHdhcm5pbmcgPSBGQUxTRX0NCmpvaW5fZGF0YV8xIDwtIHJlYWRfY3N2KGhlcmU6OmhlcmUoImRhdGEiLCAiam9pbl9kYXRhMS5jc3YiKSkNCmpvaW5fZGF0YV8yIDwtIHJlYWRfY3N2KGhlcmU6OmhlcmUoImRhdGEiLCAiam9pbl9kYXRhMi5jc3YiKSkNCmBgYA0KDQoNCmBgYHtyIG1lc3NhZ2UgPSBGQUxTRSwgd2FybmluZyA9IEZBTFNFLCBldmFsID0gRkFMU0V9DQpzdW1tYXJ5KGpvaW5fZGF0YV8xKQ0Kc3VtbWFyeShqb2luX2RhdGFfMikNCmBgYA0KDQojIyBRdWl6IDUuMw0KDQpgYGB7ciBtZXNzYWdlID0gRkFMU0UsIHdhcm5pbmcgPSBGQUxTRX0NCmpvaW5fZGF0YV8xJGRhdGUgPC0geW1kX2htcyhqb2luX2RhdGFfMSRkYXRlLCB0eiA9ICJBc2lhL0tvbGthdGEiKQ0Kam9pbl9kYXRhXzIkRGF0ZSA8LSBkbXlfaG1zKGpvaW5fZGF0YV8yJERhdGUsIHR6ID0gIkFzaWEvS29sa2F0YSIpDQpgYGANCg0KIyMgUXVpeiA1LjQNCg0KYGBge3IgbWVzc2FnZSA9IEZBTFNFLCB3YXJuaW5nID0gRkFMU0V9DQpuZXdfam9pbmVkX2RmIDwtIGZ1bGxfam9pbihqb2luX2RhdGFfMSwgam9pbl9kYXRhXzIsIGJ5ID0gYygiZGF0ZSIgPSAiRGF0ZSIsIA0KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgImFyZWEiID0gIkFyZWEiKSkNCmBgYA0KDQojIyBRdWl6IDUuNQ0KDQpgYGB7ciBtZXNzYWdlID0gRkFMU0UsIHdhcm5pbmcgPSBGQUxTRX0NCm5ld19qb2luZWRfZGYgPC0gbmV3X2pvaW5lZF9kZiAlPiUgDQogIHNlbGVjdChldmVyeXRoaW5nKCksIC0gc28yKQ0KYGBgDQoNCiMjIFF1aXogNS42DQoNCmBgYHtyIG1lc3NhZ2UgPSBGQUxTRSwgd2FybmluZyA9IEZBTFNFfQ0KbmV3X2pvaW5lZF9kZiA8LSBuZXdfam9pbmVkX2RmICU+JSANCiAgZmlsdGVyKGFyZWEgPT0gIkJMUiIpDQpgYGANCg0KDQojIyBRdWl6IDUuNw0KDQpgYGB7ciBtZXNzYWdlID0gRkFMU0UsIHdhcm5pbmcgPSBGQUxTRX0NCm5ld19qb2luZWRfZGYgPC0gbmV3X2pvaW5lZF9kZiAlPiUgDQogIG11dGF0ZShyYXRpbyA9IHBtMjUgLyBwbTEwKQ0KYGBgDQoNCiMjIFF1aXogNS44DQoNCmBgYHtyIG1lc3NhZ2UgPSBGQUxTRSwgd2FybmluZyA9IEZBTFNFfQ0KIG5ld19qb2luZWRfZGYgJT4lIA0KICBnZ3Bsb3QoYWVzKHBtMjUsIHBtMTApKSArIA0KICBnZW9tX3BvaW50KCkNCmBgYA0KDQojIyBRdWl6IDUuOQ0KDQpgYGB7ciBtZXNzYWdlID0gRkFMU0UsIHdhcm5pbmcgPSBGQUxTRX0NCiBuZXdfam9pbmVkX2RmICU+JSANCiAgZ2dwbG90KGFlcyhkYXRlLCByYXRpbykpICsgDQogIGdlb21fbGluZSgpDQpgYGANCg0KDQoNCg==</div>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeSourceEmbed("dates_and_time.Rmd");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

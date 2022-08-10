@@ -14,6 +14,8 @@ navbar:
         href: dataviz.html
       - text: Module 5
         href: relational_data.html
+      - text: Module 6
+        href: dates_time.html
     - text: "Shortcuts"
       href: shortcuts.html
     - text: "About"

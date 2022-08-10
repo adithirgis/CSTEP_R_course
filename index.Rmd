@@ -75,6 +75,7 @@ knitr::opts_chunk$set(
 [tidyverse](https://www.tidyverse.org/packages/)
 
 ## 6 Date and Time
+[Slides](https://cstep-rcourse-date-and-time.netlify.app/)
 
 -   Creating date/times
 -   Introduction lubridate package
@@ -82,7 +83,10 @@ knitr::opts_chunk$set(
 -   Arithmetic with date-time data
 
 #### Packages
-TBD
+[tidyverse](https://www.tidyverse.org/packages/)     
+[lubridate](https://lubridate.tidyverse.org/)     
+[nycflights13](https://cran.r-project.org/web/packages/nycflights13/index.html)     
+[openair](https://davidcarslaw.github.io/openair/)
 
 ## 7 Iterations & Functions
 
