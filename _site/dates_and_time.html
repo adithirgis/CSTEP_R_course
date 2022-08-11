@@ -395,6 +395,7 @@ div.tocify {
 <div id="load-packages" class="section level2">
 <h2>Load Packages</h2>
 <pre class="r"><code>library(tidyverse) 
+# install.packages(&quot;lubridate&quot;)
 library(lubridate)
 library(nycflights13)
 library(openair)</code></pre>
@@ -402,9 +403,9 @@ library(openair)</code></pre>
 <div id="get-todays-date-and-time" class="section level2">
 <h2>Get today’s date and time</h2>
 <pre class="r"><code>today()</code></pre>
-<pre><code>## [1] &quot;2022-08-10&quot;</code></pre>
+<pre><code>## [1] &quot;2022-08-11&quot;</code></pre>
 <pre class="r"><code>now()</code></pre>
-<pre><code>## [1] &quot;2022-08-10 16:03:48 IST&quot;</code></pre>
+<pre><code>## [1] &quot;2022-08-11 16:02:03 IST&quot;</code></pre>
 </div>
 <div id="create-a-date-time-object-from-a-string"
 class="section level2">
@@ -421,19 +422,40 @@ class="section level2">
 <div id="create-a-date-time-object-from-individual-components"
 class="section level2">
 <h2>Create a date time object from individual components</h2>
+<pre class="r"><code>glimpse(flights)</code></pre>
+<pre><code>## Rows: 336,776
+## Columns: 19
+## $ year           &lt;int&gt; 2013, 2013, 2013, 2013, 2013, 2013, 2013, 2013, 2013, 2…
+## $ month          &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1…
+## $ day            &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1…
+## $ dep_time       &lt;int&gt; 517, 533, 542, 544, 554, 554, 555, 557, 557, 558, 558, …
+## $ sched_dep_time &lt;int&gt; 515, 529, 540, 545, 600, 558, 600, 600, 600, 600, 600, …
+## $ dep_delay      &lt;dbl&gt; 2, 4, 2, -1, -6, -4, -5, -3, -3, -2, -2, -2, -2, -2, -1…
+## $ arr_time       &lt;int&gt; 830, 850, 923, 1004, 812, 740, 913, 709, 838, 753, 849,…
+## $ sched_arr_time &lt;int&gt; 819, 830, 850, 1022, 837, 728, 854, 723, 846, 745, 851,…
+## $ arr_delay      &lt;dbl&gt; 11, 20, 33, -18, -25, 12, 19, -14, -8, 8, -2, -3, 7, -1…
+## $ carrier        &lt;chr&gt; &quot;UA&quot;, &quot;UA&quot;, &quot;AA&quot;, &quot;B6&quot;, &quot;DL&quot;, &quot;UA&quot;, &quot;B6&quot;, &quot;EV&quot;, &quot;B6&quot;, &quot;…
+## $ flight         &lt;int&gt; 1545, 1714, 1141, 725, 461, 1696, 507, 5708, 79, 301, 4…
+## $ tailnum        &lt;chr&gt; &quot;N14228&quot;, &quot;N24211&quot;, &quot;N619AA&quot;, &quot;N804JB&quot;, &quot;N668DN&quot;, &quot;N394…
+## $ origin         &lt;chr&gt; &quot;EWR&quot;, &quot;LGA&quot;, &quot;JFK&quot;, &quot;JFK&quot;, &quot;LGA&quot;, &quot;EWR&quot;, &quot;EWR&quot;, &quot;LGA&quot;,…
+## $ dest           &lt;chr&gt; &quot;IAH&quot;, &quot;IAH&quot;, &quot;MIA&quot;, &quot;BQN&quot;, &quot;ATL&quot;, &quot;ORD&quot;, &quot;FLL&quot;, &quot;IAD&quot;,…
+## $ air_time       &lt;dbl&gt; 227, 227, 160, 183, 116, 150, 158, 53, 140, 138, 149, 1…
+## $ distance       &lt;dbl&gt; 1400, 1416, 1089, 1576, 762, 719, 1065, 229, 944, 733, …
+## $ hour           &lt;dbl&gt; 5, 5, 5, 5, 6, 5, 6, 6, 6, 6, 6, 6, 6, 6, 6, 5, 6, 6, 6…
+## $ minute         &lt;dbl&gt; 15, 29, 40, 45, 0, 58, 0, 0, 0, 0, 0, 0, 0, 0, 0, 59, 0…
+## $ time_hour      &lt;dttm&gt; 2013-01-01 05:00:00, 2013-01-01 05:00:00, 2013-01-01 0…</code></pre>
 <pre class="r"><code>new_flights &lt;- flights %&gt;% 
   select(year, month, day, hour, minute)
 
-new_flights_date &lt;- flights %&gt;% 
-  select(year, month, day, hour, minute) %&gt;% 
+new_flights_date &lt;- new_flights %&gt;% 
   mutate(departure = make_datetime(year, month, day, hour, minute))</code></pre>
 </div>
 <div id="from-other-types" class="section level2">
 <h2>From other types</h2>
 <pre class="r"><code>as_datetime(now())</code></pre>
-<pre><code>## [1] &quot;2022-08-10 10:33:52 UTC&quot;</code></pre>
+<pre><code>## [1] &quot;2022-08-11 10:32:05 UTC&quot;</code></pre>
 <pre class="r"><code>as_date(now())</code></pre>
-<pre><code>## [1] &quot;2022-08-10&quot;</code></pre>
+<pre><code>## [1] &quot;2022-08-11&quot;</code></pre>
 </div>
 <div id="quiz-1" class="section level2">
 <h2>Quiz 1</h2>
@@ -455,7 +477,7 @@ d5 &lt;- mdy(&quot;12/30/14&quot;) </code></pre>
 </div>
 <div id="manipulating-date-and-time" class="section level2">
 <h2>Manipulating date and time</h2>
-<pre class="r"><code>datetime &lt;- ymd_hms(&quot;2022-07-08 12:34:56&quot;)
+<pre class="r"><code>datetime &lt;- ymd_hms(&quot;2022/Jul/08 12:34:56&quot;)
 year(datetime)</code></pre>
 <pre><code>## [1] 2022</code></pre>
 <pre class="r"><code>month(datetime)</code></pre>
@@ -469,12 +491,11 @@ year(datetime)</code></pre>
 </div>
 <div id="date-time-components" class="section level2">
 <h2>Date time components</h2>
-<pre class="r"><code>month(datetime, label = TRUE)</code></pre>
-<pre><code>## [1] Jul
-## 12 Levels: Jan &lt; Feb &lt; Mar &lt; Apr &lt; May &lt; Jun &lt; Jul &lt; Aug &lt; Sep &lt; ... &lt; Dec</code></pre>
-<pre class="r"><code>wday(datetime, label = TRUE, abbr = FALSE)</code></pre>
-<pre><code>## [1] Friday
-## 7 Levels: Sunday &lt; Monday &lt; Tuesday &lt; Wednesday &lt; Thursday &lt; ... &lt; Saturday</code></pre>
+<pre class="r"><code>month(datetime, label = TRUE, abbr = FALSE)</code></pre>
+<pre><code>## [1] July
+## 12 Levels: January &lt; February &lt; March &lt; April &lt; May &lt; June &lt; ... &lt; December</code></pre>
+<pre class="r"><code>wday(datetime)</code></pre>
+<pre><code>## [1] 6</code></pre>
 <pre class="r"><code>hour(datetime)</code></pre>
 <pre><code>## [1] 12</code></pre>
 <pre class="r"><code>minute(datetime)</code></pre>
@@ -484,7 +505,8 @@ year(datetime)</code></pre>
 </div>
 <div id="rounding" class="section level2">
 <h2>Rounding</h2>
-<pre class="r"><code>datetime &lt;- ymd_hms(&quot;2022-07-08 12:34:56&quot;)
+<pre class="r"><code>datetime &lt;- &quot;2022-Jul-08 12:34:56&quot;
+datetime &lt;- ymd_hms(datetime)
 ceiling_date(datetime, &quot;min&quot;)</code></pre>
 <pre><code>## [1] &quot;2022-07-08 12:35:00 UTC&quot;</code></pre>
 <pre class="r"><code>floor_date(datetime, &quot;hour&quot;)</code></pre>
@@ -494,7 +516,7 @@ ceiling_date(datetime, &quot;min&quot;)</code></pre>
 </div>
 <div id="setting-components" class="section level2">
 <h2>Setting components</h2>
-<pre class="r"><code>(datetime &lt;- ymd_hms(&quot;2020-07-08 12:34:56&quot;))</code></pre>
+<pre class="r"><code>(datetime &lt;- ymd_hms(&quot;2020-Jul-08 12:34:56&quot;))</code></pre>
 <pre><code>## [1] &quot;2020-07-08 12:34:56 UTC&quot;</code></pre>
 <pre class="r"><code>year(datetime) &lt;- 2022
 datetime</code></pre>
@@ -508,10 +530,10 @@ datetime</code></pre>
 </div>
 <div id="using-update" class="section level2">
 <h2>Using <code>update()</code></h2>
-<pre class="r"><code>(datetime &lt;- ymd_hms(&quot;2020-07-08 12:34:56&quot;))</code></pre>
+<pre class="r"><code>(datetime &lt;- ymd_hms(&quot;2020-Jul-08 12:34:56&quot;))</code></pre>
 <pre><code>## [1] &quot;2020-07-08 12:34:56 UTC&quot;</code></pre>
-<pre class="r"><code>update(datetime, year = 2020, month = 2, mday = 2, hour = 2)</code></pre>
-<pre><code>## [1] &quot;2020-02-02 02:34:56 UTC&quot;</code></pre>
+<pre class="r"><code>update(datetime, year = 2022, month = 08, mday = 12, hour = 21)</code></pre>
+<pre><code>## [1] &quot;2022-08-12 21:34:56 UTC&quot;</code></pre>
 </div>
 <div id="quiz-3" class="section level2">
 <h2>Quiz 3</h2>
@@ -521,15 +543,18 @@ our_new_dataset &lt;- openair::mydata %&gt;%
   head(50)</code></pre>
 <pre class="r"><code>our_new_mutated_dataset &lt;- our_new_dataset %&gt;% 
   mutate(year_new_column = year(date), 
-         month_new_column = month(date))</code></pre>
+         month_new_column = month(date),
+         day_new_column = mday(date))
+
+year(our_new_mutated_dataset$date) &lt;- 2022</code></pre>
 </div>
 <div id="durations" class="section level2">
 <h2>Durations</h2>
 <pre class="r"><code>my_age &lt;- today() - ymd(&quot;1995-03-27&quot;)
 my_age</code></pre>
-<pre><code>## Time difference of 9998 days</code></pre>
+<pre><code>## Time difference of 9999 days</code></pre>
 <pre class="r"><code>as.duration(my_age)</code></pre>
-<pre><code>## [1] &quot;863827200s (~27.37 years)&quot;</code></pre>
+<pre><code>## [1] &quot;863913600s (~27.38 years)&quot;</code></pre>
 </div>
 <div id="different-durations" class="section level2">
 <h2>Different durations</h2>
@@ -554,9 +579,9 @@ my_age</code></pre>
 <pre class="r"><code>dyears(1) + dweeks(12) + dhours(15)</code></pre>
 <pre><code>## [1] &quot;38869200s (~1.23 years)&quot;</code></pre>
 <pre class="r"><code>today() + ddays(1)</code></pre>
-<pre><code>## [1] &quot;2022-08-11&quot;</code></pre>
+<pre><code>## [1] &quot;2022-08-12&quot;</code></pre>
 <pre class="r"><code>today() - dyears(1)</code></pre>
-<pre><code>## [1] &quot;2021-08-09 18:00:00 UTC&quot;</code></pre>
+<pre><code>## [1] &quot;2021-08-10 18:00:00 UTC&quot;</code></pre>
 </div>
 <div id="periods" class="section level2">
 <h2>Periods</h2>
@@ -658,7 +683,7 @@ join_data_2$Date &lt;- dmy_hms(join_data_2$Date, tz = &quot;Asia/Kolkata&quot;)<
 <p><img src="dates_and_time_files/figure-html/unnamed-chunk-33-1.png" width="672" /></p>
 </div>
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIkRhdGUgYW5kIFRpbWUiDQphdXRob3I6ICJBZGl0aGkgUiBVcGFkaHlhIg0KZGF0ZTogIjIwMjItMDgtMTAiDQpvdXRwdXQ6IA0KICBodG1sX2RvY3VtZW50Og0KICAgIHRvYzogdHJ1ZQ0KICAgIHRvY19mbG9hdDogdHJ1ZQ0KICAgIGNvZGVfZG93bmxvYWQ6IHRydWUNCi0tLQ0KDQojIyBMb2FkIFBhY2thZ2VzDQoNCmBgYHtyIHdhcm5pbmcgPSBGQUxTRSwgbWVzc2FnZSA9IEZBTFNFfQ0KbGlicmFyeSh0aWR5dmVyc2UpIA0KbGlicmFyeShsdWJyaWRhdGUpDQpsaWJyYXJ5KG55Y2ZsaWdodHMxMykNCmxpYnJhcnkob3BlbmFpcikNCmBgYA0KDQojIyBHZXQgdG9kYXkncyBkYXRlIGFuZCB0aW1lIA0KDQpgYGB7cn0NCnRvZGF5KCkNCg0Kbm93KCkNCmBgYA0KDQojIyBDcmVhdGUgYSBkYXRlIHRpbWUgb2JqZWN0IGZyb20gYSBzdHJpbmcgDQoNCmBgYHtyfQ0KeW1kKCIyMDIyLTAxLTMxIikNCm1keSgiSmFudWFyeSAzMXN0LCAyMDIyIikNCmRteSgiMzEtSmFuLTIwMjIiKQ0KDQp5bWRfaG1zKCIyMDIyLTAxLTMxIDIwOjExOjU5IikNCmBgYA0KDQojIyBDcmVhdGUgYSBkYXRlIHRpbWUgb2JqZWN0IGZyb20gaW5kaXZpZHVhbCBjb21wb25lbnRzDQoNCg0KYGBge3J9DQpuZXdfZmxpZ2h0cyA8LSBmbGlnaHRzICU+JSANCiAgc2VsZWN0KHllYXIsIG1vbnRoLCBkYXksIGhvdXIsIG1pbnV0ZSkNCg0KbmV3X2ZsaWdodHNfZGF0ZSA8LSBmbGlnaHRzICU+JSANCiAgc2VsZWN0KHllYXIsIG1vbnRoLCBkYXksIGhvdXIsIG1pbnV0ZSkgJT4lIA0KICBtdXRhdGUoZGVwYXJ0dXJlID0gbWFrZV9kYXRldGltZSh5ZWFyLCBtb250aCwgZGF5LCBob3VyLCBtaW51dGUpKQ0KYGBgDQoNCg0KIyMgRnJvbSBvdGhlciB0eXBlcw0KDQpgYGB7cn0NCmFzX2RhdGV0aW1lKG5vdygpKQ0KYXNfZGF0ZShub3coKSkNCmBgYA0KDQojIyBRdWl6IDENCg0KYGBge3J9DQpkMSA8LSBtZHkoIkphbnVhcnkgMSwgMjAxMCIpDQoNCmQyIDwtIHltZCgiMjAxNS1NYXItMDciKQ0KDQpkMyA8LSBkbXkoIjA2LUp1bi0yMDE3IikNCg0KZDQgPC0gbWR5KGMoIkF1Z3VzdCAxOSAoMjAxNSkiLCAiSnVseSAxICgyMDE1KSIpKQ0KDQpkNSA8LSBtZHkoIjEyLzMwLzE0IikgDQpgYGANCg0KIyMgUXVpeiAyDQoNCmBgYHtyfQ0KeW1kKGMoIjIwMTAtMTAtMTAiLCAiYmFuYW5hcyIpKQ0KYGBgDQoNCiMjIE1hbmlwdWxhdGluZyBkYXRlIGFuZCB0aW1lIA0KDQpgYGB7cn0NCmRhdGV0aW1lIDwtIHltZF9obXMoIjIwMjItMDctMDggMTI6MzQ6NTYiKQ0KeWVhcihkYXRldGltZSkNCm1vbnRoKGRhdGV0aW1lKQ0KbWRheShkYXRldGltZSkNCnlkYXkoZGF0ZXRpbWUpDQp3ZGF5KGRhdGV0aW1lKQ0KYGBgDQoNCg0KIyMgRGF0ZSB0aW1lIGNvbXBvbmVudHMNCg0KYGBge3J9DQptb250aChkYXRldGltZSwgbGFiZWwgPSBUUlVFKQ0Kd2RheShkYXRldGltZSwgbGFiZWwgPSBUUlVFLCBhYmJyID0gRkFMU0UpDQpgYGANCg0KYGBge3J9DQpob3VyKGRhdGV0aW1lKQ0KbWludXRlKGRhdGV0aW1lKQ0Kc2Vjb25kKGRhdGV0aW1lKQ0KYGBgDQoNCiMjIFJvdW5kaW5nDQoNCmBgYHtyfQ0KZGF0ZXRpbWUgPC0geW1kX2htcygiMjAyMi0wNy0wOCAxMjozNDo1NiIpDQpjZWlsaW5nX2RhdGUoZGF0ZXRpbWUsICJtaW4iKQ0KZmxvb3JfZGF0ZShkYXRldGltZSwgImhvdXIiKQ0Kcm91bmRfZGF0ZShkYXRldGltZSwgIm1vbnRoIikNCmBgYA0KDQojIyBTZXR0aW5nIGNvbXBvbmVudHMNCg0KYGBge3J9DQooZGF0ZXRpbWUgPC0geW1kX2htcygiMjAyMC0wNy0wOCAxMjozNDo1NiIpKQ0KDQp5ZWFyKGRhdGV0aW1lKSA8LSAyMDIyDQpkYXRldGltZQ0KDQptb250aChkYXRldGltZSkgPC0gMDgNCmRhdGV0aW1lDQoNCmhvdXIoZGF0ZXRpbWUpIDwtIGhvdXIoZGF0ZXRpbWUpICsgMg0KZGF0ZXRpbWUNCg0KYGBgDQoNCiMjIFVzaW5nIGB1cGRhdGUoKWAgDQoNCmBgYHtyfQ0KKGRhdGV0aW1lIDwtIHltZF9obXMoIjIwMjAtMDctMDggMTI6MzQ6NTYiKSkNCg0KdXBkYXRlKGRhdGV0aW1lLCB5ZWFyID0gMjAyMCwgbW9udGggPSAyLCBtZGF5ID0gMiwgaG91ciA9IDIpDQoNCmBgYA0KDQojIyBRdWl6IDMgDQoNCmBgYHtyfQ0KIyBpbnN0YWxsLnBhY2thZ2VzKCJvcGVuYWlyIikNCmxpYnJhcnkob3BlbmFpcikNCm91cl9uZXdfZGF0YXNldCA8LSBvcGVuYWlyOjpteWRhdGEgJT4lIA0KICBoZWFkKDUwKQ0KYGBgDQoNCg0KYGBge3J9DQpvdXJfbmV3X211dGF0ZWRfZGF0YXNldCA8LSBvdXJfbmV3X2RhdGFzZXQgJT4lIA0KICBtdXRhdGUoeWVhcl9uZXdfY29sdW1uID0geWVhcihkYXRlKSwgDQogICAgICAgICBtb250aF9uZXdfY29sdW1uID0gbW9udGgoZGF0ZSkpDQpgYGANCg0KIyMgRHVyYXRpb25zIA0KDQpgYGB7cn0NCm15X2FnZSA8LSB0b2RheSgpIC0geW1kKCIxOTk1LTAzLTI3IikNCm15X2FnZQ0KYXMuZHVyYXRpb24obXlfYWdlKQ0KYGBgDQoNCiMjIERpZmZlcmVudCBkdXJhdGlvbnMgDQoNCmBgYHtyfQ0KZHNlY29uZHMoMTUpDQpkbWludXRlcygxMCkNCmRob3VycyhjKDEyLCAyNCkpDQpkZGF5cygwOjUpDQpkd2Vla3MoMykNCmR5ZWFycygxKQ0KYGBgDQoNCiMjIEFpcnRobWV0aWMgd2l0aCBEdXJhdGlvbnMNCg0KYGBge3J9DQoyICogZHllYXJzKDEpDQpkeWVhcnMoMSkgKyBkd2Vla3MoMTIpICsgZGhvdXJzKDE1KQ0KdG9kYXkoKSArIGRkYXlzKDEpDQp0b2RheSgpIC0gZHllYXJzKDEpDQpgYGANCg0KIyMgUGVyaW9kcyANCg0KYGBge3J9DQpvbmVfcG0gPC0geW1kX2htcygiMjAyMi0wNC0xMiAxMzowMDowMCIsIHR6ID0gIkFtZXJpY2EvTmV3X1lvcmsiKQ0Kb25lX3BtICsgZGRheXMoMSkNCmBgYA0KDQojIyBNYW5pcHVsYXRpbmcgUGVyaW9kcyANCg0KDQpgYGB7cn0NCnNlY29uZHMoMTUpDQpob3VycyhjKDEyLCAyNCkpDQpkYXlzKDcpDQptb250aHMoMTo2KQ0Kd2Vla3MoMykNCmBgYA0KDQojIyBBaXJ0aG1ldGljIHdpdGggUGVyaW9kcw0KDQpgYGB7cn0NCjEwICogKG1vbnRocyg2KSArIGRheXMoMSkpDQp5bWQoIjIwMjAtMDEtMDEiKSArIGR5ZWFycygxKQ0KYGBgDQoNCiMjIEludGVydmFscyANCg0KYGBge3J9DQpuZXh0X3llYXIgPC0gdG9kYXkoKSArIHllYXJzKDEpDQoodG9kYXkoKSAlLS0lIG5leHRfeWVhcikgLyBkZGF5cygxKQ0KYGBgDQoNCiMjIEF2YWlsYWJsZSB0aW1lIHpvbmVzDQoNCmBgYHtyfQ0KU3lzLnRpbWV6b25lKCkNCmhlYWQoT2xzb25OYW1lcygpKQ0KYGBgDQoNCiMjIFNldCB0aW1lIHpvbmVzDQoNCmBgYHtyfQ0KeGEgPC0gd2l0aF90eigiMjAyMi0wNi0wMiAwMjozMDowMCIsIHR6b25lID0gIkFzaWEvS29sa2F0YSIpDQp4YQ0KeGIgPC0gZm9yY2VfdHooeGEsIHR6b25lID0gIkFtZXJpY2EvTmV3X1lvcmsiKQ0KeGINCnhjIDwtIG1keV9obXMoIjA5LzEyLzIwMjEgMDk6MDA6MTAiLCB0eiA9ICJBc2lhL0tvbGthdGEiKQ0KeGMNCmBgYA0KDQojIyBRdWl6IDUuMQ0KDQpgYGB7ciBtZXNzYWdlID0gRkFMU0UsIHdhcm5pbmcgPSBGQUxTRX0NCmpvaW5fZGF0YV8xIDwtIHJlYWRfY3N2KGhlcmU6OmhlcmUoImRhdGEiLCAiam9pbl9kYXRhMS5jc3YiKSkNCmpvaW5fZGF0YV8yIDwtIHJlYWRfY3N2KGhlcmU6OmhlcmUoImRhdGEiLCAiam9pbl9kYXRhMi5jc3YiKSkNCmBgYA0KDQoNCmBgYHtyIG1lc3NhZ2UgPSBGQUxTRSwgd2FybmluZyA9IEZBTFNFLCBldmFsID0gRkFMU0V9DQpzdW1tYXJ5KGpvaW5fZGF0YV8xKQ0Kc3VtbWFyeShqb2luX2RhdGFfMikNCmBgYA0KDQojIyBRdWl6IDUuMw0KDQpgYGB7ciBtZXNzYWdlID0gRkFMU0UsIHdhcm5pbmcgPSBGQUxTRX0NCmpvaW5fZGF0YV8xJGRhdGUgPC0geW1kX2htcyhqb2luX2RhdGFfMSRkYXRlLCB0eiA9ICJBc2lhL0tvbGthdGEiKQ0Kam9pbl9kYXRhXzIkRGF0ZSA8LSBkbXlfaG1zKGpvaW5fZGF0YV8yJERhdGUsIHR6ID0gIkFzaWEvS29sa2F0YSIpDQpgYGANCg0KIyMgUXVpeiA1LjQNCg0KYGBge3IgbWVzc2FnZSA9IEZBTFNFLCB3YXJuaW5nID0gRkFMU0V9DQpuZXdfam9pbmVkX2RmIDwtIGZ1bGxfam9pbihqb2luX2RhdGFfMSwgam9pbl9kYXRhXzIsIGJ5ID0gYygiZGF0ZSIgPSAiRGF0ZSIsIA0KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgImFyZWEiID0gIkFyZWEiKSkNCmBgYA0KDQojIyBRdWl6IDUuNQ0KDQpgYGB7ciBtZXNzYWdlID0gRkFMU0UsIHdhcm5pbmcgPSBGQUxTRX0NCm5ld19qb2luZWRfZGYgPC0gbmV3X2pvaW5lZF9kZiAlPiUgDQogIHNlbGVjdChldmVyeXRoaW5nKCksIC0gc28yKQ0KYGBgDQoNCiMjIFF1aXogNS42DQoNCmBgYHtyIG1lc3NhZ2UgPSBGQUxTRSwgd2FybmluZyA9IEZBTFNFfQ0KbmV3X2pvaW5lZF9kZiA8LSBuZXdfam9pbmVkX2RmICU+JSANCiAgZmlsdGVyKGFyZWEgPT0gIkJMUiIpDQpgYGANCg0KDQojIyBRdWl6IDUuNw0KDQpgYGB7ciBtZXNzYWdlID0gRkFMU0UsIHdhcm5pbmcgPSBGQUxTRX0NCm5ld19qb2luZWRfZGYgPC0gbmV3X2pvaW5lZF9kZiAlPiUgDQogIG11dGF0ZShyYXRpbyA9IHBtMjUgLyBwbTEwKQ0KYGBgDQoNCiMjIFF1aXogNS44DQoNCmBgYHtyIG1lc3NhZ2UgPSBGQUxTRSwgd2FybmluZyA9IEZBTFNFfQ0KIG5ld19qb2luZWRfZGYgJT4lIA0KICBnZ3Bsb3QoYWVzKHBtMjUsIHBtMTApKSArIA0KICBnZW9tX3BvaW50KCkNCmBgYA0KDQojIyBRdWl6IDUuOQ0KDQpgYGB7ciBtZXNzYWdlID0gRkFMU0UsIHdhcm5pbmcgPSBGQUxTRX0NCiBuZXdfam9pbmVkX2RmICU+JSANCiAgZ2dwbG90KGFlcyhkYXRlLCByYXRpbykpICsgDQogIGdlb21fbGluZSgpDQpgYGANCg0KDQoNCg==</div>
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIkRhdGUgYW5kIFRpbWUiDQphdXRob3I6ICJBZGl0aGkgUiBVcGFkaHlhIg0KZGF0ZTogIjIwMjItMDgtMTAiDQpvdXRwdXQ6IA0KICBodG1sX2RvY3VtZW50Og0KICAgIHRvYzogdHJ1ZQ0KICAgIHRvY19mbG9hdDogdHJ1ZQ0KICAgIGNvZGVfZG93bmxvYWQ6IHRydWUNCi0tLQ0KDQojIyBMb2FkIFBhY2thZ2VzDQoNCmBgYHtyIHdhcm5pbmcgPSBGQUxTRSwgbWVzc2FnZSA9IEZBTFNFfQ0KbGlicmFyeSh0aWR5dmVyc2UpIA0KIyBpbnN0YWxsLnBhY2thZ2VzKCJsdWJyaWRhdGUiKQ0KbGlicmFyeShsdWJyaWRhdGUpDQpsaWJyYXJ5KG55Y2ZsaWdodHMxMykNCmxpYnJhcnkob3BlbmFpcikNCmBgYA0KDQojIyBHZXQgdG9kYXkncyBkYXRlIGFuZCB0aW1lIA0KDQpgYGB7cn0NCnRvZGF5KCkNCg0Kbm93KCkNCmBgYA0KDQojIyBDcmVhdGUgYSBkYXRlIHRpbWUgb2JqZWN0IGZyb20gYSBzdHJpbmcgDQoNCmBgYHtyfQ0KeW1kKCIyMDIyLTAxLTMxIikNCm1keSgiSmFudWFyeSAzMXN0LCAyMDIyIikNCmRteSgiMzEtSmFuLTIwMjIiKQ0KDQp5bWRfaG1zKCIyMDIyLTAxLTMxIDIwOjExOjU5IikNCmBgYA0KDQojIyBDcmVhdGUgYSBkYXRlIHRpbWUgb2JqZWN0IGZyb20gaW5kaXZpZHVhbCBjb21wb25lbnRzDQoNCg0KYGBge3J9DQpnbGltcHNlKGZsaWdodHMpDQpuZXdfZmxpZ2h0cyA8LSBmbGlnaHRzICU+JSANCiAgc2VsZWN0KHllYXIsIG1vbnRoLCBkYXksIGhvdXIsIG1pbnV0ZSkNCg0KbmV3X2ZsaWdodHNfZGF0ZSA8LSBuZXdfZmxpZ2h0cyAlPiUgDQogIG11dGF0ZShkZXBhcnR1cmUgPSBtYWtlX2RhdGV0aW1lKHllYXIsIG1vbnRoLCBkYXksIGhvdXIsIG1pbnV0ZSkpDQpgYGANCg0KDQojIyBGcm9tIG90aGVyIHR5cGVzDQoNCmBgYHtyfQ0KYXNfZGF0ZXRpbWUobm93KCkpDQphc19kYXRlKG5vdygpKQ0KYGBgDQoNCiMjIFF1aXogMQ0KDQpgYGB7cn0NCmQxIDwtIG1keSgiSmFudWFyeSAxLCAyMDEwIikNCg0KZDIgPC0geW1kKCIyMDE1LU1hci0wNyIpDQoNCmQzIDwtIGRteSgiMDYtSnVuLTIwMTciKQ0KDQpkNCA8LSBtZHkoYygiQXVndXN0IDE5ICgyMDE1KSIsICJKdWx5IDEgKDIwMTUpIikpDQoNCmQ1IDwtIG1keSgiMTIvMzAvMTQiKSANCmBgYA0KDQojIyBRdWl6IDINCg0KYGBge3J9DQp5bWQoYygiMjAxMC0xMC0xMCIsICJiYW5hbmFzIikpDQpgYGANCg0KIyMgTWFuaXB1bGF0aW5nIGRhdGUgYW5kIHRpbWUgDQoNCmBgYHtyfQ0KZGF0ZXRpbWUgPC0geW1kX2htcygiMjAyMi9KdWwvMDggMTI6MzQ6NTYiKQ0KeWVhcihkYXRldGltZSkNCm1vbnRoKGRhdGV0aW1lKQ0KbWRheShkYXRldGltZSkNCnlkYXkoZGF0ZXRpbWUpDQp3ZGF5KGRhdGV0aW1lKQ0KYGBgDQoNCg0KIyMgRGF0ZSB0aW1lIGNvbXBvbmVudHMNCg0KYGBge3J9DQptb250aChkYXRldGltZSwgbGFiZWwgPSBUUlVFLCBhYmJyID0gRkFMU0UpDQp3ZGF5KGRhdGV0aW1lKQ0KYGBgDQoNCmBgYHtyfQ0KaG91cihkYXRldGltZSkNCm1pbnV0ZShkYXRldGltZSkNCnNlY29uZChkYXRldGltZSkNCmBgYA0KDQojIyBSb3VuZGluZw0KDQpgYGB7cn0NCmRhdGV0aW1lIDwtICIyMDIyLUp1bC0wOCAxMjozNDo1NiINCmRhdGV0aW1lIDwtIHltZF9obXMoZGF0ZXRpbWUpDQpjZWlsaW5nX2RhdGUoZGF0ZXRpbWUsICJtaW4iKQ0KZmxvb3JfZGF0ZShkYXRldGltZSwgImhvdXIiKQ0Kcm91bmRfZGF0ZShkYXRldGltZSwgIm1vbnRoIikNCmBgYA0KDQojIyBTZXR0aW5nIGNvbXBvbmVudHMNCg0KYGBge3J9DQooZGF0ZXRpbWUgPC0geW1kX2htcygiMjAyMC1KdWwtMDggMTI6MzQ6NTYiKSkNCg0KeWVhcihkYXRldGltZSkgPC0gMjAyMg0KZGF0ZXRpbWUNCg0KbW9udGgoZGF0ZXRpbWUpIDwtIDA4DQpkYXRldGltZQ0KDQpob3VyKGRhdGV0aW1lKSA8LSBob3VyKGRhdGV0aW1lKSArIDINCmRhdGV0aW1lDQoNCmBgYA0KDQojIyBVc2luZyBgdXBkYXRlKClgIA0KDQpgYGB7cn0NCihkYXRldGltZSA8LSB5bWRfaG1zKCIyMDIwLUp1bC0wOCAxMjozNDo1NiIpKQ0KDQp1cGRhdGUoZGF0ZXRpbWUsIHllYXIgPSAyMDIyLCBtb250aCA9IDA4LCBtZGF5ID0gMTIsIGhvdXIgPSAyMSkNCg0KYGBgDQoNCiMjIFF1aXogMyANCg0KYGBge3J9DQojIGluc3RhbGwucGFja2FnZXMoIm9wZW5haXIiKQ0KbGlicmFyeShvcGVuYWlyKQ0Kb3VyX25ld19kYXRhc2V0IDwtIG9wZW5haXI6Om15ZGF0YSAlPiUgDQogIGhlYWQoNTApDQpgYGANCg0KDQpgYGB7cn0NCm91cl9uZXdfbXV0YXRlZF9kYXRhc2V0IDwtIG91cl9uZXdfZGF0YXNldCAlPiUgDQogIG11dGF0ZSh5ZWFyX25ld19jb2x1bW4gPSB5ZWFyKGRhdGUpLCANCiAgICAgICAgIG1vbnRoX25ld19jb2x1bW4gPSBtb250aChkYXRlKSwNCiAgICAgICAgIGRheV9uZXdfY29sdW1uID0gbWRheShkYXRlKSkNCg0KeWVhcihvdXJfbmV3X211dGF0ZWRfZGF0YXNldCRkYXRlKSA8LSAyMDIyDQpgYGANCg0KIyMgRHVyYXRpb25zIA0KDQpgYGB7cn0NCm15X2FnZSA8LSB0b2RheSgpIC0geW1kKCIxOTk1LTAzLTI3IikNCm15X2FnZQ0KYXMuZHVyYXRpb24obXlfYWdlKQ0KYGBgDQoNCiMjIERpZmZlcmVudCBkdXJhdGlvbnMgDQoNCmBgYHtyfQ0KZHNlY29uZHMoMTUpDQpkbWludXRlcygxMCkNCmRob3VycyhjKDEyLCAyNCkpDQpkZGF5cygwOjUpDQpkd2Vla3MoMykNCmR5ZWFycygxKQ0KYGBgDQoNCiMjIEFpcnRobWV0aWMgd2l0aCBEdXJhdGlvbnMNCg0KYGBge3J9DQoyICogZHllYXJzKDEpDQpkeWVhcnMoMSkgKyBkd2Vla3MoMTIpICsgZGhvdXJzKDE1KQ0KdG9kYXkoKSArIGRkYXlzKDEpDQp0b2RheSgpIC0gZHllYXJzKDEpDQpgYGANCg0KIyMgUGVyaW9kcyANCg0KYGBge3J9DQpvbmVfcG0gPC0geW1kX2htcygiMjAyMi0wNC0xMiAxMzowMDowMCIsIHR6ID0gIkFtZXJpY2EvTmV3X1lvcmsiKQ0Kb25lX3BtICsgZGRheXMoMSkNCmBgYA0KDQojIyBNYW5pcHVsYXRpbmcgUGVyaW9kcyANCg0KDQpgYGB7cn0NCnNlY29uZHMoMTUpDQpob3VycyhjKDEyLCAyNCkpDQpkYXlzKDcpDQptb250aHMoMTo2KQ0Kd2Vla3MoMykNCmBgYA0KDQojIyBBaXJ0aG1ldGljIHdpdGggUGVyaW9kcw0KDQpgYGB7cn0NCjEwICogKG1vbnRocyg2KSArIGRheXMoMSkpDQp5bWQoIjIwMjAtMDEtMDEiKSArIGR5ZWFycygxKQ0KYGBgDQoNCiMjIEludGVydmFscyANCg0KYGBge3J9DQpuZXh0X3llYXIgPC0gdG9kYXkoKSArIHllYXJzKDEpDQoodG9kYXkoKSAlLS0lIG5leHRfeWVhcikgLyBkZGF5cygxKQ0KYGBgDQoNCiMjIEF2YWlsYWJsZSB0aW1lIHpvbmVzDQoNCmBgYHtyfQ0KU3lzLnRpbWV6b25lKCkNCmhlYWQoT2xzb25OYW1lcygpKQ0KYGBgDQoNCiMjIFNldCB0aW1lIHpvbmVzDQoNCmBgYHtyfQ0KeGEgPC0gd2l0aF90eigiMjAyMi0wNi0wMiAwMjozMDowMCIsIHR6b25lID0gIkFzaWEvS29sa2F0YSIpDQp4YQ0KeGIgPC0gZm9yY2VfdHooeGEsIHR6b25lID0gIkFtZXJpY2EvTmV3X1lvcmsiKQ0KeGINCnhjIDwtIG1keV9obXMoIjA5LzEyLzIwMjEgMDk6MDA6MTAiLCB0eiA9ICJBc2lhL0tvbGthdGEiKQ0KeGMNCmBgYA0KDQojIyBRdWl6IDUuMQ0KDQpgYGB7ciBtZXNzYWdlID0gRkFMU0UsIHdhcm5pbmcgPSBGQUxTRX0NCmpvaW5fZGF0YV8xIDwtIHJlYWRfY3N2KGhlcmU6OmhlcmUoImRhdGEiLCAiam9pbl9kYXRhMS5jc3YiKSkNCmpvaW5fZGF0YV8yIDwtIHJlYWRfY3N2KGhlcmU6OmhlcmUoImRhdGEiLCAiam9pbl9kYXRhMi5jc3YiKSkNCmBgYA0KDQoNCmBgYHtyIG1lc3NhZ2UgPSBGQUxTRSwgd2FybmluZyA9IEZBTFNFLCBldmFsID0gRkFMU0V9DQpzdW1tYXJ5KGpvaW5fZGF0YV8xKQ0Kc3VtbWFyeShqb2luX2RhdGFfMikNCmBgYA0KDQojIyBRdWl6IDUuMw0KDQpgYGB7ciBtZXNzYWdlID0gRkFMU0UsIHdhcm5pbmcgPSBGQUxTRX0NCmpvaW5fZGF0YV8xJGRhdGUgPC0geW1kX2htcyhqb2luX2RhdGFfMSRkYXRlLCB0eiA9ICJBc2lhL0tvbGthdGEiKQ0Kam9pbl9kYXRhXzIkRGF0ZSA8LSBkbXlfaG1zKGpvaW5fZGF0YV8yJERhdGUsIHR6ID0gIkFzaWEvS29sa2F0YSIpDQpgYGANCg0KIyMgUXVpeiA1LjQNCg0KYGBge3IgbWVzc2FnZSA9IEZBTFNFLCB3YXJuaW5nID0gRkFMU0V9DQpuZXdfam9pbmVkX2RmIDwtIGZ1bGxfam9pbihqb2luX2RhdGFfMSwgam9pbl9kYXRhXzIsIGJ5ID0gYygiZGF0ZSIgPSAiRGF0ZSIsIA0KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgImFyZWEiID0gIkFyZWEiKSkNCmBgYA0KDQojIyBRdWl6IDUuNQ0KDQpgYGB7ciBtZXNzYWdlID0gRkFMU0UsIHdhcm5pbmcgPSBGQUxTRX0NCm5ld19qb2luZWRfZGYgPC0gbmV3X2pvaW5lZF9kZiAlPiUgDQogIHNlbGVjdChldmVyeXRoaW5nKCksIC0gc28yKQ0KYGBgDQoNCiMjIFF1aXogNS42DQoNCmBgYHtyIG1lc3NhZ2UgPSBGQUxTRSwgd2FybmluZyA9IEZBTFNFfQ0KbmV3X2pvaW5lZF9kZiA8LSBuZXdfam9pbmVkX2RmICU+JSANCiAgZmlsdGVyKGFyZWEgPT0gIkJMUiIpDQpgYGANCg0KDQojIyBRdWl6IDUuNw0KDQpgYGB7ciBtZXNzYWdlID0gRkFMU0UsIHdhcm5pbmcgPSBGQUxTRX0NCm5ld19qb2luZWRfZGYgPC0gbmV3X2pvaW5lZF9kZiAlPiUgDQogIG11dGF0ZShyYXRpbyA9IHBtMjUgLyBwbTEwKQ0KYGBgDQoNCiMjIFF1aXogNS44DQoNCmBgYHtyIG1lc3NhZ2UgPSBGQUxTRSwgd2FybmluZyA9IEZBTFNFfQ0KIG5ld19qb2luZWRfZGYgJT4lIA0KICBnZ3Bsb3QoYWVzKHBtMjUsIHBtMTApKSArIA0KICBnZW9tX3BvaW50KCkNCmBgYA0KDQojIyBRdWl6IDUuOQ0KDQpgYGB7ciBtZXNzYWdlID0gRkFMU0UsIHdhcm5pbmcgPSBGQUxTRX0NCiBuZXdfam9pbmVkX2RmICU+JSANCiAgZ2dwbG90KGFlcyhkYXRlLCByYXRpbykpICsgDQogIGdlb21fbGluZSgpDQpgYGANCg0KDQoNCg==</div>
 
 
 </div>
