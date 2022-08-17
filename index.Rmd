@@ -74,6 +74,7 @@ knitr::opts_chunk$set(
 #### Packages
 [tidyverse](https://www.tidyverse.org/packages/)
 
+
 ## 6 Date and Time
 [Slides](https://cstep-rcourse-date-and-time.netlify.app/)
 
@@ -89,6 +90,7 @@ knitr::opts_chunk$set(
 [openair](https://davidcarslaw.github.io/openair/)
 
 ## 7 Iterations & Functions
+[Slides](https://cstep-iterations.netlify.app/#/title-slide)
 
 -   Introduction to functions
 -   for loops
@@ -96,7 +98,8 @@ knitr::opts_chunk$set(
 -   Best practices for efficient code
 
 #### Packages
-TBD
+[tidyverse](https://www.tidyverse.org/packages/)   
+[gapminder](https://www.rdocumentation.org/packages/gapminder/versions/0.3.0)
 
 ## 8 Statistics & Modelling
 

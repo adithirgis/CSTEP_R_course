@@ -9,6 +9,11 @@ output:
     code_download: true
 ---
 
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, cache = TRUE)
+```
+
+
 ## Load Packages
 
 ```{r warning = FALSE, message = FALSE}
