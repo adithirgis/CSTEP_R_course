@@ -9,6 +9,7 @@ output:
     toc_float: true
     code_download: true
     theme: flatly
+    code_foalding: true
 ---
 
 ```{r setup, include=FALSE}
@@ -74,6 +75,38 @@ gapminder %>%
 ```
 
 ## Using `~` with `map()`
+
+~ helps reduce the amount of typing when you want to pass complex functions through `map()`
+
+Example
+```{r}
+my_vector <- c(1, 2, 3)
+map_dbl(my_vector, function(x){x+10})
+```
+
+Shortcut of the same code using `~`
+```{r}
+my_vector <- c(1, 2, 3)
+map_dbl(my_vector, ~(.+10))
+```
+
+More complex example:
+
+Fitting a linear model with different groups of the data
+
+```{r}
+gapminder %>% 
+  split(.$continent) %>%  # split dataset by continent
+  map(function(df) lm(lifeExp ~ pop, data = gapminder)) # linear model for each group
+```
+
+Shortcut of the same code using `~`
+
+```{r}
+gapminder %>% 
+  split(.$continent) %>% # split dataset by continent
+  map(~lm(lifeExp ~ pop, data = .)) # linear model for each group
+```
 
 ## Reading multiple files using `purrr()`
 Download the data here - [Google drive link](https://drive.google.com/drive/folders/1X54HsJUWnx9kAKYoTdceePoEP1139bKN?usp=sharing)

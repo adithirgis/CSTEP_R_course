@@ -457,6 +457,121 @@ column? Hint: use <code>n_distinct()</code></p>
 </div>
 <div id="using-with-map" class="section level2">
 <h2>Using <code>~</code> with <code>map()</code></h2>
+<p>~ helps reduce the amount of typing when you want to pass complex
+functions through <code>map()</code></p>
+<p>Example</p>
+<pre class="r"><code>my_vector &lt;- c(1, 2, 3)
+map_dbl(my_vector, function(x){x+10})</code></pre>
+<pre><code>## [1] 11 12 13</code></pre>
+<p>Shortcut of the same code using <code>~</code></p>
+<pre class="r"><code>my_vector &lt;- c(1, 2, 3)
+map_dbl(my_vector, ~(.+10))</code></pre>
+<pre><code>## [1] 11 12 13</code></pre>
+<p>More complex example:</p>
+<p>Fitting a linear model with different groups of the data</p>
+<pre class="r"><code>gapminder %&gt;% 
+  split(.$continent) %&gt;%  # split dataset by continent
+  map(function(df) lm(lifeExp ~ pop, data = gapminder)) # linear model for each group</code></pre>
+<pre><code>## $Africa
+## 
+## Call:
+## lm(formula = lifeExp ~ pop, data = gapminder)
+## 
+## Coefficients:
+## (Intercept)          pop  
+##   5.924e+01    7.904e-09  
+## 
+## 
+## $Americas
+## 
+## Call:
+## lm(formula = lifeExp ~ pop, data = gapminder)
+## 
+## Coefficients:
+## (Intercept)          pop  
+##   5.924e+01    7.904e-09  
+## 
+## 
+## $Asia
+## 
+## Call:
+## lm(formula = lifeExp ~ pop, data = gapminder)
+## 
+## Coefficients:
+## (Intercept)          pop  
+##   5.924e+01    7.904e-09  
+## 
+## 
+## $Europe
+## 
+## Call:
+## lm(formula = lifeExp ~ pop, data = gapminder)
+## 
+## Coefficients:
+## (Intercept)          pop  
+##   5.924e+01    7.904e-09  
+## 
+## 
+## $Oceania
+## 
+## Call:
+## lm(formula = lifeExp ~ pop, data = gapminder)
+## 
+## Coefficients:
+## (Intercept)          pop  
+##   5.924e+01    7.904e-09</code></pre>
+<p>Shortcut of the same code using <code>~</code></p>
+<pre class="r"><code>gapminder %&gt;% 
+  split(.$continent) %&gt;% # split dataset by continent
+  map(~lm(lifeExp ~ pop, data = .)) # linear model for each group</code></pre>
+<pre><code>## $Africa
+## 
+## Call:
+## lm(formula = lifeExp ~ pop, data = .)
+## 
+## Coefficients:
+## (Intercept)          pop  
+##   4.816e+01    7.150e-08  
+## 
+## 
+## $Americas
+## 
+## Call:
+## lm(formula = lifeExp ~ pop, data = .)
+## 
+## Coefficients:
+## (Intercept)          pop  
+##   6.353e+01    4.587e-08  
+## 
+## 
+## $Asia
+## 
+## Call:
+## lm(formula = lifeExp ~ pop, data = .)
+## 
+## Coefficients:
+## (Intercept)          pop  
+##   5.992e+01    1.901e-09  
+## 
+## 
+## $Europe
+## 
+## Call:
+## lm(formula = lifeExp ~ pop, data = .)
+## 
+## Coefficients:
+## (Intercept)          pop  
+##   7.162e+01    1.650e-08  
+## 
+## 
+## $Oceania
+## 
+## Call:
+## lm(formula = lifeExp ~ pop, data = .)
+## 
+## Coefficients:
+## (Intercept)          pop  
+##   7.207e+01    2.545e-07</code></pre>
 </div>
 <div id="reading-multiple-files-using-purrr" class="section level2">
 <h2>Reading multiple files using <code>purrr()</code></h2>
@@ -502,7 +617,7 @@ my_df</code></pre>
 ## 16 Nepal   Asia       1967    41.5  11261690      676.</code></pre>
 </div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiRnVuY3Rpb25zIGFuZCBJdGVyYXRpb25zIgphdXRob3I6ICJNZWVuYWtzaGkgS3VzaHdhaGEiCmRhdGU6ICIyMDIyLTA4LTE4IgoKb3V0cHV0OiAKICBodG1sX2RvY3VtZW50OgogICAgdG9jOiB0cnVlCiAgICB0b2NfZmxvYXQ6IHRydWUKICAgIGNvZGVfZG93bmxvYWQ6IHRydWUKICAgIHRoZW1lOiBmbGF0bHkKLS0tCgpgYGB7ciBzZXR1cCwgaW5jbHVkZT1GQUxTRX0Ka25pdHI6Om9wdHNfY2h1bmskc2V0KGVjaG8gPSBUUlVFLCBtZXNzYWdlID0gRkFMU0UsIGNhY2hlID0gVFJVRSwgd2FybmluZyA9IEZBTFNFKQpsaWJyYXJ5KGdhcG1pbmRlcikKbGlicmFyeSh0aWR5dmVyc2UpCmxpYnJhcnkoaGVyZSkKYGBgCgojIyBXcml0aW5nIGZ1bmN0aW9ucwpJbiB0aGUgYGdhcG1pbmRlcmAgZGF0YXNldCBjYWxjdWxhdGUgdGhlIHJhbmdlIG9mIHBvcHVsYXRpb24sIGdkcCwgYW5kIGxpZmUgZXhwZWN0YW5jeQoKYGBge3J9CnJvdW5kKG1heChnYXBtaW5kZXIkbGlmZUV4cCkgLSBtaW4oZ2FwbWluZGVyJGxpZmVFeHApLDEpCgpyb3VuZChtYXgoZ2FwbWluZGVyJHBvcCkgLSBtaW4oZ2FwbWluZGVyJHBvcCksMSkKCnJvdW5kKG1heChnYXBtaW5kZXIkcG9wKSAtIG1pbihnYXBtaW5kZXIkcG9wKSwxKQpgYGAKCk1ha2UgYSBmdW5jdGlvbiBmb3IgY2FsY3VsYXRpbmcgcmFuZ2UKYGBge3J9Cm1heF9taW51c19taW4gPC0gZnVuY3Rpb24oeCl7CiAgcm91bmQoKG1heCh4KSAtIG1pbih4KSksIDEpCiAgfQpgYGAKClRlc3QtcnVuIHlvdXIgZnVuY3Rpb24KYGBge3J9Cm1heF9taW51c19taW4oZ2FwbWluZGVyJGxpZmVFeHApCmBgYAoKIyMgSXRlcmF0aW9ucyB1c2luZyBgcHVycnJgIHBhY2thZ2UKCkFwcGx5IGBjbGFzcygpYCBmdW5jdGlvbiB0byBlYWNoIGNvbHVtbiBvZiBnYW1wbWluZGVyIGRhdGEKCmBgYHtyfQpnYXBtaW5kZXIgJT4lIAogIG1hcChjbGFzcykKCmBgYAoKVGhlIGRlZmF1bHQgb3V0cHV0IG9mIGBtYXAoKWAgaXMgYSBsaXN0LiBJZiB5b3Ugd2FudCBhIGNoYXJhY3RlciB2ZWN0b3IgYXMgb3VwdXQgdXNlIGBtYXBfY2hyKClgCgpgYGB7cn0KZ2FwbWluZGVyICU+JSAKICBtYXBfY2hyKGNsYXNzKQpgYGAKCkFub3RoZXIgZXhhbXBsZSwgV2hhdCBpcyB0aGUgbnVtYmVyIG9mIGRpc3RpbmN0IHZhbHVlcyBpbiBlYWNoIGNvbHVtbj8gCkhpbnQ6IHVzZSBgbl9kaXN0aW5jdCgpYAoKYGBge3J9CmdhcG1pbmRlciAlPiUgCiAgbWFwX2ludChuX2Rpc3RpbmN0KSAjIHVzaW5nIG1hcF9pbnQgZm9yIGludGVnZXIgb3V0cHV0CmBgYAoKV2hhdCBpcyB0aGUgbWVkaWFuIG9mIGFsbCBudW1lcmljIGNvbHVtbnM/CmBgYHtyfQpnYXBtaW5kZXIgJT4lIAogIGRwbHlyOjpzZWxlY3RfaWYoaXMubnVtZXJpYykgJT4lIAogIG1hcF9kYmwobWVkaWFuKQpgYGAKCiMjIFVzaW5nIGB+YCB3aXRoIGBtYXAoKWAKCiMjIFJlYWRpbmcgbXVsdGlwbGUgZmlsZXMgdXNpbmcgYHB1cnJyKClgCkRvd25sb2FkIHRoZSBkYXRhIGhlcmUgLSBbR29vZ2xlIGRyaXZlIGxpbmtdKGh0dHBzOi8vZHJpdmUuZ29vZ2xlLmNvbS9kcml2ZS9mb2xkZXJzLzFYNTRIc0pVV254OWtBS1lvVGRjZWVQb0VQMTEzOWJLTj91c3A9c2hhcmluZykKClRoaXMgaXMgZGF0YSBmcm9tIGRpZmZyZW50IGNvdW50cmllcy4gIl9nbSIgc3VmZml4IGlzIGZvciBnYXBtaW5kZXIgZnJvbSB3aGVyZSBkYXRhIGlzIGJvcnJvd2VkLiBJbiB0aGUgZXhhbXBsZSBiZWxvdywgdGhlIGZpbGVzIGluIGEgZm9sZGVyIGNhbGxlZCAiZGF0YSIKCgpTdGVwIDEgYW5kIDI6IE1ha2UgYSBsaXN0IG9mIGFsbCBgLmNzdmAgZmlsZXMgd2l0aCBfZ20gc3VmZml4CmBgYHtyfQpteV9maWxlcyA8LSBkaXIoaGVyZSgiZGF0YSIpLCAjIHNwZWNpZnkgZmlsZSBwYXRoCiAgICAgICAgICAgICAgICBwYXR0ZXJuID0gIipfZ20uY3N2IiwgICMgbG9vayBmb3IgLmNzdiBmaWxlcyB3aXRoIF9nbSBzdWZmaXgKICAgICAgICAgICAgICAgIGZ1bGwubmFtZXMgPSBUUlVFKSAgIyBwcmVzZXJ2ZSBmaWxlIHBhdGgKbXlfZmlsZXMKYGBgCgpTdGVwIDM6IFJlYWQgYW5kIGNvbWJpbmUgYWxsIGZpbGVzIHVzaW5nIGBtYXBfZGZyKClgCmBgYHtyfQoKbXlfZGYgPC0gbXlfZmlsZXMgJT4lIAogIG1hcF9kZnIocmVhZF9jc3YpIAoKbXlfZGYKYGBgCgo=</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiRnVuY3Rpb25zIGFuZCBJdGVyYXRpb25zIgphdXRob3I6ICJNZWVuYWtzaGkgS3VzaHdhaGEiCmRhdGU6ICIyMDIyLTA4LTE4IgoKb3V0cHV0OiAKICBodG1sX2RvY3VtZW50OgogICAgdG9jOiB0cnVlCiAgICB0b2NfZmxvYXQ6IHRydWUKICAgIGNvZGVfZG93bmxvYWQ6IHRydWUKICAgIHRoZW1lOiBmbGF0bHkKICAgIGNvZGVfZm9hbGRpbmc6IHRydWUKLS0tCgpgYGB7ciBzZXR1cCwgaW5jbHVkZT1GQUxTRX0Ka25pdHI6Om9wdHNfY2h1bmskc2V0KGVjaG8gPSBUUlVFLCBtZXNzYWdlID0gRkFMU0UsIGNhY2hlID0gVFJVRSwgd2FybmluZyA9IEZBTFNFKQpsaWJyYXJ5KGdhcG1pbmRlcikKbGlicmFyeSh0aWR5dmVyc2UpCmxpYnJhcnkoaGVyZSkKYGBgCgojIyBXcml0aW5nIGZ1bmN0aW9ucwpJbiB0aGUgYGdhcG1pbmRlcmAgZGF0YXNldCBjYWxjdWxhdGUgdGhlIHJhbmdlIG9mIHBvcHVsYXRpb24sIGdkcCwgYW5kIGxpZmUgZXhwZWN0YW5jeQoKYGBge3J9CnJvdW5kKG1heChnYXBtaW5kZXIkbGlmZUV4cCkgLSBtaW4oZ2FwbWluZGVyJGxpZmVFeHApLDEpCgpyb3VuZChtYXgoZ2FwbWluZGVyJHBvcCkgLSBtaW4oZ2FwbWluZGVyJHBvcCksMSkKCnJvdW5kKG1heChnYXBtaW5kZXIkcG9wKSAtIG1pbihnYXBtaW5kZXIkcG9wKSwxKQpgYGAKCk1ha2UgYSBmdW5jdGlvbiBmb3IgY2FsY3VsYXRpbmcgcmFuZ2UKYGBge3J9Cm1heF9taW51c19taW4gPC0gZnVuY3Rpb24oeCl7CiAgcm91bmQoKG1heCh4KSAtIG1pbih4KSksIDEpCiAgfQpgYGAKClRlc3QtcnVuIHlvdXIgZnVuY3Rpb24KYGBge3J9Cm1heF9taW51c19taW4oZ2FwbWluZGVyJGxpZmVFeHApCmBgYAoKIyMgSXRlcmF0aW9ucyB1c2luZyBgcHVycnJgIHBhY2thZ2UKCkFwcGx5IGBjbGFzcygpYCBmdW5jdGlvbiB0byBlYWNoIGNvbHVtbiBvZiBnYW1wbWluZGVyIGRhdGEKCmBgYHtyfQpnYXBtaW5kZXIgJT4lIAogIG1hcChjbGFzcykKCmBgYAoKVGhlIGRlZmF1bHQgb3V0cHV0IG9mIGBtYXAoKWAgaXMgYSBsaXN0LiBJZiB5b3Ugd2FudCBhIGNoYXJhY3RlciB2ZWN0b3IgYXMgb3VwdXQgdXNlIGBtYXBfY2hyKClgCgpgYGB7cn0KZ2FwbWluZGVyICU+JSAKICBtYXBfY2hyKGNsYXNzKQpgYGAKCkFub3RoZXIgZXhhbXBsZSwgV2hhdCBpcyB0aGUgbnVtYmVyIG9mIGRpc3RpbmN0IHZhbHVlcyBpbiBlYWNoIGNvbHVtbj8gCkhpbnQ6IHVzZSBgbl9kaXN0aW5jdCgpYAoKYGBge3J9CmdhcG1pbmRlciAlPiUgCiAgbWFwX2ludChuX2Rpc3RpbmN0KSAjIHVzaW5nIG1hcF9pbnQgZm9yIGludGVnZXIgb3V0cHV0CmBgYAoKV2hhdCBpcyB0aGUgbWVkaWFuIG9mIGFsbCBudW1lcmljIGNvbHVtbnM/CmBgYHtyfQpnYXBtaW5kZXIgJT4lIAogIGRwbHlyOjpzZWxlY3RfaWYoaXMubnVtZXJpYykgJT4lIAogIG1hcF9kYmwobWVkaWFuKQpgYGAKCiMjIFVzaW5nIGB+YCB3aXRoIGBtYXAoKWAKCn4gaGVscHMgcmVkdWNlIHRoZSBhbW91bnQgb2YgdHlwaW5nIHdoZW4geW91IHdhbnQgdG8gcGFzcyBjb21wbGV4IGZ1bmN0aW9ucyB0aHJvdWdoIGBtYXAoKWAKCkV4YW1wbGUKYGBge3J9Cm15X3ZlY3RvciA8LSBjKDEsIDIsIDMpCm1hcF9kYmwobXlfdmVjdG9yLCBmdW5jdGlvbih4KXt4KzEwfSkKYGBgCgpTaG9ydGN1dCBvZiB0aGUgc2FtZSBjb2RlIHVzaW5nIGB+YApgYGB7cn0KbXlfdmVjdG9yIDwtIGMoMSwgMiwgMykKbWFwX2RibChteV92ZWN0b3IsIH4oLisxMCkpCmBgYAoKTW9yZSBjb21wbGV4IGV4YW1wbGU6CgpGaXR0aW5nIGEgbGluZWFyIG1vZGVsIHdpdGggZGlmZmVyZW50IGdyb3VwcyBvZiB0aGUgZGF0YQoKYGBge3J9CmdhcG1pbmRlciAlPiUgCiAgc3BsaXQoLiRjb250aW5lbnQpICU+JSAgIyBzcGxpdCBkYXRhc2V0IGJ5IGNvbnRpbmVudAogIG1hcChmdW5jdGlvbihkZikgbG0obGlmZUV4cCB+IHBvcCwgZGF0YSA9IGdhcG1pbmRlcikpICMgbGluZWFyIG1vZGVsIGZvciBlYWNoIGdyb3VwCmBgYAoKU2hvcnRjdXQgb2YgdGhlIHNhbWUgY29kZSB1c2luZyBgfmAKCmBgYHtyfQpnYXBtaW5kZXIgJT4lIAogIHNwbGl0KC4kY29udGluZW50KSAlPiUgIyBzcGxpdCBkYXRhc2V0IGJ5IGNvbnRpbmVudAogIG1hcCh+bG0obGlmZUV4cCB+IHBvcCwgZGF0YSA9IC4pKSAjIGxpbmVhciBtb2RlbCBmb3IgZWFjaCBncm91cApgYGAKCiMjIFJlYWRpbmcgbXVsdGlwbGUgZmlsZXMgdXNpbmcgYHB1cnJyKClgCkRvd25sb2FkIHRoZSBkYXRhIGhlcmUgLSBbR29vZ2xlIGRyaXZlIGxpbmtdKGh0dHBzOi8vZHJpdmUuZ29vZ2xlLmNvbS9kcml2ZS9mb2xkZXJzLzFYNTRIc0pVV254OWtBS1lvVGRjZWVQb0VQMTEzOWJLTj91c3A9c2hhcmluZykKClRoaXMgaXMgZGF0YSBmcm9tIGRpZmZyZW50IGNvdW50cmllcy4gIl9nbSIgc3VmZml4IGlzIGZvciBnYXBtaW5kZXIgZnJvbSB3aGVyZSBkYXRhIGlzIGJvcnJvd2VkLiBJbiB0aGUgZXhhbXBsZSBiZWxvdywgdGhlIGZpbGVzIGluIGEgZm9sZGVyIGNhbGxlZCAiZGF0YSIKCgpTdGVwIDEgYW5kIDI6IE1ha2UgYSBsaXN0IG9mIGFsbCBgLmNzdmAgZmlsZXMgd2l0aCBfZ20gc3VmZml4CmBgYHtyfQpteV9maWxlcyA8LSBkaXIoaGVyZSgiZGF0YSIpLCAjIHNwZWNpZnkgZmlsZSBwYXRoCiAgICAgICAgICAgICAgICBwYXR0ZXJuID0gIipfZ20uY3N2IiwgICMgbG9vayBmb3IgLmNzdiBmaWxlcyB3aXRoIF9nbSBzdWZmaXgKICAgICAgICAgICAgICAgIGZ1bGwubmFtZXMgPSBUUlVFKSAgIyBwcmVzZXJ2ZSBmaWxlIHBhdGgKbXlfZmlsZXMKYGBgCgpTdGVwIDM6IFJlYWQgYW5kIGNvbWJpbmUgYWxsIGZpbGVzIHVzaW5nIGBtYXBfZGZyKClgCmBgYHtyfQoKbXlfZGYgPC0gbXlfZmlsZXMgJT4lIAogIG1hcF9kZnIocmVhZF9jc3YpIAoKbXlfZGYKYGBgCgo=</div>
 
 
 </div>
