@@ -97,7 +97,7 @@ Fitting a linear model with different groups of the data
 ```{r}
 gapminder %>% 
   split(.$continent) %>%  # split dataset by continent
-  map(function(df) lm(lifeExp ~ pop, data = gapminder)) # linear model for each group
+  map(function(df) lm(lifeExp ~ pop, data = df)) # linear model for each group
 ```
 
 Shortcut of the same code using `~`
