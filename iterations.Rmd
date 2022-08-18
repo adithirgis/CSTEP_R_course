@@ -2,15 +2,17 @@
 title: "Functions and Iterations"
 author: "Meenakshi Kushwaha"
 date: "2022-08-18"
+
 output: 
   html_document:
     toc: true
-    toc-float: true
+    toc_float: true
     code_download: true
+    theme: flatly
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, cache = TRUE, message = FALSE, warning = FALSE)
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, cache = TRUE, warning = FALSE)
 library(gapminder)
 library(tidyverse)
 library(here)
@@ -76,11 +78,13 @@ gapminder %>%
 ## Reading multiple files using `purrr()`
 Download the data here - [Google drive link](https://drive.google.com/drive/folders/1X54HsJUWnx9kAKYoTdceePoEP1139bKN?usp=sharing)
 
+This is data from diffrent countries. "_gm" suffix is for gapminder from where data is borrowed. In the example below, the files in a folder called "data"
 
-Step 1 and 2: Make a list of all `.csv` files
+
+Step 1 and 2: Make a list of all `.csv` files with _gm suffix
 ```{r}
 my_files <- dir(here("data"), # specify file path
-                pattern = "*.csv",  # look for .csv files
+                pattern = "*_gm.csv",  # look for .csv files with _gm suffix
                 full.names = TRUE)  # preserve file path
 my_files
 ```

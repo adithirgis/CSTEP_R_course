@@ -18,7 +18,7 @@
 <script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
@@ -31,6 +31,9 @@
        h6 {font-size: 12px;}
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <script src="site_libs/navigation-1.1/codefolding.js"></script>
 <script src="site_libs/navigation-1.1/sourceembed.js"></script>
@@ -234,6 +237,69 @@ $(document).ready(function () {
 
 
 
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
 
 </head>
 
@@ -241,6 +307,16 @@ $(document).ready(function () {
 
 
 <div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -318,20 +394,6 @@ $(document).ready(function () {
 
 </div>
 
-<div id="TOC">
-<ul>
-<li><a href="#writing-functions" id="toc-writing-functions">Writing
-functions</a></li>
-<li><a href="#iterations-using-purrr-package"
-id="toc-iterations-using-purrr-package">Iterations using
-<code>purrr</code> package</a></li>
-<li><a href="#using-with-map" id="toc-using-with-map">Using
-<code>~</code> with <code>map()</code></a></li>
-<li><a href="#reading-multiple-files-using-purrr"
-id="toc-reading-multiple-files-using-purrr">Reading multiple files using
-<code>purrr()</code></a></li>
-</ul>
-</div>
 
 <div id="writing-functions" class="section level2">
 <h2>Writing functions</h2>
@@ -401,38 +463,50 @@ column? Hint: use <code>n_distinct()</code></p>
 <p>Download the data here - <a
 href="https://drive.google.com/drive/folders/1X54HsJUWnx9kAKYoTdceePoEP1139bKN?usp=sharing">Google
 drive link</a></p>
-<p>Step 1 and 2: Make a list of all <code>.csv</code> files</p>
+<p>This is data from diffrent countries. “_gm” suffix is for gapminder
+from where data is borrowed. In the example below, the files in a folder
+called “data”</p>
+<p>Step 1 and 2: Make a list of all <code>.csv</code> files with _gm
+suffix</p>
 <pre class="r"><code>my_files &lt;- dir(here(&quot;data&quot;), # specify file path
-                pattern = &quot;*.csv&quot;,  # look for .csv files
+                pattern = &quot;*_gm.csv&quot;,  # look for .csv files with _gm suffix
                 full.names = TRUE)  # preserve file path
 my_files</code></pre>
-<pre><code>## [1] &quot;/Users/meenakshikushwaha/Dropbox/R projects/github/CSTEP_R_course/data/join_data1.csv&quot;
-## [2] &quot;/Users/meenakshikushwaha/Dropbox/R projects/github/CSTEP_R_course/data/join_data2.csv&quot;</code></pre>
+<pre><code>## [1] &quot;/Users/meenakshikushwaha/Dropbox/R projects/github/CSTEP_R_course/data/china_gm.csv&quot;
+## [2] &quot;/Users/meenakshikushwaha/Dropbox/R projects/github/CSTEP_R_course/data/india_gm.csv&quot;
+## [3] &quot;/Users/meenakshikushwaha/Dropbox/R projects/github/CSTEP_R_course/data/japan_gm.csv&quot;
+## [4] &quot;/Users/meenakshikushwaha/Dropbox/R projects/github/CSTEP_R_course/data/nepal_gm.csv&quot;</code></pre>
 <p>Step 3: Read and combine all files using <code>map_dfr()</code></p>
 <pre class="r"><code>my_df &lt;- my_files %&gt;% 
   map_dfr(read_csv) 
 
 my_df</code></pre>
-<pre><code>## # A tibble: 200 × 14
-##     ...1 date                area     ws    wd   no2 Date  Area    nox    o3
-##    &lt;dbl&gt; &lt;dttm&gt;              &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;
-##  1     1 2005-06-19 09:00:00 BLR     3.1   150    70 &lt;NA&gt;  &lt;NA&gt;     NA    NA
-##  2     2 2005-06-19 10:00:00 BLR     3.6   160    61 &lt;NA&gt;  &lt;NA&gt;     NA    NA
-##  3     3 2005-06-19 11:00:00 BLR     3.6   170    70 &lt;NA&gt;  &lt;NA&gt;     NA    NA
-##  4     4 2005-06-19 12:00:00 BLR     5.2   160    82 &lt;NA&gt;  &lt;NA&gt;     NA    NA
-##  5     5 2005-06-19 13:00:00 BLR     5.7   180    68 &lt;NA&gt;  &lt;NA&gt;     NA    NA
-##  6     6 2005-06-19 14:00:00 BLR     5.7   190    71 &lt;NA&gt;  &lt;NA&gt;     NA    NA
-##  7     7 2005-06-19 15:00:00 BLR     5.7   190    68 &lt;NA&gt;  &lt;NA&gt;     NA    NA
-##  8     8 2005-06-19 16:00:00 BLR     5.7   190    75 &lt;NA&gt;  &lt;NA&gt;     NA    NA
-##  9     9 2005-06-19 17:00:00 BLR     6.2   190    85 &lt;NA&gt;  &lt;NA&gt;     NA    NA
-## 10    10 2005-06-19 18:00:00 BLR     5.7   190    74 &lt;NA&gt;  &lt;NA&gt;     NA    NA
-## # … with 190 more rows, and 4 more variables: pm10 &lt;dbl&gt;, so2 &lt;lgl&gt;, co &lt;dbl&gt;,
-## #   pm25 &lt;dbl&gt;</code></pre>
+<pre><code>## # A tibble: 16 × 6
+##    country continent  year lifeExp       pop gdpPercap
+##    &lt;chr&gt;   &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
+##  1 China   Asia       1952    44   556263527      400.
+##  2 China   Asia       1957    50.5 637408000      576.
+##  3 China   Asia       1962    44.5 665770000      488.
+##  4 China   Asia       1967    58.4 754550000      613.
+##  5 India   Asia       1952    37.4 372000000      547.
+##  6 India   Asia       1957    40.2 409000000      590.
+##  7 India   Asia       1962    43.6 454000000      658.
+##  8 India   Asia       1967    47.2 506000000      701.
+##  9 Japan   Asia       1952    63.0  86459025     3217.
+## 10 Japan   Asia       1957    65.5  91563009     4318.
+## 11 Japan   Asia       1962    68.7  95831757     6577.
+## 12 Japan   Asia       1967    71.4 100825279     9848.
+## 13 Nepal   Asia       1952    36.2   9182536      546.
+## 14 Nepal   Asia       1957    37.7   9682338      598.
+## 15 Nepal   Asia       1962    39.4  10332057      652.
+## 16 Nepal   Asia       1967    41.5  11261690      676.</code></pre>
 </div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiRnVuY3Rpb25zIGFuZCBJdGVyYXRpb25zIgphdXRob3I6ICJNZWVuYWtzaGkgS3VzaHdhaGEiCmRhdGU6ICIyMDIyLTA4LTE4IgpvdXRwdXQ6IAogIGh0bWxfZG9jdW1lbnQ6CiAgICB0b2M6IHRydWUKICAgIHRvYy1mbG9hdDogdHJ1ZQogICAgY29kZV9kb3dubG9hZDogdHJ1ZQotLS0KCmBgYHtyIHNldHVwLCBpbmNsdWRlPUZBTFNFfQprbml0cjo6b3B0c19jaHVuayRzZXQoZWNobyA9IFRSVUUsIGNhY2hlID0gVFJVRSwgbWVzc2FnZSA9IEZBTFNFLCB3YXJuaW5nID0gRkFMU0UpCmxpYnJhcnkoZ2FwbWluZGVyKQpsaWJyYXJ5KHRpZHl2ZXJzZSkKbGlicmFyeShoZXJlKQpgYGAKCiMjIFdyaXRpbmcgZnVuY3Rpb25zCkluIHRoZSBgZ2FwbWluZGVyYCBkYXRhc2V0IGNhbGN1bGF0ZSB0aGUgcmFuZ2Ugb2YgcG9wdWxhdGlvbiwgZ2RwLCBhbmQgbGlmZSBleHBlY3RhbmN5CgpgYGB7cn0Kcm91bmQobWF4KGdhcG1pbmRlciRsaWZlRXhwKSAtIG1pbihnYXBtaW5kZXIkbGlmZUV4cCksMSkKCnJvdW5kKG1heChnYXBtaW5kZXIkcG9wKSAtIG1pbihnYXBtaW5kZXIkcG9wKSwxKQoKcm91bmQobWF4KGdhcG1pbmRlciRwb3ApIC0gbWluKGdhcG1pbmRlciRwb3ApLDEpCmBgYAoKTWFrZSBhIGZ1bmN0aW9uIGZvciBjYWxjdWxhdGluZyByYW5nZQpgYGB7cn0KbWF4X21pbnVzX21pbiA8LSBmdW5jdGlvbih4KXsKICByb3VuZCgobWF4KHgpIC0gbWluKHgpKSwgMSkKICB9CmBgYAoKVGVzdC1ydW4geW91ciBmdW5jdGlvbgpgYGB7cn0KbWF4X21pbnVzX21pbihnYXBtaW5kZXIkbGlmZUV4cCkKYGBgCgojIyBJdGVyYXRpb25zIHVzaW5nIGBwdXJycmAgcGFja2FnZQoKQXBwbHkgYGNsYXNzKClgIGZ1bmN0aW9uIHRvIGVhY2ggY29sdW1uIG9mIGdhbXBtaW5kZXIgZGF0YQoKYGBge3J9CmdhcG1pbmRlciAlPiUgCiAgbWFwKGNsYXNzKQoKYGBgCgpUaGUgZGVmYXVsdCBvdXRwdXQgb2YgYG1hcCgpYCBpcyBhIGxpc3QuIElmIHlvdSB3YW50IGEgY2hhcmFjdGVyIHZlY3RvciBhcyBvdXB1dCB1c2UgYG1hcF9jaHIoKWAKCmBgYHtyfQpnYXBtaW5kZXIgJT4lIAogIG1hcF9jaHIoY2xhc3MpCmBgYAoKQW5vdGhlciBleGFtcGxlLCBXaGF0IGlzIHRoZSBudW1iZXIgb2YgZGlzdGluY3QgdmFsdWVzIGluIGVhY2ggY29sdW1uPyAKSGludDogdXNlIGBuX2Rpc3RpbmN0KClgCgpgYGB7cn0KZ2FwbWluZGVyICU+JSAKICBtYXBfaW50KG5fZGlzdGluY3QpICMgdXNpbmcgbWFwX2ludCBmb3IgaW50ZWdlciBvdXRwdXQKYGBgCgpXaGF0IGlzIHRoZSBtZWRpYW4gb2YgYWxsIG51bWVyaWMgY29sdW1ucz8KYGBge3J9CmdhcG1pbmRlciAlPiUgCiAgZHBseXI6OnNlbGVjdF9pZihpcy5udW1lcmljKSAlPiUgCiAgbWFwX2RibChtZWRpYW4pCmBgYAoKIyMgVXNpbmcgYH5gIHdpdGggYG1hcCgpYAoKIyMgUmVhZGluZyBtdWx0aXBsZSBmaWxlcyB1c2luZyBgcHVycnIoKWAKRG93bmxvYWQgdGhlIGRhdGEgaGVyZSAtIFtHb29nbGUgZHJpdmUgbGlua10oaHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL2RyaXZlL2ZvbGRlcnMvMVg1NEhzSlVXbng5a0FLWW9UZGNlZVBvRVAxMTM5YktOP3VzcD1zaGFyaW5nKQoKClN0ZXAgMSBhbmQgMjogTWFrZSBhIGxpc3Qgb2YgYWxsIGAuY3N2YCBmaWxlcwpgYGB7cn0KbXlfZmlsZXMgPC0gZGlyKGhlcmUoImRhdGEiKSwgIyBzcGVjaWZ5IGZpbGUgcGF0aAogICAgICAgICAgICAgICAgcGF0dGVybiA9ICIqLmNzdiIsICAjIGxvb2sgZm9yIC5jc3YgZmlsZXMKICAgICAgICAgICAgICAgIGZ1bGwubmFtZXMgPSBUUlVFKSAgIyBwcmVzZXJ2ZSBmaWxlIHBhdGgKbXlfZmlsZXMKYGBgCgpTdGVwIDM6IFJlYWQgYW5kIGNvbWJpbmUgYWxsIGZpbGVzIHVzaW5nIGBtYXBfZGZyKClgCmBgYHtyfQoKbXlfZGYgPC0gbXlfZmlsZXMgJT4lIAogIG1hcF9kZnIocmVhZF9jc3YpIAoKbXlfZGYKYGBgCgo=</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiRnVuY3Rpb25zIGFuZCBJdGVyYXRpb25zIgphdXRob3I6ICJNZWVuYWtzaGkgS3VzaHdhaGEiCmRhdGU6ICIyMDIyLTA4LTE4IgoKb3V0cHV0OiAKICBodG1sX2RvY3VtZW50OgogICAgdG9jOiB0cnVlCiAgICB0b2NfZmxvYXQ6IHRydWUKICAgIGNvZGVfZG93bmxvYWQ6IHRydWUKICAgIHRoZW1lOiBmbGF0bHkKLS0tCgpgYGB7ciBzZXR1cCwgaW5jbHVkZT1GQUxTRX0Ka25pdHI6Om9wdHNfY2h1bmskc2V0KGVjaG8gPSBUUlVFLCBtZXNzYWdlID0gRkFMU0UsIGNhY2hlID0gVFJVRSwgd2FybmluZyA9IEZBTFNFKQpsaWJyYXJ5KGdhcG1pbmRlcikKbGlicmFyeSh0aWR5dmVyc2UpCmxpYnJhcnkoaGVyZSkKYGBgCgojIyBXcml0aW5nIGZ1bmN0aW9ucwpJbiB0aGUgYGdhcG1pbmRlcmAgZGF0YXNldCBjYWxjdWxhdGUgdGhlIHJhbmdlIG9mIHBvcHVsYXRpb24sIGdkcCwgYW5kIGxpZmUgZXhwZWN0YW5jeQoKYGBge3J9CnJvdW5kKG1heChnYXBtaW5kZXIkbGlmZUV4cCkgLSBtaW4oZ2FwbWluZGVyJGxpZmVFeHApLDEpCgpyb3VuZChtYXgoZ2FwbWluZGVyJHBvcCkgLSBtaW4oZ2FwbWluZGVyJHBvcCksMSkKCnJvdW5kKG1heChnYXBtaW5kZXIkcG9wKSAtIG1pbihnYXBtaW5kZXIkcG9wKSwxKQpgYGAKCk1ha2UgYSBmdW5jdGlvbiBmb3IgY2FsY3VsYXRpbmcgcmFuZ2UKYGBge3J9Cm1heF9taW51c19taW4gPC0gZnVuY3Rpb24oeCl7CiAgcm91bmQoKG1heCh4KSAtIG1pbih4KSksIDEpCiAgfQpgYGAKClRlc3QtcnVuIHlvdXIgZnVuY3Rpb24KYGBge3J9Cm1heF9taW51c19taW4oZ2FwbWluZGVyJGxpZmVFeHApCmBgYAoKIyMgSXRlcmF0aW9ucyB1c2luZyBgcHVycnJgIHBhY2thZ2UKCkFwcGx5IGBjbGFzcygpYCBmdW5jdGlvbiB0byBlYWNoIGNvbHVtbiBvZiBnYW1wbWluZGVyIGRhdGEKCmBgYHtyfQpnYXBtaW5kZXIgJT4lIAogIG1hcChjbGFzcykKCmBgYAoKVGhlIGRlZmF1bHQgb3V0cHV0IG9mIGBtYXAoKWAgaXMgYSBsaXN0LiBJZiB5b3Ugd2FudCBhIGNoYXJhY3RlciB2ZWN0b3IgYXMgb3VwdXQgdXNlIGBtYXBfY2hyKClgCgpgYGB7cn0KZ2FwbWluZGVyICU+JSAKICBtYXBfY2hyKGNsYXNzKQpgYGAKCkFub3RoZXIgZXhhbXBsZSwgV2hhdCBpcyB0aGUgbnVtYmVyIG9mIGRpc3RpbmN0IHZhbHVlcyBpbiBlYWNoIGNvbHVtbj8gCkhpbnQ6IHVzZSBgbl9kaXN0aW5jdCgpYAoKYGBge3J9CmdhcG1pbmRlciAlPiUgCiAgbWFwX2ludChuX2Rpc3RpbmN0KSAjIHVzaW5nIG1hcF9pbnQgZm9yIGludGVnZXIgb3V0cHV0CmBgYAoKV2hhdCBpcyB0aGUgbWVkaWFuIG9mIGFsbCBudW1lcmljIGNvbHVtbnM/CmBgYHtyfQpnYXBtaW5kZXIgJT4lIAogIGRwbHlyOjpzZWxlY3RfaWYoaXMubnVtZXJpYykgJT4lIAogIG1hcF9kYmwobWVkaWFuKQpgYGAKCiMjIFVzaW5nIGB+YCB3aXRoIGBtYXAoKWAKCiMjIFJlYWRpbmcgbXVsdGlwbGUgZmlsZXMgdXNpbmcgYHB1cnJyKClgCkRvd25sb2FkIHRoZSBkYXRhIGhlcmUgLSBbR29vZ2xlIGRyaXZlIGxpbmtdKGh0dHBzOi8vZHJpdmUuZ29vZ2xlLmNvbS9kcml2ZS9mb2xkZXJzLzFYNTRIc0pVV254OWtBS1lvVGRjZWVQb0VQMTEzOWJLTj91c3A9c2hhcmluZykKClRoaXMgaXMgZGF0YSBmcm9tIGRpZmZyZW50IGNvdW50cmllcy4gIl9nbSIgc3VmZml4IGlzIGZvciBnYXBtaW5kZXIgZnJvbSB3aGVyZSBkYXRhIGlzIGJvcnJvd2VkLiBJbiB0aGUgZXhhbXBsZSBiZWxvdywgdGhlIGZpbGVzIGluIGEgZm9sZGVyIGNhbGxlZCAiZGF0YSIKCgpTdGVwIDEgYW5kIDI6IE1ha2UgYSBsaXN0IG9mIGFsbCBgLmNzdmAgZmlsZXMgd2l0aCBfZ20gc3VmZml4CmBgYHtyfQpteV9maWxlcyA8LSBkaXIoaGVyZSgiZGF0YSIpLCAjIHNwZWNpZnkgZmlsZSBwYXRoCiAgICAgICAgICAgICAgICBwYXR0ZXJuID0gIipfZ20uY3N2IiwgICMgbG9vayBmb3IgLmNzdiBmaWxlcyB3aXRoIF9nbSBzdWZmaXgKICAgICAgICAgICAgICAgIGZ1bGwubmFtZXMgPSBUUlVFKSAgIyBwcmVzZXJ2ZSBmaWxlIHBhdGgKbXlfZmlsZXMKYGBgCgpTdGVwIDM6IFJlYWQgYW5kIGNvbWJpbmUgYWxsIGZpbGVzIHVzaW5nIGBtYXBfZGZyKClgCmBgYHtyfQoKbXlfZGYgPC0gbXlfZmlsZXMgJT4lIAogIG1hcF9kZnIocmVhZF9jc3YpIAoKbXlfZGYKYGBgCgo=</div>
 
 
+</div>
+</div>
 
 </div>
 
@@ -470,6 +544,35 @@ $(document).ready(function () {
 });
 </script>
 
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
