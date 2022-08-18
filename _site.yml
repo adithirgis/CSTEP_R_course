@@ -16,6 +16,8 @@ navbar:
         href: relational_data.html
       - text: Module 6
         href: dates_and_time.html
+      - text: Module 7
+        href: iterations.html
     - text: "Shortcuts"
       href: shortcuts.html
     - text: "About"

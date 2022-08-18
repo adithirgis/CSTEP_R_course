@@ -1,0 +1,95 @@
+---
+title: "Functions and Iterations"
+author: "Meenakshi Kushwaha"
+date: "2022-08-18"
+output: 
+  html_document:
+    toc: true
+    toc-float: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, cache = TRUE, message = FALSE, warning = FALSE)
+library(gapminder)
+library(tidyverse)
+library(here)
+```
+
+## Writing functions
+In the `gapminder` dataset calculate the range of population, gdp, and life expectancy
+
+```{r}
+round(max(gapminder$lifeExp) - min(gapminder$lifeExp),1)
+
+round(max(gapminder$pop) - min(gapminder$pop),1)
+
+round(max(gapminder$pop) - min(gapminder$pop),1)
+```
+
+Make a function for calculating range
+```{r}
+max_minus_min <- function(x){
+  round((max(x) - min(x)), 1)
+  }
+```
+
+Test-run your function
+```{r}
+max_minus_min(gapminder$lifeExp)
+```
+
+## Iterations using `purrr` package
+
+Apply `class()` function to each column of gampminder data
+
+```{r}
+gapminder %>% 
+  map(class)
+
+```
+
+The default output of `map()` is a list. If you want a character vector as ouput use `map_chr()`
+
+```{r}
+gapminder %>% 
+  map_chr(class)
+```
+
+Another example, What is the number of distinct values in each column? 
+Hint: use `n_distinct()`
+
+```{r}
+gapminder %>% 
+  map_int(n_distinct) # using map_int for integer output
+```
+
+What is the median of all numeric columns?
+```{r}
+gapminder %>% 
+  dplyr::select_if(is.numeric) %>% 
+  map_dbl(median)
+```
+
+## Using `~` with `map()`
+
+## Reading multiple files using `purrr()`
+Download the data here - [Google drive link](https://drive.google.com/drive/folders/1X54HsJUWnx9kAKYoTdceePoEP1139bKN?usp=sharing)
+
+
+Step 1 and 2: Make a list of all `.csv` files
+```{r}
+my_files <- dir(here("data"), # specify file path
+                pattern = "*.csv",  # look for .csv files
+                full.names = TRUE)  # preserve file path
+my_files
+```
+
+Step 3: Read and combine all files using `map_dfr()`
+```{r}
+
+my_df <- my_files %>% 
+  map_dfr(read_csv) 
+
+my_df
+```
+
