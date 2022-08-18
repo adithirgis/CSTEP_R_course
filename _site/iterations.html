@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Meenakshi Kushwaha" />
+
+<meta name="date" content="2022-08-18" />
+
+<title>Functions and Iterations</title>
+
+<script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<script src="site_libs/navigation-1.1/sourceembed.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+<style type="text/css">
+#rmd-source-code {
+  display: none;
+}
+</style>
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Exercises
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="EDA.html">Module 2</a>
+    </li>
+    <li>
+      <a href="wrangling.html">Module 3</a>
+    </li>
+    <li>
+      <a href="dataviz.html">Module 4</a>
+    </li>
+    <li>
+      <a href="relational_data.html">Module 5</a>
+    </li>
+    <li>
+      <a href="dates_and_time.html">Module 6</a>
+    </li>
+    <li>
+      <a href="iterations.html">Module 7</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="shortcuts.html">Shortcuts</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-download-source" href="#">Download Rmd</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">Functions and Iterations</h1>
+<h4 class="author">Meenakshi Kushwaha</h4>
+<h4 class="date">2022-08-18</h4>
+
+</div>
+
+<div id="TOC">
+<ul>
+<li><a href="#writing-functions" id="toc-writing-functions">Writing
+functions</a></li>
+<li><a href="#iterations-using-purrr-package"
+id="toc-iterations-using-purrr-package">Iterations using
+<code>purrr</code> package</a></li>
+<li><a href="#using-with-map" id="toc-using-with-map">Using
+<code>~</code> with <code>map()</code></a></li>
+<li><a href="#reading-multiple-files-using-purrr"
+id="toc-reading-multiple-files-using-purrr">Reading multiple files using
+<code>purrr()</code></a></li>
+</ul>
+</div>
+
+<div id="writing-functions" class="section level2">
+<h2>Writing functions</h2>
+<p>In the <code>gapminder</code> dataset calculate the range of
+population, gdp, and life expectancy</p>
+<pre class="r"><code>round(max(gapminder$lifeExp) - min(gapminder$lifeExp),1)</code></pre>
+<pre><code>## [1] 59</code></pre>
+<pre class="r"><code>round(max(gapminder$pop) - min(gapminder$pop),1)</code></pre>
+<pre><code>## [1] 1318623085</code></pre>
+<pre class="r"><code>round(max(gapminder$pop) - min(gapminder$pop),1)</code></pre>
+<pre><code>## [1] 1318623085</code></pre>
+<p>Make a function for calculating range</p>
+<pre class="r"><code>max_minus_min &lt;- function(x){
+  round((max(x) - min(x)), 1)
+  }</code></pre>
+<p>Test-run your function</p>
+<pre class="r"><code>max_minus_min(gapminder$lifeExp)</code></pre>
+<pre><code>## [1] 59</code></pre>
+</div>
+<div id="iterations-using-purrr-package" class="section level2">
+<h2>Iterations using <code>purrr</code> package</h2>
+<p>Apply <code>class()</code> function to each column of gampminder
+data</p>
+<pre class="r"><code>gapminder %&gt;% 
+  map(class)</code></pre>
+<pre><code>## $country
+## [1] &quot;factor&quot;
+## 
+## $continent
+## [1] &quot;factor&quot;
+## 
+## $year
+## [1] &quot;integer&quot;
+## 
+## $lifeExp
+## [1] &quot;numeric&quot;
+## 
+## $pop
+## [1] &quot;integer&quot;
+## 
+## $gdpPercap
+## [1] &quot;numeric&quot;</code></pre>
+<p>The default output of <code>map()</code> is a list. If you want a
+character vector as ouput use <code>map_chr()</code></p>
+<pre class="r"><code>gapminder %&gt;% 
+  map_chr(class)</code></pre>
+<pre><code>##   country continent      year   lifeExp       pop gdpPercap 
+##  &quot;factor&quot;  &quot;factor&quot; &quot;integer&quot; &quot;numeric&quot; &quot;integer&quot; &quot;numeric&quot;</code></pre>
+<p>Another example, What is the number of distinct values in each
+column? Hint: use <code>n_distinct()</code></p>
+<pre class="r"><code>gapminder %&gt;% 
+  map_int(n_distinct) # using map_int for integer output</code></pre>
+<pre><code>##   country continent      year   lifeExp       pop gdpPercap 
+##       142         5        12      1626      1704      1704</code></pre>
+<p>What is the median of all numeric columns?</p>
+<pre class="r"><code>gapminder %&gt;% 
+  dplyr::select_if(is.numeric) %&gt;% 
+  map_dbl(median)</code></pre>
+<pre><code>##         year      lifeExp          pop    gdpPercap 
+##    1979.5000      60.7125 7023595.5000    3531.8470</code></pre>
+</div>
+<div id="using-with-map" class="section level2">
+<h2>Using <code>~</code> with <code>map()</code></h2>
+</div>
+<div id="reading-multiple-files-using-purrr" class="section level2">
+<h2>Reading multiple files using <code>purrr()</code></h2>
+<p>Download the data here - <a
+href="https://drive.google.com/drive/folders/1X54HsJUWnx9kAKYoTdceePoEP1139bKN?usp=sharing">Google
+drive link</a></p>
+<p>Step 1 and 2: Make a list of all <code>.csv</code> files</p>
+<pre class="r"><code>my_files &lt;- dir(here(&quot;data&quot;), # specify file path
+                pattern = &quot;*.csv&quot;,  # look for .csv files
+                full.names = TRUE)  # preserve file path
+my_files</code></pre>
+<pre><code>## [1] &quot;/Users/meenakshikushwaha/Dropbox/R projects/github/CSTEP_R_course/data/join_data1.csv&quot;
+## [2] &quot;/Users/meenakshikushwaha/Dropbox/R projects/github/CSTEP_R_course/data/join_data2.csv&quot;</code></pre>
+<p>Step 3: Read and combine all files using <code>map_dfr()</code></p>
+<pre class="r"><code>my_df &lt;- my_files %&gt;% 
+  map_dfr(read_csv) 
+
+my_df</code></pre>
+<pre><code>## # A tibble: 200 × 14
+##     ...1 date                area     ws    wd   no2 Date  Area    nox    o3
+##    &lt;dbl&gt; &lt;dttm&gt;              &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;
+##  1     1 2005-06-19 09:00:00 BLR     3.1   150    70 &lt;NA&gt;  &lt;NA&gt;     NA    NA
+##  2     2 2005-06-19 10:00:00 BLR     3.6   160    61 &lt;NA&gt;  &lt;NA&gt;     NA    NA
+##  3     3 2005-06-19 11:00:00 BLR     3.6   170    70 &lt;NA&gt;  &lt;NA&gt;     NA    NA
+##  4     4 2005-06-19 12:00:00 BLR     5.2   160    82 &lt;NA&gt;  &lt;NA&gt;     NA    NA
+##  5     5 2005-06-19 13:00:00 BLR     5.7   180    68 &lt;NA&gt;  &lt;NA&gt;     NA    NA
+##  6     6 2005-06-19 14:00:00 BLR     5.7   190    71 &lt;NA&gt;  &lt;NA&gt;     NA    NA
+##  7     7 2005-06-19 15:00:00 BLR     5.7   190    68 &lt;NA&gt;  &lt;NA&gt;     NA    NA
+##  8     8 2005-06-19 16:00:00 BLR     5.7   190    75 &lt;NA&gt;  &lt;NA&gt;     NA    NA
+##  9     9 2005-06-19 17:00:00 BLR     6.2   190    85 &lt;NA&gt;  &lt;NA&gt;     NA    NA
+## 10    10 2005-06-19 18:00:00 BLR     5.7   190    74 &lt;NA&gt;  &lt;NA&gt;     NA    NA
+## # … with 190 more rows, and 4 more variables: pm10 &lt;dbl&gt;, so2 &lt;lgl&gt;, co &lt;dbl&gt;,
+## #   pm25 &lt;dbl&gt;</code></pre>
+</div>
+
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiRnVuY3Rpb25zIGFuZCBJdGVyYXRpb25zIgphdXRob3I6ICJNZWVuYWtzaGkgS3VzaHdhaGEiCmRhdGU6ICIyMDIyLTA4LTE4IgpvdXRwdXQ6IAogIGh0bWxfZG9jdW1lbnQ6CiAgICB0b2M6IHRydWUKICAgIHRvYy1mbG9hdDogdHJ1ZQogICAgY29kZV9kb3dubG9hZDogdHJ1ZQotLS0KCmBgYHtyIHNldHVwLCBpbmNsdWRlPUZBTFNFfQprbml0cjo6b3B0c19jaHVuayRzZXQoZWNobyA9IFRSVUUsIGNhY2hlID0gVFJVRSwgbWVzc2FnZSA9IEZBTFNFLCB3YXJuaW5nID0gRkFMU0UpCmxpYnJhcnkoZ2FwbWluZGVyKQpsaWJyYXJ5KHRpZHl2ZXJzZSkKbGlicmFyeShoZXJlKQpgYGAKCiMjIFdyaXRpbmcgZnVuY3Rpb25zCkluIHRoZSBgZ2FwbWluZGVyYCBkYXRhc2V0IGNhbGN1bGF0ZSB0aGUgcmFuZ2Ugb2YgcG9wdWxhdGlvbiwgZ2RwLCBhbmQgbGlmZSBleHBlY3RhbmN5CgpgYGB7cn0Kcm91bmQobWF4KGdhcG1pbmRlciRsaWZlRXhwKSAtIG1pbihnYXBtaW5kZXIkbGlmZUV4cCksMSkKCnJvdW5kKG1heChnYXBtaW5kZXIkcG9wKSAtIG1pbihnYXBtaW5kZXIkcG9wKSwxKQoKcm91bmQobWF4KGdhcG1pbmRlciRwb3ApIC0gbWluKGdhcG1pbmRlciRwb3ApLDEpCmBgYAoKTWFrZSBhIGZ1bmN0aW9uIGZvciBjYWxjdWxhdGluZyByYW5nZQpgYGB7cn0KbWF4X21pbnVzX21pbiA8LSBmdW5jdGlvbih4KXsKICByb3VuZCgobWF4KHgpIC0gbWluKHgpKSwgMSkKICB9CmBgYAoKVGVzdC1ydW4geW91ciBmdW5jdGlvbgpgYGB7cn0KbWF4X21pbnVzX21pbihnYXBtaW5kZXIkbGlmZUV4cCkKYGBgCgojIyBJdGVyYXRpb25zIHVzaW5nIGBwdXJycmAgcGFja2FnZQoKQXBwbHkgYGNsYXNzKClgIGZ1bmN0aW9uIHRvIGVhY2ggY29sdW1uIG9mIGdhbXBtaW5kZXIgZGF0YQoKYGBge3J9CmdhcG1pbmRlciAlPiUgCiAgbWFwKGNsYXNzKQoKYGBgCgpUaGUgZGVmYXVsdCBvdXRwdXQgb2YgYG1hcCgpYCBpcyBhIGxpc3QuIElmIHlvdSB3YW50IGEgY2hhcmFjdGVyIHZlY3RvciBhcyBvdXB1dCB1c2UgYG1hcF9jaHIoKWAKCmBgYHtyfQpnYXBtaW5kZXIgJT4lIAogIG1hcF9jaHIoY2xhc3MpCmBgYAoKQW5vdGhlciBleGFtcGxlLCBXaGF0IGlzIHRoZSBudW1iZXIgb2YgZGlzdGluY3QgdmFsdWVzIGluIGVhY2ggY29sdW1uPyAKSGludDogdXNlIGBuX2Rpc3RpbmN0KClgCgpgYGB7cn0KZ2FwbWluZGVyICU+JSAKICBtYXBfaW50KG5fZGlzdGluY3QpICMgdXNpbmcgbWFwX2ludCBmb3IgaW50ZWdlciBvdXRwdXQKYGBgCgpXaGF0IGlzIHRoZSBtZWRpYW4gb2YgYWxsIG51bWVyaWMgY29sdW1ucz8KYGBge3J9CmdhcG1pbmRlciAlPiUgCiAgZHBseXI6OnNlbGVjdF9pZihpcy5udW1lcmljKSAlPiUgCiAgbWFwX2RibChtZWRpYW4pCmBgYAoKIyMgVXNpbmcgYH5gIHdpdGggYG1hcCgpYAoKIyMgUmVhZGluZyBtdWx0aXBsZSBmaWxlcyB1c2luZyBgcHVycnIoKWAKRG93bmxvYWQgdGhlIGRhdGEgaGVyZSAtIFtHb29nbGUgZHJpdmUgbGlua10oaHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL2RyaXZlL2ZvbGRlcnMvMVg1NEhzSlVXbng5a0FLWW9UZGNlZVBvRVAxMTM5YktOP3VzcD1zaGFyaW5nKQoKClN0ZXAgMSBhbmQgMjogTWFrZSBhIGxpc3Qgb2YgYWxsIGAuY3N2YCBmaWxlcwpgYGB7cn0KbXlfZmlsZXMgPC0gZGlyKGhlcmUoImRhdGEiKSwgIyBzcGVjaWZ5IGZpbGUgcGF0aAogICAgICAgICAgICAgICAgcGF0dGVybiA9ICIqLmNzdiIsICAjIGxvb2sgZm9yIC5jc3YgZmlsZXMKICAgICAgICAgICAgICAgIGZ1bGwubmFtZXMgPSBUUlVFKSAgIyBwcmVzZXJ2ZSBmaWxlIHBhdGgKbXlfZmlsZXMKYGBgCgpTdGVwIDM6IFJlYWQgYW5kIGNvbWJpbmUgYWxsIGZpbGVzIHVzaW5nIGBtYXBfZGZyKClgCmBgYHtyfQoKbXlfZGYgPC0gbXlfZmlsZXMgJT4lIAogIG1hcF9kZnIocmVhZF9jc3YpIAoKbXlfZGYKYGBgCgo=</div>
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeSourceEmbed("iterations.Rmd");
+});
+</script>
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
