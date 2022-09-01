@@ -18,6 +18,9 @@ navbar:
         href: dates_and_time.html
       - text: Module 7
         href: iterations.html
+      - text: Module 8
+        href: modelling.html
+        
     - text: "Shortcuts"
       href: shortcuts.html
     - text: "About"

@@ -1,0 +1,191 @@
+---
+title: "Statistics and Modelling"
+author: "Meenakshi Kushwaha"
+date: "2022-09-01"
+
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    code_download: true
+    theme: flatly
+    code_foalding: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, cache = TRUE, warning = FALSE)
+library(gapminder)
+library(tidyverse)
+library(here)
+library(gtsummary)
+library(flextable)
+library(broom)
+```
+
+# Presenting Summary Statistics
+## Simple table in R
+
+```{r}
+gapminder %>% 
+  filter(country == "India",
+         year > 1980) %>% 
+  select(year, pop, lifeExp ) %>% 
+  knitr::kable() # print in table format
+```
+
+## Summary statistics
+Generate summary statistics by continent for `gapminder` dataset
+
+```{r}
+gapminder %>% 
+  select(-country) %>% # drop country and year variable
+  tbl_summary()
+```
+
+## Customizing your table
+
+### Include/exclude variables
+```{r}
+gapminder %>% 
+  select(-country) %>% # drop country variable
+  tbl_summary(include = -year) # include everything but year
+```
+
+
+```{r}
+gapminder %>% 
+  select(-country) %>% # drop country variable
+  tbl_summary(include = c(continent, lifeExp, gdpPercap))
+```
+
+Format labels
+```{r}
+gapminder %>% 
+  select(-country, - year) %>% # drop country and year variable
+  tbl_summary() %>% 
+  bold_labels()
+```
+
+### Saving your table
+Save your table as .docx file
+```{r}
+gapminder %>% 
+  select(-country, - year) %>% # drop country and year variable
+  tbl_summary() %>% 
+  as_flex_table() %>% # save table as Word file 
+  save_as_docx(path = here("myfile.docx")) 
+```
+
+## Simple linear models in R
+
+```{r}
+lm(lifeExp ~ pop, data = gapminder)
+```
+
+Store model as object 
+```{r}
+my_model <- gapminder %>% 
+  lm(lifeExp ~ year, data = .) 
+summary(my_model)
+```
+
+## Testing model assumptions
+
+Make a model for Argentina and plot diagnostics
+```{r}
+arg_model <- gapminder %>% 
+  filter(country == "Argentina") %>% 
+  lm(lifeExp ~ year, data = .)
+plot(arg_model) # generates four diagnostic plots
+```
+
+Try the same for Rwanda and compare
+```{r}
+rwanda_model <- gapminder %>% 
+  filter(country == "Rwanda") %>% 
+  lm(lifeExp ~ year, data = .)
+plot(rwanda_model) # generates four diagnostic plots
+```
+
+## Multiple models [Home Exercise] 
+How does life expectancy change with time in each country?
+
+###  Global vs local trend
+```{r}
+gapminder %>%
+  ggplot(aes(x = year, y = lifeExp, group = country)) +
+  geom_line(alpha = 1/3)
+```
+
+
+### Keep related things together `group_nest()`
+Nest by country
+```{r}
+by_country <- gapminder %>% 
+  mutate(year1950 = year - 1950) %>% 
+  group_nest(continent, country)
+head(by_country)
+```
+
+### Linear model per country
+```{r}
+by_country_lm <- by_country %>% 
+  mutate(model = map(data, ~lm(lifeExp ~ year1950, data = .)))# to each element of data column apply lm() function
+by_country_lm
+```
+
+### Plot for one country
+```{r}
+by_country_lm %>% 
+  filter(country=="India") %>% 
+  unnest(data) %>% 
+  ggplot(aes(x = year1950, y = lifeExp)) +
+  geom_line()
+```
+
+### Linear model for India
+```{r}
+by_country_lm%>% 
+  filter(country == "India") %>% 
+  pluck("model", 1) %>% 
+  summary()
+```
+
+### Linear model for Rwanda
+```{r}
+by_country_lm%>% 
+  filter(country == "Rwanda") %>% 
+  pluck("model", 1) %>% 
+  summary()
+```
+
+### Verify model results by plotting for Rwanda
+```{r}
+by_country_lm %>% 
+  filter(country=="Rwanda") %>% 
+  unnest(data) %>% 
+  ggplot(aes(x = year1950, y = lifeExp)) +
+  geom_line()
+```
+
+### Cleaning model results with `broom`
+
+```{r}
+gm_models <- by_country_lm %>% 
+  mutate(glance= map(model, glance),
+         tidy = map(model, tidy),
+         augment = map(model, augment),
+         rsq = map_dbl(glance, "r.squared"))
+gm_models
+```
+
+### Visualizing all models
+```{r}
+gm_models %>%
+  unnest(tidy) %>%
+  select(continent, country, rsq, term, estimate) %>%
+  pivot_wider(names_from = term, values_from = estimate) %>%
+  ggplot(aes(x = `(Intercept)`, y = year1950)) +
+  geom_point(aes(colour = continent, size = rsq)) +
+  geom_smooth(se = FALSE, method = "loess") +
+  scale_size_area() + labs(x = "Life expectancy (1950)", y = "Yearly improvement")
