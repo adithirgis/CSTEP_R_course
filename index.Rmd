@@ -102,13 +102,17 @@ knitr::opts_chunk$set(
 [gapminder](https://www.rdocumentation.org/packages/gapminder/versions/0.3.0)
 
 ## 8 Statistics & Modelling
+[Slides](https://cstep-stats.netlify.app/)
 
-#### Packages
-TBD
+#### Packages (new)
+[gtsummary](https://www.danieldsjoberg.com/gtsummary/)  
+[flextable](https://ardata-fr.github.io/flextable-book/)  
+[broom](https://broom.tidymodels.org/)  
 
--   Univariate and Bivariate analysis
--   simple linear regression
--   Multivariate analysis
+
+-   Summary statistics
+-   Linear Regression
+-   Working with multiple models
 -   Brief introduction to Machine Learning
 
 ## 9 Spatial Analysis
