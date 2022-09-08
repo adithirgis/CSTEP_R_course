@@ -116,6 +116,7 @@ knitr::opts_chunk$set(
 -   Brief introduction to Machine Learning
 
 ## 9 Spatial Analysis
+[Slides](https://r-course-spatial-analysis.netlify.app/#1)
 
 -   Introduction to coordinate systems
 -   Introduction to sf and raster packages
@@ -123,7 +124,11 @@ knitr::opts_chunk$set(
 -   Spatial data analysis in R
 
 #### Packages
-TBD
+[sf](https://r-spatial.github.io/sf/)  
+[raster](https://rspatial.org/raster/pkg/index.html)  
+[leaflet](https://rstudio.github.io/leaflet/)  
+[ggspatial](https://paleolimbot.github.io/ggspatial/)  
+
 
 ## 10 Reporting with RMarkdown
 
