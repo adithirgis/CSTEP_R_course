@@ -20,7 +20,8 @@ navbar:
         href: iterations.html
       - text: Module 8
         href: modelling.html
-        
+      - text: Module 9
+        href: spatial_analysis.html
     - text: "Shortcuts"
       href: shortcuts.html
     - text: "About"
