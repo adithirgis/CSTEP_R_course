@@ -131,7 +131,7 @@ knitr::opts_chunk$set(
 
 
 ## 10 Reporting with RMarkdown
-[Slides](cstep-rmd.netlify.app)
+[Slides](https://cstep-rmd.netlify.app)
 
 -   Creating reproducible reports
 -   Themes and formatting
