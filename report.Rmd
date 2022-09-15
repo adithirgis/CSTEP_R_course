@@ -1,0 +1,80 @@
+---
+title: "Gapminder Data Report"
+author: "Meenakshi Kushwaha"
+date: "2022-09-15"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    code_folding: hide
+    code_download: true
+    theme: flatly
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(gapminder)
+library(tidyverse)
+library(glue)
+```
+
+## About
+
+This is a dataset of 142 countries, with values for life expectancy, GDP per capita, and population, every five years, from 1952 to 2007. Learn more [here](https://www.gapminder.org/data/documentation/) and watch this data come alive in this [TED talk](https://www.ted.com/talks/hans_rosling_the_best_stats_you_ve_ever_seen?language=en) by Han's Rosling.
+
+
+```{r summary}
+gapminder %>% 
+  head(10) %>% 
+knitr::kable(align = "c")
+```
+
+
+## Quick Look
+
+The dataset has `r nrow(gapminder)` rows and `r ncol(gapminder)` columns. The median life expectancy is 
+
+We are using the `glue` package here to summarize number of countries in each continent using `R` code. The chunk itself is invisible here because we set `echo = FALSE` but you can use the download code button above to see the full code. 
+
+```{r results = 'asis', echo=FALSE}
+gapminder %>% 
+  count(continent) %>% 
+  glue_data("-  {continent} has {n} countries") %>% 
+  glue_collapse(sep = " \ \n")
+```
+
+The table below shows how life expectancy varies with continent. 
+
+
+```{r}
+gapminder %>% 
+  filter(year == 2007) %>% 
+  group_by(continent) %>% 
+  summarize(median_life_exp = round(median(lifeExp), 1)) %>% 
+  knitr::kable(align = "c", 
+               col.names = c("Continent", 
+                             "Median Life Expectancy"),
+               caption = "Life Expetancy by Continent")
+  
+```
+
+
+## GDP vs life expectancy?
+
+In this section we will explore to the question "Do people in wealthy countries live longer". For this report we will do the analysis for the year 2007. If you want to generate similar report for different years try the [parameters](https://rmarkdown.rstudio.com/lesson-6.html) feature of RMarkdown.
+
+```{r plot}
+gapminder %>% 
+  filter(year == 2007) %>% 
+  ggplot(aes(x = gdpPercap, 
+             y = lifeExp, 
+             color= continent, 
+             size = pop/1000000)) + # population in millions
+  geom_point()+
+  labs(x = "GDP Per Capita",
+       y = "Life Expectancy",
+       title = "Relationship between GDP and Life Expectancy",
+       subtitle = "Data Source: Gapminder", 
+       size = "Population in millions")
+  
+```

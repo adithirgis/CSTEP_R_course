@@ -22,6 +22,8 @@ navbar:
         href: modelling.html
       - text: Module 9
         href: spatial_analysis.html
+      - text: Module 10
+        href: report.html
     - text: "Shortcuts"
       href: shortcuts.html
     - text: "About"
