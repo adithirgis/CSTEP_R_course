@@ -131,6 +131,7 @@ knitr::opts_chunk$set(
 
 
 ## 10 Reporting with RMarkdown
+[Slides](cstep-rmd.netlify.app)
 
 -   Creating reproducible reports
 -   Themes and formatting
@@ -138,4 +139,7 @@ knitr::opts_chunk$set(
 -   Introduction to Xaringan package
 
 #### Packages
-TBD
+[glue](https://glue.tidyverse.org/)
+[gapminder](https://www.rdocumentation.org/packages/gapminder/versions/0.3.0)
+[tidyverse](https://www.tidyverse.org/packages/)  
+

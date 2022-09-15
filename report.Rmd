@@ -32,7 +32,7 @@ knitr::kable(align = "c")
 
 ## Quick Look
 
-The dataset has `r nrow(gapminder)` rows and `r ncol(gapminder)` columns. The median life expectancy is 
+The dataset has `r nrow(gapminder)` rows and `r ncol(gapminder)` columns. 
 
 We are using the `glue` package here to summarize number of countries in each continent using `R` code. The chunk itself is invisible here because we set `echo = FALSE` but you can use the download code button above to see the full code. 
 
